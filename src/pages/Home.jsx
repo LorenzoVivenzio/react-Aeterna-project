@@ -43,13 +43,13 @@ export default function Home() {
       <VideoBanner />
       <div className="container">
         <h1>I nostri consigliati</h1>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
           {Featured.map((product) => (
             <CardHome key={product.id} product={product} />
           ))}
         </div>
         <h1>Ultimi arrivi</h1>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
           {created.map((product) => (
             <CardHome key={product.id} product={product} />
           ))}

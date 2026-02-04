@@ -1,12 +1,17 @@
+import { NavLink } from "react-router-dom";
+
+
+
+
 export default function Header(){
     return(
     <>
           <div className="nav-bar fixed-top"> 
                <div className="nav">
           <ul>
-            <li>Home</li>
-            <li>Product</li>
-            <li>Wishlist</li>
+            <NavLink to= "/">Home</NavLink>
+            <NavLink to= "/product">Product</NavLink>
+            <NavLink to= "/wishlist">Wishlist</NavLink>
           </ul>
         </div>
         <div className="logo">

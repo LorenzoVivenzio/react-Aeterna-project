@@ -1,28 +1,19 @@
 import { NavLink } from "react-router-dom";
 
-
-
-
-export default function Header(){
-    return(
-    <>
-          <div className="nav-bar fixed-top"> 
-               <div className="nav">
-          <ul>
-            <NavLink to= "/">Home</NavLink>
-            <NavLink to= "/product">Product</NavLink>
-            <NavLink to= "/wishlist">Wishlist</NavLink>
-          </ul>
-        </div>
-        <div className="logo">
-          <h4>eternal</h4>
-        </div>
-
-        <div className="search-bar">
-          <input className="input-nav" type="search" name="" id="" placeholder="trova il tuo articolo" />
-          <button className="submit-nav" type="submit">Cerca</button>
-        </div>
+export default function Header() {
+  return (
+    <div className="nav-bar fixed-top">
+      <div className="nav">
+        <ul>
+          <li><NavLink to="/">Home</NavLink></li>
+          <li><NavLink to="/products">Prodotti</NavLink></li>
+          <li><NavLink to="/wishlist">Wishlist</NavLink></li>
+        </ul>
       </div>
-    </>
-)
+      <div className="logo">
+        <h4>ETERNAL</h4>
+      </div>
+      {/* La search-bar è stata rimossa da qui */}
+    </div>
+  );
 }

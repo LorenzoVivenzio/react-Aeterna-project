@@ -24,20 +24,15 @@ export default function Home() {
   return (
     <>
       <div className="hero-banner">
-        <Header />
         <div className="top-hero-banner">
           <p className="text-hero text-center">
-            Il 20% del ricavato sarà donato ad associazioni che sostengono specie a rischio
+            Il 20% del ricavato sarà donato ad associazioni che sostengono
+            specie a rischio
           </p>
         </div>
         <div className="slogan">
           <h1 className="text-slogan text-white">TOUCH WAHT TIME ERASED</h1>
-    
         </div>
-
-        {/* <div className="btn-banner">
-          <button className="btn-btn-banner">visualizza i prodotti </button>
-        </div> */}
       </div>
 
       <VideoBanner />

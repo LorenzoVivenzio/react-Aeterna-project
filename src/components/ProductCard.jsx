@@ -15,7 +15,7 @@ export default function ProductCard({ product }) {
             onError={(e) => e.target.src = "https://placehold.co/400x400?text=Immagine+non+trovata"} 
           />
         </Link>
-        {product.is_featured === 1 && <span className="badge-featured">Featured</span>}
+        
       </div>
       
       <div className="card-content">
@@ -25,9 +25,7 @@ export default function ProductCard({ product }) {
         
         <div className="card-actions">
         
-          <Link to={`/product/${product.slug}`} className="btn-details">
-            Dettagli
-          </Link>
+         
           <button className="btn-add-cart">
             Aggiungi
           </button>

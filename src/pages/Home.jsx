@@ -27,17 +27,17 @@ export default function Home() {
         <Header />
         <div className="top-hero-banner">
           <p className="text-hero text-center">
-            il 5% delle entrate andrà al wwf
+            Il 20% del ricavato sarà donato ad associazioni che sostengono specie a rischio
           </p>
         </div>
         <div className="slogan">
-          <h1 className="text-slogan text-white">SAVE THE ANIMALS</h1>
-          <p className="text-white text-center">AETERNA : Nati per restare</p>
+          <h1 className="text-slogan text-white">TOUCH WAHT TIME ERASED</h1>
+    
         </div>
 
-        <div className="btn-banner">
+        {/* <div className="btn-banner">
           <button className="btn-btn-banner">visualizza i prodotti </button>
-        </div>
+        </div> */}
       </div>
 
       <VideoBanner />

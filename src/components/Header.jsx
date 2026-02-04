@@ -13,7 +13,7 @@ export default function Header() {
       <div className="logo">
         <h4>ETERNAL</h4>
       </div>
-      {/* La search-bar è stata rimossa da qui */}
+    
     </div>
   );
 }

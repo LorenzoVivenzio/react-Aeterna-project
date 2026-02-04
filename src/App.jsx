@@ -11,6 +11,8 @@ import Wishlist from './pages/Wishlist.jsx';
 
 
 import DetailProduct from './components/DetailProduct.jsx';
+import Cart from './pages/Cart.jsx';
+import About from './pages/About.jsx';
 
 function App() {
   return (
@@ -19,11 +21,13 @@ function App() {
         <Route element={<DefaultLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
-
+          <Route path="/about" element={<About />} />
           <Route path="/product/:slug" element={<DetailProduct />} />
 
 
           <Route path="/wishlist" element={<Wishlist />} />
+
+          <Route path="/cart" element={<Cart />} />
         </Route>
       </Routes>
     </BrowserRouter>

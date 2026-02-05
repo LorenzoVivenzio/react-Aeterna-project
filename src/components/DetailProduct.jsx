@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import api from "../api/axios";
-import Header from "../components/Header";
+
 import ProductCard from "../components/ProductCard";
 
 export default function DetailProduct() {

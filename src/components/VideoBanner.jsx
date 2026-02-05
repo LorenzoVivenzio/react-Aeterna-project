@@ -7,7 +7,7 @@ export default function VideoBanner() {
         <div className="container">
           <div className="row">
             <div 
-            className="col-12-sm col-8-md video-lv rounded-1">
+            className="col-sm-12 col-md-12 col-lg-8 video-lv rounded-1">
               <div className="video-product ">
                 <video
                   autoPlay
@@ -25,7 +25,7 @@ export default function VideoBanner() {
               </div>
             </div>
 
-            <div className="col-12-sm col-4-md bg-white rounded-1">
+            <div className="descrition col-sm-12 col-md-12 col-lg-4 bg-white rounded-1 ">
               {" "}
               {/* Corretto typo 'roundend' */}
               <h3 className="text-center my-5 px-3">

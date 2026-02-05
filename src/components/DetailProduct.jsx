@@ -11,6 +11,8 @@ export default function DetailProduct() {
 
   useEffect(() => {
     api.get(`/products/${slug}`).then((res) => {
+      console.log(res)
+      
       const current = res.data.item || res.data;
       setLoading(false);
       setProduct(current);
@@ -26,37 +28,41 @@ export default function DetailProduct() {
   return (
     <>
       <div
-        className="product-detail-page bg-black text-white"
-        style={{ paddingTop: "100px" }}
+        className="product-detail-page"
+        style={{ paddingTop: "50px" }}
       >
         <div className="container">
           {/* SCHEDA PRODOTTO */}
-          <div className="row mb-5 py-5 border-bottom border-secondary">
-            <div className="col-md-6 mb-4">
+          <div className=" row mb-5 py-5 border-bottom border-secondary">
+            <div className="row-cart col-md-6 mb-4">
               <img
                 src={`http://localhost:3001/images/${product.url_image}`}
-                className="img-fluid rounded border border-primary shadow-lg"
+                className="img-fluid rounded border border-info shadow-lg"
                 alt={product.name}
               />
             </div>
-            <div className="col-md-6">
-              <h1 className="display-4 fw-bold text-uppercase text-primary">
+            <div className="col-md-6 d-flex flex-column justify-content-between">
+              <h2 className="product-name border-bottom pb-2 mb-4">
                 {product.name}
-              </h1>
-              <div className="d-flex gap-2 mb-4">
+              </h2>
+
+              <h4>Dimensioni prodotto: {product.dimension}</h4>
+              <div className="d-flex gap-2 mb-4 ">
                 <span className="badge bg-secondary">{product.era_name}</span>
                 <span className="badge bg-info text-dark">
                   {product.diet_name}
                 </span>
-                <span className="badge bg-warning text-dark">
+                <p className="badge bg-warning text-dark">
                   {product.power_source_name}
-                </span>
+                </p>
               </div>
-              <h2 className="text-success mb-4">
+              <h4 className=" product-price text-info mb-4">
                 {Number(product.price).toFixed(2)}€
-              </h2>
-              <p className="lead text-white-50">{product.description}</p>
-              <button className="btn btn-primary btn-lg mt-4 w-100">
+              </h4>
+              <p className="lead">{product.description}</p>
+
+              
+              <button className="btn-cart">
                 Aggiungi al Carrello
               </button>
             </div>

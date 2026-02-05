@@ -67,10 +67,10 @@ export default function Products() {
   ]);
 
   return (
-    <div className="products-page bg-black text-white min-vh-100 pb-5">
+    <div className="products-page bg-white text-dark min-vh-100 pb-5">
       <Header />
 
-      <div className="container" style={{ paddingTop: "140px" }}>
+      <div className="container" style={{ paddingTop: "50px" }}>
         <h1 className="text-center mb-5 fw-bold text-uppercase tracking-widest text-primary">
           Catalogo Aeterna
         </h1>

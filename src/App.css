@@ -1,5 +1,5 @@
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 img {
@@ -14,24 +14,29 @@ img {
     font-weight: bold;
     color: rgb(195, 166, 4);
 }
-.logo{
+
+.logo {
     margin-top: 10px;
     margin-right: 120px;
 }
+
 /* Colore base (se vuoi un colore solido) */
 .color-solido {
     color: #b3904a;
 }
 
 /* Gradiente per simulare l'effetto metallico dell'immagine */
-.main-title{
-    background: linear-gradient(
-        to bottom, 
-        #e1bb70 0%,   /* Oro chiaro superiore */
-        #b3904a 45%,  /* Tono medio */
-        #826331 55%,  /* Ombra centrale "tagliata" */
-        #c8a55d 100%  /* Riflesso base */
-    ); 
+.main-title {
+    background: linear-gradient(to bottom,
+            #e1bb70 0%,
+            /* Oro chiaro superiore */
+            #b3904a 45%,
+            /* Tono medio */
+            #826331 55%,
+            /* Ombra centrale "tagliata" */
+            #c8a55d 100%
+            /* Riflesso base */
+        );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -77,8 +82,8 @@ img {
     background-position: center;
     background-repeat: no-repeat;
     min-height: 90vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
-    url('public/Banner-animal.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        url('public/Banner-animal.jpeg');
 
 }
 
@@ -113,7 +118,7 @@ a {
 }
 
 li:hover {
-    border: 2px solid #e1bb70 ;
+    border: 2px solid #e1bb70;
     padding: 5px 10px;
     border-radius: 10px;
     /* background-color: #e1bb70 ; */
@@ -242,13 +247,13 @@ li:hover {
     border-radius: 20px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    color: white;
+    
 }
 
 .product-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    border-color: #7000ff;
+    border: 2px solid aqua;
 }
 
 .card-image-wrapper {
@@ -257,7 +262,7 @@ li:hover {
     overflow: hidden;
     position: relative;
     background: #f8f8f8;
-    
+
     /* Sfondo chiaro per far risaltare il robot se l'immagine è trasparente */
 }
 
@@ -318,18 +323,79 @@ li:hover {
     text-transform: uppercase;
 }
 
-.btn-link{
+.btn-link {
     color: initial;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 10px;
     border: 3px solid rgb(1, 223, 223);
 }
-.btn-link:hover{
+
+.btn-link:hover {
     background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 3px solid rgb(1, 223, 223);
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.descrition{
+    overflow-y: scroll;
+    height: 600px;
+
+}
+.btn-cart{
+    text-align: center;
+    background-color: #0f0f0f;
+    color: white;
+    padding: 10px 50px;
+    border-radius: 15px;
+    
+}
+.product-name{
+
+    font-family: 'Anta', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+                             /* RESPONSIVE */
+                             /* RESPONSIVE */
+                             /* RESPONSIVE */
+                             /* RESPONSIVE */
+                             /* RESPONSIVE */
+                             /* RESPONSIVE */
+
+@media (min-width: 425px) {
+
+    .btn-video {
+        position: absolute;
+        top: 92%;
+        left: 68%;
+    }
+}
+
+
+
+
+
+
+
+
+@media (min-width: 768px) {
+
+    .btn-video {
+        position: absolute;
+        top: 92%;
+        left: 79%;
+    }
 }

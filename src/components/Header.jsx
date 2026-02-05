@@ -7,46 +7,26 @@ export default function Header() {
     <header>
       <div className="nav-bar fixed-top">
         {/* prova */}
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-          <div className="container-fluid">
+        <div class="dropdown">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown link
+          </a>
 
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarMenu"
-              aria-controls="navbarMenu"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-
-            <div className="collapse navbar-collapse" id="navbarMenu">
-              <ul className="navbar-nav ms-auto">
-                <li className="nav-item">
-                  <NavLink to="/" className="nav-link">Home</NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink to="/products" className="nav-link">Prodotti</NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink to="/about" className="nav-link">Chi siamo</NavLink>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-        </nav>
-        {/* class="nav-link" */}
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
         {/* fine prova */}
-        {/* <div className="nav">
-        <ul>
-          <li><NavLink to="/">Home</NavLink></li>
-          <li><NavLink to="/products">Prodotti</NavLink></li>
-          <li><NavLink to="/about">Chi siamo</NavLink></li>
-        </ul>
-      </div> */}
+        <div className="nav d-none d-lg-flex">
+          <ul>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/products">Prodotti</NavLink></li>
+            <li><NavLink to="/about">Chi siamo</NavLink></li>
+          </ul>
+        </div>
+
         <div className="logo">
           <div className="logo-img">
             <p className="main-title">AETERNA</p>

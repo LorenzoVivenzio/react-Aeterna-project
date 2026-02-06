@@ -24,11 +24,11 @@ export default function ProductCard({ product }) {
       </div>
 
       <div className="card-content">
-        <div className="card-category text-white-50">
+        <div className="card-category">
           {product.era || "Aeterna Model"}
         </div>
-        <h3 className="card-title text-white">{product.name}</h3>
-        <p className="card-price text-white">
+        <h3 className="card-title">{product.name}</h3>
+        <p className="card-price ">
           {Number(product.price).toFixed(2)}€
         </p>
 

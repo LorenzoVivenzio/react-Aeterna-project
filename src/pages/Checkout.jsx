@@ -66,7 +66,7 @@ export default function Checkout() {
                 country: isBillingSameAsShipping ? formData.shipping_country : formData.billing_country
             },
             cart: cart.map(item => ({
-                product_id: item.id, 
+                product_slug: item.slug, // MODIFICATO: ora usa lo slug per il backend
                 quantity: item.quantity
             }))
         };

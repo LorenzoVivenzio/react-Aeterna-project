@@ -36,8 +36,12 @@ export default function DetailProduct() {
     <>
       <div
         className="product-detail-page"
-        style={{ paddingTop: "50px" }}>
+        style={{ paddingTop: "60px" }}>
 
+        {/* BANNER SCONTO ORDINI */}
+        <div className="banner">
+          Per odini superiori ai €1000, la spedizione è gratuita
+        </div>
 
         <div className="container">
           {/* SCHEDA PRODOTTO */}

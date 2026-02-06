@@ -6,7 +6,11 @@ import { useNavigate } from "react-router-dom";
 export default function Checkout() {
     const { cart, clearCart } = useCart();
     const navigate = useNavigate();
+    
+    // STATI AGGIUNTI
     const [isBillingSameAsShipping, setIsBillingSameAsShipping] = useState(true);
+    const [isOrdered, setIsOrdered] = useState(false); // Per mostrare il successo
+    const [orderData, setOrderData] = useState(null); // Per i dati ricevuti dal server
 
     const [formData, setFormData] = useState({
         customer_email: "",
@@ -24,10 +28,10 @@ export default function Checkout() {
         billing_postcode: "",
         billing_province_state: "",
         billing_country: "Italia",
-        payment_method: "Credit Card"
+        payment_method: "Credit Card" // Valore iniziale
     });
 
-    if (cart.length === 0) return null;
+    if (cart.length === 0 && !isOrdered) return null;
 
     const subtotal = cart.reduce((acc, item) => acc + (Number(item.price) * item.quantity), 0);
     const shippingCost = subtotal >= 1000 ? 0 : 50;
@@ -40,7 +44,6 @@ export default function Checkout() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Mappa i campi per il backend Express (oggetti billing e customer)
         const payload = {
             customer: {
                 email: formData.customer_email,
@@ -63,28 +66,47 @@ export default function Checkout() {
                 country: isBillingSameAsShipping ? formData.shipping_country : formData.billing_country
             },
             cart: cart.map(item => ({
-                product_id: item.id, // <--- Fondamentale per il tuo controller
+                product_id: item.id, 
                 quantity: item.quantity
             }))
         };
 
         try {
-            const response = await api.post("/products", payload);
+            // Invio al tuo endpoint Express
+            const response = await api.post("/orders", payload);
             if (response.status === 201) {
-                alert("Ordine inviato!");
+                setOrderData(response.data); // Salviamo la risposta (ID ordine, fattura, etc)
+                setIsOrdered(true); // Attiviamo la vista di successo
                 clearCart();
-                navigate("/");
             }
         } catch (err) {
             alert(err.response?.data?.message || "Errore invio ordine");
         }
     };
 
+    // SE L'ORDINE È ANDATO A BUON FINE, MOSTRA QUESTO:
+    if (isOrdered) {
+        return (
+            <div className="container text-center text-white" style={{ paddingTop: "200px", minHeight: "100vh" }}>
+                <div className="bg-dark p-5 rounded-4 border border-primary shadow-lg d-inline-block">
+                    <i className="bi bi-check-circle-fill text-primary display-1 mb-4"></i>
+                    <h1 className="fw-bold text-uppercase">Ordine Confermato!</h1>
+                    <p className="lead opacity-75">Grazie per aver scelto la tecnologia Aeterna Dynamics.</p>
+                    <hr className="border-secondary my-4" />
+                    <p className="mb-1">ID Ordine: <span className="text-primary fw-bold">#{orderData?.ordine_id}</span></p>
+                    <p className="mb-4">Fattura: <span className="text-info">{orderData?.fattura}</span></p>
+                    <button onClick={() => navigate("/")} className="btn btn-primary px-5 py-3 fw-bold">TORNA ALLA HOME</button>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="checkout-page bg-black text-white min-vh-100" style={{ paddingTop: "120px" }}>
             <div className="container pb-5">
                 <form onSubmit={handleSubmit} className="row">
                     <div className="col-lg-8">
+                        {/* 1. SPEDIZIONE */}
                         <div className="bg-dark p-4 rounded-4 border border-secondary mb-4">
                             <h4 className="text-primary fw-bold mb-4">1. SPEDIZIONE</h4>
                             <div className="row">
@@ -112,7 +134,8 @@ export default function Checkout() {
                             </div>
                         </div>
 
-                        <div className="bg-dark p-4 rounded-4 border border-secondary">
+                        {/* 2. FATTURAZIONE */}
+                        <div className="bg-dark p-4 rounded-4 border border-secondary mb-4">
                             <h4 className="text-primary fw-bold mb-4">2. FATTURAZIONE</h4>
                             <div className="form-check form-switch mb-3">
                                 <input className="form-check-input" type="checkbox" checked={isBillingSameAsShipping} onChange={() => setIsBillingSameAsShipping(!isBillingSameAsShipping)} />
@@ -132,23 +155,40 @@ export default function Checkout() {
                                 </div>
                             )}
                         </div>
+
+                        {/* 3. METODO DI PAGAMENTO (INTEGRATO) */}
+                        <div className="bg-dark p-4 rounded-4 border border-secondary mb-4">
+                            <h4 className="text-primary fw-bold mb-4">3. METODO DI PAGAMENTO</h4>
+                            <div className="row">
+                                <div className="col-12">
+                                    <select 
+                                        name="payment_method" 
+                                        className="form-select bg-black text-white border-secondary py-3" 
+                                        onChange={handleChange}
+                                        value={formData.payment_method}
+                                    >
+                                        <option value="Credit Card">Carta di Credito</option>
+                                        <option value="PayPal">PayPal</option>
+                                        <option value="Crypto">Neural Transfer (Crypto)</option>
+                                        <option value="Bank Transfer">Bonifico Bancario</option>
+                                    </select>
+                                    <p className="small opacity-50 mt-2 text-center">Transazione sicura e crittografata.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="col-lg-4">
-                        <div className="bg-primary bg-opacity-10 p-4 rounded-4 border border-primary">
-                            <h4 className="fw-bold mb-4">RIEPILOGO</h4>
-                            {cart.map(item => (
-                                <div key={`summary-${item.id}`} className="d-flex justify-content-between small mb-1">
-                                    <span>{item.name} x{item.quantity}</span>
-                                    <span>{(item.price * item.quantity).toFixed(2)}€</span>
-                                </div>
-                            ))}
+                        <div className="bg-primary bg-opacity-10 p-4 rounded-4 border border-primary sticky-top shadow-lg" style={{ top: "140px" }}>
+                            <h4 className="fw-bold mb-4 text-center text-uppercase">Riepilogo</h4>
                             <hr/>
-                            <div className="d-flex justify-content-between fs-4 fw-bold text-primary">
+                            <div className="d-flex justify-content-between fs-3 fw-bold text-primary mb-4">
                                 <span>TOTALE</span>
                                 <span>{(subtotal + shippingCost).toFixed(2)}€</span>
                             </div>
-                            <button type="submit" className="btn btn-primary w-100 py-3 mt-4 fw-bold">ORDINA ORA</button>
+                            <button type="submit" className="btn btn-primary w-100 py-3 fw-bold text-uppercase shadow">
+                                ORDINA ORA
+                            </button>
                         </div>
                     </div>
                 </form>

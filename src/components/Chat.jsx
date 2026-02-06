@@ -10,7 +10,7 @@ export default function Chat() {
     if (!input) {
       return alert("miao");
     }
-
+    setInput("");
     const message = input;
 
     const obj = {
@@ -32,7 +32,6 @@ export default function Chat() {
           parts: [{ text: `${data.data.testo_risposta}` }],
         },
       ]);
-      setInput("");
     });
   }
   return (

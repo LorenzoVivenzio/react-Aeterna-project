@@ -33,9 +33,9 @@ export default function Header() {
       {/* LINKS--------------------------- */}
       <div className="nav d-none d-md-flex">
         <ul>
-          <li ><NavLink to="/">Home</NavLink></li>
-          <li ><NavLink to="/products">Prodotti</NavLink></li>
-          <li ><NavLink to="/about">Chi siamo</NavLink></li>
+          <li className="anta-head bold"><NavLink to="/">Home</NavLink></li>
+          <li className="anta-head bold"><NavLink to="/products">Prodotti</NavLink></li>
+          <li className="anta-head bold"><NavLink to="/about">Chi siamo</NavLink></li>
         </ul>
       </div>
 

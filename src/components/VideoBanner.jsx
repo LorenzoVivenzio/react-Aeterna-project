@@ -19,7 +19,7 @@ export default function VideoBanner() {
                 ></video>
                 <div className="btn-video">
                   <Link to="/products">
-                    <button className="btn-btn-video">Scopri di più</button>
+                    <button className="btn-btn-banner">Scopri di più</button>
                   </Link>
                 </div>
               </div>

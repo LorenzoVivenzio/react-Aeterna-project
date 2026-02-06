@@ -35,7 +35,7 @@ export default function Home() {
           </p>
         </div>
         <div className="slogan">
-          <h1 className="text-slogan text-white">TOUCH WHAT <br /> TIME <br />ERASED</h1>
+          <h1 className="text-slogan text-white">TOUCH WHAT TIME ERASED</h1>
           <div className="btn-slogan">
             <button className="btn-btn-banner">
               <a 

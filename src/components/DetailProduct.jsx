@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import api from "../api/axios";
-import Header from "../components/Header";
+import api from "../API/axios.jsx";
 import ProductCard from "../components/ProductCard";
+import { useCart } from "../context/CartContext"; 
 
 export default function DetailProduct() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
-
   const [loading, setLoading] = useState(true);
+
+  
+  const { addToCart } = useCart();
 
   useEffect(() => {
     api.get(`/products/${slug}`).then((res) => {
@@ -21,9 +23,10 @@ export default function DetailProduct() {
   if (loading)
     return (
       <div className="pt-5 container">
-        <div className="text-black p-5 text-center">Ricerca in corso</div>;
+        <div className="text-white p-5 text-center">Ricerca in corso...</div>
       </div>
     );
+
   return (
     <>
       <div
@@ -31,7 +34,6 @@ export default function DetailProduct() {
         style={{ paddingTop: "100px" }}
       >
         <div className="container">
-          {/* SCHEDA PRODOTTO */}
           <div className="row mb-5 py-5 border-bottom border-secondary">
             <div className="col-md-6 mb-4">
               <img
@@ -46,25 +48,25 @@ export default function DetailProduct() {
               </h1>
               <div className="d-flex gap-2 mb-4">
                 <span className="badge bg-secondary">{product.era_name}</span>
-                <span className="badge bg-info text-dark">
-                  {product.diet_name}
-                </span>
-                <span className="badge bg-warning text-dark">
-                  {product.power_source_name}
-                </span>
+                <span className="badge bg-info text-dark">{product.diet_name}</span>
+                <span className="badge bg-warning text-dark">{product.power_source_name}</span>
               </div>
               <h2 className="text-success mb-4">
                 {Number(product.price).toFixed(2)}€
               </h2>
               <p className="lead text-white-50">{product.description}</p>
-              <button className="btn btn-primary btn-lg mt-4 w-100">
+              
+              
+              <button 
+                className="btn btn-primary btn-lg mt-4 w-100"
+                onClick={() => addToCart(product)}
+              >
                 Aggiungi al Carrello
               </button>
             </div>
           </div>
 
           {/* CORRELATI */}
-
           {product.recommended.length > 0 && (
             <div className="related-section pb-5">
               <h3 className="mb-5 text-center text-uppercase tracking-widest">

@@ -12,15 +12,15 @@ export default function Header() {
     <header className="nav-bar fixed-top header-border-bot ">
       {/* OFFCANVAS------------------- */}
       <div className="d-md-none">
-        <button class="btn-custom d-md-none anta-head" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">Menu</button>
+        <button className="btn-custom d-md-none anta-head" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">Menu</button>
 
-        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
-          <div class="offcanvas-header anta-head">
-            <h5 class="offcanvas-title " id="offcanvasResponsiveLabel">Menu</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
+        <div className="offcanvas-md offcanvas-start" tabIndex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
+          <div className="offcanvas-header anta-head">
+            <h5 className="offcanvas-title " id="offcanvasResponsiveLabel">Menu</h5>
+            <button type="button" className="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
           </div>
           {/* BODY OFFCANVAS---------- */}
-          <div class="offcanvas-body d-md-none ">
+          <div className="offcanvas-body d-md-none ">
             <ul className="d-flex row ">
               <li className="anta-head li-bord-bot"><NavLink to="/">Home</NavLink></li>
               <li className="anta-head li-bord-bot"><NavLink to="/products">Prodotti</NavLink></li>
@@ -33,9 +33,9 @@ export default function Header() {
       {/* LINKS--------------------------- */}
       <div className="nav d-none d-md-flex">
         <ul>
-          <li ><NavLink to="/">Home</NavLink></li>
-          <li ><NavLink to="/products">Prodotti</NavLink></li>
-          <li ><NavLink to="/about">Chi siamo</NavLink></li>
+          <li className="anta-head bold"><NavLink to="/">Home</NavLink></li>
+          <li className="anta-head bold"><NavLink to="/products">Prodotti</NavLink></li>
+          <li className="anta-head bold"><NavLink to="/about">Chi siamo</NavLink></li>
         </ul>
       </div>
 

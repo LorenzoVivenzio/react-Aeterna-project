@@ -5,6 +5,8 @@ import ProductCard from "../components/ProductCard";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../context/CartContext";
 
+import "./DetailProduct.css"
+
 export default function DetailProduct() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
@@ -68,7 +70,7 @@ export default function DetailProduct() {
               <div>
                 <button
                   onClick={() => addToCart(product)}
-                  className="btn-cart">
+                  className="btn-cart2">
                   AGGIUNGI AL CARRELLO
                 </button>
               </div>

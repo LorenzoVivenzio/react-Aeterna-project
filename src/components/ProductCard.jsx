@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext"; // 1. Importa l'hook
 
 export default function ProductCard({ product }) {
   const backendUrl = "http://localhost:3001";
   const imageUrl = `${backendUrl}/images/${product.url_image}`;
+  
+  // 2.funzione addToCart
+  const { addToCart } = useCart();
 
   return (
     <div className="product-card">
@@ -29,7 +33,13 @@ export default function ProductCard({ product }) {
         </p>
 
         <div className="card-actions">
-          <button className="btn-add-cart">Aggiungi</button>
+          {/* 3. Collega la funzione */}
+          <button 
+            className="btn-add-cart" 
+            onClick={() => addToCart(product)}
+          >
+            Aggiungi
+          </button>
         </div>
       </div>
     </div>

@@ -25,34 +25,18 @@ export default function VideoBanner() {
               </div>
             </div>
 
-            <div className="descrition col-sm-12 col-md-12 col-lg-4 bg-white rounded-1 ">
+            <div className="descrition col-sm-12 col-md-12 col-lg-4 mt-5">
               {" "}
               {/* Corretto typo 'roundend' */}
-              <h3 className="text-center my-5 px-3">
-                L'Eccellenza Sotto la Scocca: Ingegneria Senza Tempo
-              </h3>
+              <h4 className="text-center pt-5 pb-2">
+               Aeterna:
+              </h4>
+              <h6 className="text-center  px-5">Bio-ingegneria di lusso e precisione</h6>
               <p
                 className="text-center my-4 px-3"
-                style={{ fontSize: "0.9rem", lineHeight: "1.6" }}
               >
-                Aeterna offre prodotti di bio-ingegneria avanzata che uniscono
-                estetica naturale e tecnologia d’avanguardia. Ogni unità è
-                progettata come un bene duraturo e collezionabile, destinata a
-                evolversi senza invecchiare. La struttura in Titanio Grado 5
-                garantisce resistenza, leggerezza, biocompatibilità e durata nel
-                tempo, mentre ogni componente è testato per milioni di cicli
-                operativi. Non si tratta solo di tecnologia, ma di artigianato
-                digitale che preserva la bellezza naturale attraverso la
-                perfezione meccanica.
-                <br />
-                <br />
-                Ogni esemplare è un equilibrio perfetto tra potenza e eleganza,
-                capace di integrarsi armoniosamente nell’ambiente umano. La
-                precisione ingegneristica assicura performance costanti e
-                affidabili, mentre il design senza tempo lo rende un oggetto
-                ammirato tanto quanto funzionale. Aeterna non vende solo
-                macchine: offre un’esperienza sensoriale e un investimento per
-                il futuro. Il risultato è una tecnologia che sfida il tempo.
+                "Aeterna non progetta macchine, ma scolpisce il futuro nel titanio: 
+                dove la perfezione meccanica incontra l'immortalità del design."
               </p>
             </div>
           </div>

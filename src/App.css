@@ -51,7 +51,6 @@ img {
 .top-hero-banner {
     width: 100%;
     height: 60px;
-    color: white;
     font-size: bold;
     margin-top: 60px;
     overflow: hidden;
@@ -125,31 +124,6 @@ li:hover {
     border-radius: 8px;
     /* background-color: #e1bb70 ; */
 }
-
-/* .input-nav {
-    width: 200px;
-    height: 30px;
-
-    border: 1px solid white;
-    border-bottom: 1px solid black;
-}
-
-.input-nav:active {
-    border: 1px solid lightgray;
-}
-
-.submit-nav {
-    margin-left: 20px;
-    border-radius: 10px;
-    padding: 5px 20px;
-    border: 1px solid lightgray;
-} */
-
-/* .btn-banner {
-    position: absolute;
-    top: 90%;
-    left: 45%;
-} */
 
 .btn-btn-banner {
     font-family: Arial, Helvetica, sans-serif;
@@ -233,7 +207,7 @@ li:hover {
 }
 
 .section-video {
-    background-color: rgb(179, 186, 185);
+    background-color: rgb(149, 149, 149);
     /* Il grigio esatto dello sfondo video */
     display: flex;
     justify-content: center;
@@ -379,6 +353,67 @@ li:hover {
 .text-free{
     color: rgb(129, 127, 127);
 }
+/* Stile per il contenitore della descrizione */
+.description.bg-white {
+    background-color: #000 !important; /* Forza il nero stile Nike/Aeterna */
+    color: #fff !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: none !important;
+    text-transform: uppercase;
+}
+
+/* Titolo H4 stilizzato */
+.descrition h4 {
+    font-size: 2.5rem !important;
+    font-weight: 900 !important;
+    line-height: 0.9;
+    letter-spacing: -1px;
+    /* margin-bottom: 2rem; */
+}
+.descrition h6 {
+    font-size: 1.2rem !important;
+    font-weight: 900 !important;
+    line-height: 0.9;
+    letter-spacing: -1px;
+    margin-bottom: 2rem;
+}
+
+/* Paragrafo citazione */
+.descrition p {
+    font-size: 1.1rem;
+    text-transform: none; /* Per mantenere la leggibilità della frase */
+    color: white;
+    font-style: italic;
+    border-left: 2px solid #fff; /* Un dettaglio tecnico minimale */
+    padding-left: 15px;
+}
+.scroll-wrapper {
+    display: flex;
+    flex-wrap: nowrap; /* Fondamentale: impedisce alle card di andare a capo */
+    overflow-x: auto;  /* Attiva lo scroll orizzontale */
+    gap: 20px;         /* Spazio tra le card */
+    padding: 20px 0;
+    scroll-snap-type: x mandatory; /* Rende lo scorrimento magnetico */
+    -webkit-overflow-scrolling: touch; /* Fluidità su mobile */
+}
+
+/* Nasconde la scrollbar brutta di sistema per un look più clean */
+.scroll-wrapper::-webkit-scrollbar {
+    height: 4px;
+}
+
+.scroll-wrapper::-webkit-scrollbar-thumb {
+    background: #000; /* Scrollbar nera sottile stile Nike */
+    border-radius: 10px;
+}
+
+.scroll-item {
+    flex: 0 0 auto;    /* Impedisce alle card di rimpicciolirsi */
+    width: 280px;      /* Definisci quanto deve essere larga ogni card */
+    scroll-snap-align: start;
+}
 
 
 
@@ -414,7 +449,7 @@ li:hover {
 
     .btn-video {
         position: absolute;
-        top: 90%;
+        top: 85%;
         left: 79%;
     }
 }

@@ -37,10 +37,10 @@ export default function Home() {
         <div className="slogan">
           <h1 className="text-slogan text-white anta-head">TOUCH WHAT TIME ERASED</h1>
           <div className="btn-slogan">
-            <button className="btn-btn-banner mt-3">
-              <a 
-              className="text-white "
-              href="#ultimi-arrivi">vai alle notività</a>
+            <button className="btn-btn-banner">
+              <a
+                className="text-white mt-4"
+                href="#ultimi-arrivi ">vai alle notività</a>
             </button>
           </div>
         </div>
@@ -48,8 +48,8 @@ export default function Home() {
 
       <VideoBanner />
 
-      <div 
-      className="container my-5">
+      <div
+        className="container my-5">
         <section
           className="mb-5">
           <h1 className="mb-4">I nostri consigliati</h1>
@@ -64,18 +64,33 @@ export default function Home() {
 
         <hr />
 
-        <section
+        {/* <section
           id="ultimi-arrivi"
           className="mt-5">
           <h1 className="mb-4">Ultimi arrivi</h1>
-          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <div className="row ">
             {created.map((product) => (
-              <div className="col" key={product.id}>
+              <div className="col-2" key={product.id}>
+                <CardHome product={product} />
+              </div>
+            ))}
+          </div>
+        </section> */}
+        <section 
+        id="ultimi-arrivi" 
+        className="mt-5">
+          <h1 className="mb-4">Ultimi arrivi</h1>
+          {/* Cambia 'row' con 'scroll-wrapper' */}
+          <div className="scroll-wrapper">
+            {created.map((product) => (
+              /* Rimuovi 'col-2' e usa una classe per la card */
+              <div className="scroll-item" key={product.id}>
                 <CardHome product={product} />
               </div>
             ))}
           </div>
         </section>
+
       </div>
     </>
   );

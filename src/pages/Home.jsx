@@ -35,11 +35,11 @@ export default function Home() {
           </p>
         </div>
         <div className="slogan">
-          <h1 className="text-slogan text-white">TOUCH WHAT TIME ERASED</h1>
+          <h1 className="text-slogan text-white anta-head">TOUCH WHAT TIME ERASED</h1>
           <div className="btn-slogan">
-            <button className="btn-btn-banner">
+            <button className="btn-btn-banner mt-3">
               <a 
-              className="text-white"
+              className="text-white "
               href="#ultimi-arrivi">vai alle notività</a>
             </button>
           </div>
@@ -51,7 +51,6 @@ export default function Home() {
       <div 
       className="container my-5">
         <section
-          id="ultimi-arrivi"
           className="mb-5">
           <h1 className="mb-4">I nostri consigliati</h1>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -66,7 +65,7 @@ export default function Home() {
         <hr />
 
         <section
-
+          id="ultimi-arrivi"
           className="mt-5">
           <h1 className="mb-4">Ultimi arrivi</h1>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">

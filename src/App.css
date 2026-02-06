@@ -291,9 +291,11 @@ li:hover {
 }
 
 .card-price {
+    font-family: initial;
     font-weight: bold;
     font-size: 1.2rem;
-    color: #333;
+    color: #151414;
+    padding-top: 20px;
     /* O bianco se lo sfondo è scuro */
 }
 
@@ -348,18 +350,33 @@ li:hover {
 
 }
 .btn-cart{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
     text-align: center;
-    background-color: #0f0f0f;
+    background-color: rgb(54, 127, 205);
+    border: 0;
     color: white;
     padding: 10px 50px;
-    border-radius: 15px;
+    margin-top: 100px;
+    
+}
+.btn-cart:hover{
+    font-weight: bold;
+    text-align: center;
+    background-color:white ;
+    color:rgb(3, 111, 111);
+    border:2px solid rgb(3, 111, 111);
+    padding: 10px 50px;
     
 }
 .product-name{
-
+    margin-top: 50px;
     font-family: 'Anta', sans-serif;
 }
 
+.text-free{
+    color: rgb(129, 127, 127);
+}
 
 
 

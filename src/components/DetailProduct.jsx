@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api/axios";
 import ProductCard from "../components/ProductCard";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function DetailProduct() {
   const { slug } = useParams();
@@ -12,7 +13,7 @@ export default function DetailProduct() {
   useEffect(() => {
     api.get(`/products/${slug}`).then((res) => {
       console.log(res)
-      
+
       const current = res.data.item || res.data;
       setLoading(false);
       setProduct(current);
@@ -41,32 +42,39 @@ export default function DetailProduct() {
                 alt={product.name}
               />
             </div>
-            <div className="col-md-6 d-flex flex-column justify-content-between">
-              <h2 className="product-name border-bottom pb-2 mb-4">
+
+
+
+            <div className="col-md-6 px-5">
+              <h3 className="product-name mb-4">
                 {product.name}
-              </h2>
+              </h3>
 
-              <h4>Dimensioni prodotto: {product.dimension}</h4>
-              <div className="d-flex gap-2 mb-4 ">
-                <span className="badge bg-secondary">{product.era_name}</span>
-                <span className="badge bg-info text-dark">
-                  {product.diet_name}
-                </span>
-                <p className="badge bg-warning text-dark">
-                  {product.power_source_name}
-                </p>
-              </div>
-              <h4 className=" product-price text-info mb-4">
-                {Number(product.price).toFixed(2)}€
-              </h4>
+              <h6>Dimensioni prodotto: {product.dimension}</h6>
+              <h5 className=" card-price">
+                € {Number(product.price).toFixed(2)}
+              </h5>
+              <p className="text-free">(Per odini superiori ai €1000, la spedizione è gratuita)</p>
               <p className="lead">{product.description}</p>
-
               
-              <button className="btn-cart">
-                Aggiungi al Carrello
-              </button>
+
+              <h5>{product.eras} / {product.diets}</h5>
+              <p className="text-primary">{product.power_sources}</p>
+              <div>
+                <button className="btn-cart">
+                  AGGIUNGI AL CARRELLO
+                </button>
+
+              </div>
+
             </div>
           </div>
+
+
+
+
+
+
 
           {/* CORRELATI */}
 

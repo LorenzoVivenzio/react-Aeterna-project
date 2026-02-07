@@ -4,6 +4,8 @@ import api from "../API/axios.jsx";
 import ProductCard from "../components/ProductCard";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../context/CartContext";
+import ShippingBanner from "./ShippingBanner.jsx";
+
 
 import "./DetailProduct.css"
 
@@ -39,9 +41,8 @@ export default function DetailProduct() {
         style={{ paddingTop: "60px" }}>
 
         {/* BANNER SCONTO ORDINI */}
-        <div className="banner">
-          Per odini superiori ai €1000, la spedizione è gratuita
-        </div>
+        <ShippingBanner />
+
 
         <div className="container">
           {/* SCHEDA PRODOTTO */}

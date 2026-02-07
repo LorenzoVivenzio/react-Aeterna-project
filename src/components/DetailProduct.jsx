@@ -36,21 +36,19 @@ export default function DetailProduct() {
 
   return (
     <>
-      <div
-        className="product-detail-page"
-        style={{ paddingTop: "60px" }}>
+      <div className="product-detail-page">
 
         {/* BANNER SCONTO ORDINI */}
         <ShippingBanner />
 
 
-        <div className="container">
+        <div className="container product-detail">
           {/* SCHEDA PRODOTTO */}
           <div className=" row mb-5 py-5 border-bottom border-secondary">
             <div className="row-cart col-md-6 mb-4">
               <img
                 src={`http://localhost:3001/images/${product.url_image}`}
-                className="img-fluid rounded border border-info shadow-lg"
+                className="img-fluid  img-border border-info shadow-lg"
                 alt={product.name}
               />
             </div>
@@ -58,7 +56,7 @@ export default function DetailProduct() {
 
 
             <div className="col-md-6 px-5">
-              <h3 className="product-name mb-4">
+              <h3 className="anta-font mb-4">
                 {product.name}
               </h3>
 
@@ -91,13 +89,13 @@ export default function DetailProduct() {
           {/* CORRELATI */}
           {product.recommended.length > 0 && (
             <div className="related-section pb-5">
-              <h3 className="mb-5 text-center text-uppercase tracking-widest">
+              <h3 className="mb-5 text-center text-uppercase tracking-widest anta-font">
                 Modelli Correlati per Caratteristiche
               </h3>
               <div className="row">
                 {product.recommended.map((rp, index) => (
                   <div key={index} className="col-md-4">
-                    <p className="text-center text-primary small text-uppercase">
+                    <p className="text-center text-secondary small text-uppercase">
                       {index === 0 && "Stesso Periodo"}
                       {index === 1 && "Stessa Dieta"}
                       {index === 2 && "Stessa Alimentazione"}

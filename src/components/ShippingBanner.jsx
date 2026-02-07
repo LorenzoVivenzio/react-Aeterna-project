@@ -8,17 +8,32 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 export default function ShippingBanner() {
     const [visible, setVisible] = useState(true);
 
-    // renderizza una volta, se è stato cliccata la X non renderizza nulla
+    
     useEffect(() => {
-        if(localStorage.getItem("bannerClosed")) {
-            setVisible(false);
+    // riprendo il potenziale tempo salvato dalla chiusura del banner
+        const savedTime = localStorage.getItem("bannerClosedTime");
+
+
+        if(savedTime) {
+        // prendo la data attuale
+            const now = Date.now();
+
+        // calcolo i ms in un giorno
+            const oneDay = 24 * 60 * 60 * 1000;
+
+            // se è passato meno di un giorno non mostra di nuovo il banner
+            if(now - savedTime < oneDay){
+                setVisible(false);  
+            } 
         }
     }, []);
 
-    // chiude il badge e mette in localStorage bannerClosed, ricollegandosi all'if precedente
+    
     const closeBanner = () => {
         setVisible(false);
-        localStorage.setItem("bannerClosed", "true")
+        
+    // salvo il tempo in cui è stato chiuso il banner
+        localStorage.setItem("bannerClosedTime", Date.now());
     }
 
     if (!visible) return null;

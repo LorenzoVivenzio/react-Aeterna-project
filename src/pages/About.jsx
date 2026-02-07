@@ -66,7 +66,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* SEZIONE VALORI: Bootstrap Cards */}
       <section className="bg-light py-5 border-top border-bottom mt-5">
         <div className="container py-4">
           <div className="row g-4">

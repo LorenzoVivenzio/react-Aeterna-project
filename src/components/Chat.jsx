@@ -1,38 +1,36 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import "./chat.css";
 
 export default function Chat() {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [invalidInput, setInvalidInput] = useState(false);
+  const [buttonChat, setButtonChat] = useState(false);
   const scrollRef = useRef(null);
 
-  // Scroll automatico all'ultimo messaggio
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [history, loading]);
+  }, [history, loading, error]);
 
   function handleSend() {
-    if (!input.trim()) {
-      setInvalidInput(true);
-      setTimeout(() => setInvalidInput(false), 2500);
-      return;
-    }
+    if (!input.trim() || !isNaN(input)) return;
 
     const message = input;
+    setInput("");
     setLoading(true);
     setError(false);
-    setInput("");
+
+    const obj = {
+      messageUtente: message,
+      history: history,
+    };
 
     axios
-      .post("http://localhost:3001/api/chat/", {
-        messageUtente: message,
-        history: history,
-      })
+      .post("http://localhost:3001/api/chat/", obj)
       .then((res) => {
         setHistory((prev) => [
           ...prev,
@@ -40,122 +38,87 @@ export default function Chat() {
           { role: "model", parts: [{ text: res.data.testo_risposta }] },
         ]);
       })
-      .catch(() => setError(true))
+      .catch((err) => {
+        console.error("Errore chat:", err);
+        setError(true);
+      })
       .finally(() => setLoading(false));
   }
 
   return (
-    <div className="container py-5">
-      <div className="row justify-content-center">
-        <div className="col-md-8 col-lg-6">
-          <div
-            className="card shadow-lg border-0"
-            style={{ borderRadius: "15px" }}
-          >
-            <div
-              className="card-header bg-primary text-white text-center py-3"
-              style={{ borderRadius: "15px 15px 0 0" }}
+    <div className="chat-widget">
+      {buttonChat && (
+        <div className="chat-container card shadow-lg">
+          <div className="card-header bg-success text-white d-flex justify-content-between">
+            <small className="fw-bold">AETERNA BOT</small>
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => setButtonChat(false)}
             >
-              <h5 className="mb-0">Aeterna</h5>
-            </div>
+              ×
+            </span>
+          </div>
 
-            <div
-              className="card-body bg-light"
-              ref={scrollRef}
-              style={{
-                height: "400px",
-                overflowY: "auto",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              {history.map((h, index) => (
+          <div className="messages card-body bg-light" ref={scrollRef}>
+            {history.map((h, i) => (
+              <div
+                key={i}
+                className={`d-flex mb-2 ${h.role === "user" ? "justify-content-end" : "justify-content-start"}`}
+              >
                 <div
-                  key={index}
-                  className={`d-flex mb-3 ${h.role === "user" ? "justify-content-end" : "justify-content-start"}`}
+                  className={`p-2 rounded shadow-sm message-bubble ${h.role === "user" ? "bg-primary text-white" : "bg-white text-dark"}`}
                 >
-                  <div
-                    className={`p-3 shadow-sm ${h.role === "user" ? "bg-primary text-white" : "bg-white text-dark"}`}
-                    style={{
-                      maxWidth: "80%",
-                      borderRadius:
-                        h.role === "user"
-                          ? "15px 15px 0 15px"
-                          : "15px 15px 15px 0",
-                      fontSize: "0.95rem",
-                    }}
-                  >
-                    {h.parts[0].text}
-                  </div>
+                  {h.parts[0].text}
                 </div>
-              ))}
-
-              {loading && (
-                <div className="d-flex justify-content-start mb-3">
-                  <div
-                    className="bg-white p-3 shadow-sm"
-                    style={{ borderRadius: "15px 15px 15px 0" }}
-                  >
-                    <div
-                      className="spinner-grow spinner-grow-sm text-primary mx-1"
-                      role="status"
-                    ></div>
-                    <div
-                      className="spinner-grow spinner-grow-sm text-primary mx-1"
-                      role="status"
-                    ></div>
-                    <div
-                      className="spinner-grow spinner-grow-sm text-primary mx-1"
-                      role="status"
-                    ></div>
-                  </div>
-                </div>
-              )}
-
-              {error && (
-                <div
-                  className="alert alert-danger py-2 text-center"
-                  role="alert"
-                >
-                  <small>Errore di connessione. Riprova.</small>
-                </div>
-              )}
-            </div>
-
-            <div
-              className="card-footer bg-white p-3"
-              style={{ borderRadius: "0 0 15px 15px" }}
-            >
-              {invalidInput && (
-                <div className="text-danger small mb-2 ps-1">
-                  Scrivi qualcosa prima di inviare!
-                </div>
-              )}
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control border-0 bg-light"
-                  placeholder="Chiedi informazioni..."
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  disabled={loading}
-                />
-                <button
-                  className="btn btn-primary px-4"
-                  onClick={handleSend}
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  ) : (
-                    "Invia"
-                  )}
-                </button>
               </div>
+            ))}
+
+            {loading && (
+              <div className="d-flex justify-content-start mb-2">
+                <div className="p-2 bg-white rounded shadow-sm italic-text">
+                  <span className="spinner-grow spinner-grow-sm text-success"></span>{" "}
+                  Sta scrivendo...
+                </div>
+              </div>
+            )}
+
+            {error && (
+              <div
+                className="alert alert-danger py-1 mt-2"
+                style={{ fontSize: "0.7rem" }}
+              >
+                Errore di connessione. Riprova.
+              </div>
+            )}
+          </div>
+
+          <div className="card-footer p-2 bg-white">
+            <div className="input-group">
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="form-control form-control-sm"
+                placeholder="Chiedi qualcosa..."
+                disabled={loading}
+              />
+              <button
+                className="btn btn-success btn-sm"
+                onClick={handleSend}
+                disabled={loading}
+              >
+                {loading ? "..." : "Invia"}
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      )}
+
+      <button
+        onClick={() => setButtonChat(!buttonChat)}
+        className={`btn ${buttonChat ? "btn-secondary" : "btn-success"} rounded-pill shadow-lg px-4 mt-2`}
+      >
+        {buttonChat ? "Chiudi Assistente" : "💬 Chiedi ad Aeterna"}
+      </button>
     </div>
   );
 }

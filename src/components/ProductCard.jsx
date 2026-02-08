@@ -26,9 +26,7 @@ export default function ProductCard({ product }) {
       </div>
 
       <div className="card-content">
-        <div className="card-category">
-          {product.eras}
-        </div>
+        
         <h3 className="card-title anta-font">{product.name}</h3>
         <p className="card-price ">
           {Number(product.price).toFixed(2)}€

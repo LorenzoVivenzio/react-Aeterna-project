@@ -18,7 +18,7 @@
 
 .btn-cart2:hover {
     background: rgba(255, 255, 255, 0.4);
-    border: 4px double rgba(69, 194, 216, 0.616);
+    border: 3px double rgba(69, 194, 216, 0.616);
     box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
 }
 
@@ -44,12 +44,26 @@
     color: rgb(129, 127, 127);
 }
 
+.border-left{
+    border-left: 1px solid #dee2e6;
+}
+
+
 /* cards correlati ----------------------*/
-.card-price {
-    font-family: initial;
-    font-weight: bold;
+.card-price-big {
+    font-family: anta;
+    font-weight: 100;
     font-size: 1.2rem;
-    color: #303030;
+    color: #777777;
+    padding-top: 5px;
+    /* O bianco se lo sfondo è scuro */
+}
+
+.card-price {
+    font-family: anta;
+    font-weight: 100;
+    font-size: 1rem;
+    color: #777777;
     padding-top: 10px;
     /* O bianco se lo sfondo è scuro */
 }

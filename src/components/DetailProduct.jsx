@@ -56,27 +56,66 @@ export default function DetailProduct() {
 
 
             <div className="col-md-6 px-5">
-              <h3 className="anta-font mb-4">
+
+              {/* TITOLO */}
+              <h1 className="anta-font fw-bold mb-1">
                 {product.name}
-              </h3>
+              </h1>
 
-              <h6>Dimensioni prodotto: {product.dimension}</h6>
-              <h5 className=" card-price">
-                € {Number(product.price).toFixed(2)}
-              </h5>
-              <p className="text-free">(Per odini superiori ai €1000, la spedizione è gratuita)</p>
-              <p className="lead">{product.description}</p>
+              {/* PREZZO */}
+              <div className="mb-1">
+                <div className="card-price-big">
+                  € {Number(product.price).toFixed(2)}
+                </div>
+                
+              </div>
 
+              {/* CARATTERISTICHE*/}
+              <div className="mb-4 border-top">
+                <div>
+                  <div className="col-12 py-3">
+                    <strong>Dimensioni: </strong>  
+                      {product.dimension}
 
-              <h5>{product.eras} / {product.diets}</h5>
-              <p className="text-primary">{product.power_sources}</p>
-              <div>
+                  </div>
+                  <div className="row pb-3">
+                    <div className="col-6">
+                      <strong className="anta-font">Era:</strong> <br />
+                      {product.eras}
+                    </div>
+                    <div className="col-6 border-left">
+                      <strong className="anta-font">Dieta:</strong>  <br />
+                      {product.diets}
+                    </div>
+                  </div>
+
+                  <div className="col-12">
+                    <strong className="anta-font">Alimentazione:</strong>  <br />
+                    {product.power_sources}
+                  </div>
+                </div>
+              </div>
+              
+              {/* DESCRIZIONE */}
+              <div className="mb-4 border-top pt-2">
+                <h5 className="mb-1 anta-font">Descrizione:</h5>
+                <p className="lead">
+                  {product.description}
+                </p>
+              </div>
+
+              {/* BOTTONE addToCart */}
+              <div className="d-grid border-top pt-1">
+                <p className="text-muted small mb-2">
+                  Spedizione gratuita sopra i €1000
+                </p>
                 <button
                   onClick={() => addToCart(product)}
                   className="btn-cart2">
-                  AGGIUNGI AL CARRELLO
+                  Aggiungi al carrello
                 </button>
               </div>
+
             </div>
           </div>
 

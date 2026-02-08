@@ -48,7 +48,7 @@ export default function DetailProduct() {
             <div className="row-cart col-md-6 mb-4">
               <img
                 src={`http://localhost:3001/images/${product.url_image}`}
-                className="img-fluid  img-border border-info shadow-lg"
+                className="img-fluid  img-border shadow-lg"
                 alt={product.name}
               />
             </div>

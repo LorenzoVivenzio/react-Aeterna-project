@@ -24,7 +24,6 @@ export default function Chat() {
     setInput("");
     setLoading(true);
     setError(false);
-    setWelcomeMessage(false);
     const obj = {
       messageUtente: message,
       history: history,
@@ -64,18 +63,6 @@ export default function Chat() {
           </div>
 
           <div className="messages card-body bg-light" ref={scrollRef}>
-            {history.map((h, i) => (
-              <div
-                key={i}
-                className={`d-flex mb-2 ${h.role === "user" ? "justify-content-end" : "justify-content-start"}`}
-              >
-                <div
-                  className={`p-2 rounded shadow-sm message-bubble ${h.role === "user" ? "bg-primary text-white" : "bg-white text-dark"}`}
-                >
-                  {h.parts[0].text}
-                </div>
-              </div>
-            ))}
             {welcomeMessage && (
               <div className="d-flex justify-content-start mb-3">
                 <div
@@ -97,6 +84,19 @@ export default function Chat() {
                 </div>
               </div>
             )}
+            {history.map((h, i) => (
+              <div
+                key={i}
+                className={`d-flex mb-2 ${h.role === "user" ? "justify-content-end" : "justify-content-start"}`}
+              >
+                <div
+                  className={`p-2 rounded shadow-sm message-bubble ${h.role === "user" ? "bg-primary text-white" : "bg-white text-dark"}`}
+                >
+                  {h.parts[0].text}
+                </div>
+              </div>
+            ))}
+
             {loading && (
               <div className="d-flex justify-content-start mb-2">
                 <div className="p-2 bg-white rounded shadow-sm italic-text">

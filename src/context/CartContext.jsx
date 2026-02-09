@@ -12,24 +12,23 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
 
-    const addToCart = (product) => {
-        setCart((prevCart) => {
-            if (!product) return prevCart;
-            // Usiamo lo slug come identificatore principale per il frontend
-            const existingIndex = prevCart.findIndex((item) => item.slug === product.slug);
+const addToCart = (product) => {
+    setCart((prevCart) => {
+        const existingIndex = prevCart.findIndex((item) => item.slug === product.slug);
+        if (existingIndex !== -1) {
+            const newCart = [...prevCart];
+            // Somma la quantità scelta (product.quantity) a quella già presente
+            newCart[existingIndex] = {
+                ...newCart[existingIndex],
+                quantity: newCart[existingIndex].quantity + (product.quantity || 1)
+            };
+            return newCart;
+        } else {
+            return [...prevCart, { ...product, quantity: product.quantity || 1 }];
+        }
+    });
+};
 
-            if (existingIndex !== -1) {
-                const newCart = [...prevCart];
-                newCart[existingIndex] = {
-                    ...newCart[existingIndex],
-                    quantity: newCart[existingIndex].quantity + 1
-                };
-                return newCart;
-            } else {
-                return [...prevCart, { ...product, quantity: 1 }];
-            }
-        });
-    };
 
     // Usiamo lo slug per rimuovere
     const removeFromCart = (slug) => {

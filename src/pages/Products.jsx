@@ -214,7 +214,7 @@ export default function Products() {
             </div>
           ) : products.length > 0 ? (
             products.map((p, index) => (
-              <div key={index} className="col-md-4 col-lg-3 mb-4" onClick={() =>{navigate(`/product/${p.slug}`)}}>
+              <div key={index} className="col-md-4 col-lg-3 mb-4">
                 <ProductCard product={p} />
               </div>
             ))

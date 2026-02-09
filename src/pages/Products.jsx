@@ -19,7 +19,7 @@ export default function Products() {
   const [dimension, setDimension] = useState("");
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(15000);
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     Promise.all([
@@ -202,6 +202,15 @@ export default function Products() {
           </div>
         </div>
 
+        {/* CONTEGGIO RISULTATI */}
+        {!loading && (
+          <div className="mb-4 anta-font text-secondary text-uppercase small tracking-widest">
+            Risultati trovati: <span className="text-primary fw-bold">{products.length}</span>
+          </div>
+        )}
+
+
+
         {/* Griglia */}
         <div className="row">
           {loading ? (
@@ -214,7 +223,7 @@ export default function Products() {
             </div>
           ) : products.length > 0 ? (
             products.map((p, index) => (
-              <div key={index} className="col-md-4 col-lg-3 mb-4" onClick={() =>{navigate(`/product/${p.slug}`)}}>
+              <div key={index} className="col-md-4 col-lg-3 mb-4" onClick={() => { navigate(`/product/${p.slug}`) }}>
                 <ProductCard product={p} />
               </div>
             ))

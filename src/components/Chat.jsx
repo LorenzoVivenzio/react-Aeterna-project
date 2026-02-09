@@ -51,44 +51,99 @@ export default function Chat() {
   }
 
   return (
-    <div className="chat-widget">
+    <div
+      className="chat-widget"
+      style={{ position: "fixed", bottom: "20px", right: "20px", zIndex: 1000 }}
+    >
       {buttonChat && (
         <div
           className="chat-container card shadow-lg border-0"
-          style={{ borderRadius: "15px", overflow: "hidden" }}
+          style={{
+            borderRadius: "15px",
+            overflow: "hidden",
+            width: "350px",
+            height: "500px",
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "#fff",
+          }}
         >
-          {/* HEADER: Blu Notte / Ardesia */}
+          {/* --- HEADER --- */}
+
           <div
-            className="card-header text-white d-flex justify-content-between align-items-center py-3"
+            className="text-white d-flex justify-content-between align-items-center py-3 px-3"
             style={{
               background: "#0f172a",
               borderBottom: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: "15px 15px 0 0",
+              width: "100%",
+              flexShrink: 0, // Fondamentale per non farlo schiacciare dai messaggi
             }}
           >
             <div className="d-flex align-items-center">
-              <span className="me-2" style={{ color: "#38bdf8" }}>
+              {/* Icona con un piccolo margine e colore accentuato */}
+              <span
+                className="me-2"
+                style={{
+                  fontSize: "1.3rem",
+                  filter: "drop-shadow(0 0 5px rgba(56, 189, 248, 0.4))",
+                }}
+              >
                 🧬
               </span>
-              <small
-                className="fw-bold tracking-wider"
-                style={{ letterSpacing: "1px" }}
-              >
-                AETERNA BOT
-              </small>
+
+              <div className="d-flex flex-column justify-content-center">
+                <span
+                  className="fw-bold m-0"
+                  style={{
+                    fontSize: "0.85rem",
+                    letterSpacing: "1.2px",
+                    lineHeight: "1.2",
+                    color: "#f8fafc",
+                  }}
+                >
+                  AETERNA BOT
+                </span>
+                {/* Piccola aggiunta: indicatore online più discreto */}
+                <span
+                  style={{
+                    fontSize: "0.65rem",
+                    color: "#38bdf8",
+                    fontWeight: "500",
+                  }}
+                >
+                  ● Disponibile
+                </span>
+              </div>
             </div>
+
+            {/* Tasto chiusura più raffinato */}
             <span
-              style={{ cursor: "pointer", fontSize: "1.2rem", opacity: "0.7" }}
+              style={{
+                cursor: "pointer",
+                fontSize: "1.6rem",
+                lineHeight: "0",
+                opacity: "0.6",
+                transition: "opacity 0.2s ease",
+                padding: "5px",
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseOut={(e) => (e.currentTarget.style.opacity = "0.6")}
               onClick={() => setButtonChat(false)}
             >
               &times;
             </span>
           </div>
 
-          {/* MESSAGES BODY */}
+          {/* --- MESSAGES BODY --- */}
           <div
             className="messages card-body bg-light"
             ref={scrollRef}
-            style={{ overflowY: "auto", maxHeight: "400px" }}
+            style={{
+              overflowY: "auto",
+              flexGrow: 1,
+              padding: "15px",
+            }}
           >
             {welcomeMessage && (
               <div className="d-flex justify-content-start mb-3">
@@ -144,11 +199,9 @@ export default function Chat() {
 
             {loading && (
               <div className="d-flex justify-content-start mb-2">
-                <div className="p-2 bg-white rounded shadow-sm">
+                <div className="p-2 bg-white rounded shadow-sm d-flex align-items-center">
                   <span className="spinner-grow spinner-grow-sm text-success me-2"></span>
-                  <small className="text-muted italic-text">
-                    Sta scrivendo...
-                  </small>
+                  <small className="text-muted">Analisi...</small>
                 </div>
               </div>
             )}
@@ -163,7 +216,11 @@ export default function Chat() {
             )}
           </div>
 
-          <div className="card-footer p-3 bg-white border-top-0">
+          {/* --- FOOTER --- */}
+          <div
+            className="card-footer p-3 bg-white border-top"
+            style={{ flexShrink: 0 }}
+          >
             <div
               className="input-group shadow-sm"
               style={{
@@ -182,7 +239,7 @@ export default function Chat() {
                   paddingLeft: "15px",
                   boxShadow: "none",
                 }}
-                placeholder="Scrivi ad Aeterna..."
+                placeholder="Chiedi ad Aeterna..."
                 disabled={loading}
               />
               <button
@@ -192,7 +249,6 @@ export default function Chat() {
                 style={{
                   backgroundColor: "#0f172a",
                   color: "#38bdf8",
-                  transition: "all 0.3s ease",
                   fontWeight: "600",
                 }}
               >
@@ -207,6 +263,7 @@ export default function Chat() {
         </div>
       )}
 
+      {/* TASTO APERTURA */}
       {!buttonChat && (
         <button
           onClick={() => setButtonChat(true)}
@@ -215,7 +272,6 @@ export default function Chat() {
             backgroundColor: "#0f172a",
             color: "#ffffff",
             height: "50px",
-            transition: "all 0.3s ease",
             fontWeight: "500",
           }}
         >

@@ -1,24 +1,24 @@
-.header-border-bot{
-    border-bottom: 1px solid rgb(143, 143, 143);
+.header-border-bot {
+  border-bottom: 1px solid rgb(143, 143, 143);
 }
 
-.btn-custom{
-    border-radius: 10px;
-    border: 4px double #50cbd1;
+.btn-custom {
+  border-radius: 10px;
+  border: 4px double #50cbd1;
 }
 
-.logo2{
-    max-height: 100%;
-    padding-right: 120px;
+.logo2 {
+  max-height: 100%;
+  padding-right: 120px;
 }
 /* 
 .icons-nav{
     
 } */
 
-.anta-head{
-    font-family: 'Anta', sans-serif;
-    font-style: normal;
+.anta-head {
+  font-family: "Anta", sans-serif;
+  font-style: normal;
 }
 
 /* .nav-bar {
@@ -31,34 +31,43 @@
 } */
 
 .btn-custom.anta-head {
-    display: inline-block;
-    font-family: 'Anta', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    
-    color: rgb(133, 133, 133); /* testo */
-    /* background: linear-gradient(135deg, #50cbd1, #2da6b7); gradient leggero */
-    border: 4px double #50cbd1;
-    border-radius: 12px;
-    padding: 0.4rem 1.0rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); */
-    letter-spacing: 1px;
+  display: inline-block;
+  font-family: "Anta", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+
+  color: rgb(133, 133, 133); /* testo */
+  /* background: linear-gradient(135deg, #50cbd1, #2da6b7); gradient leggero */
+  border: 4px double #50cbd1;
+  border-radius: 12px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); */
+  letter-spacing: 1px;
 }
 
 .btn-custom.anta-head:hover {
-    /* background: linear-gradient(135deg, #2da6b7, #50cbd1); */
-    transform: translateY(-2px);
-    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); */
-    /* border-color: #2da6b7; */
+  /* background: linear-gradient(135deg, #2da6b7, #50cbd1); */
+  transform: translateY(-2px);
+  /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); */
+  /* border-color: #2da6b7; */
 }
 
-
-.offcanvas-header{
-    background-color: #50cbd16e;
+.offcanvas-header {
+  background-color: #50cbd16e;
 }
 
-.li-bord-bot{
-    border-bottom: 1px solid rgb(204, 204, 204);
+.li-bord-bot {
+  border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+.card-header {
+  position: absolute;
+  right: 20px;
+  top: 60px;
+}
+
+.rp-list-group {
+  background-color: red;
 }

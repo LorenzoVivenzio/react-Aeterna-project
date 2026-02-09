@@ -10,6 +10,7 @@ import Home from "./pages/Home"
 import Products from "./pages/Products.jsx"
 import Wishlist from './pages/Wishlist.jsx';
 import Checkout from './pages/Checkout.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 
 import DetailProduct from './components/DetailProduct.jsx';
@@ -33,6 +34,7 @@ function App() {
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

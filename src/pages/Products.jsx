@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../API/axios";
 import ProductCard from "../components/ProductCard";
 import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -18,6 +19,7 @@ export default function Products() {
   const [dimension, setDimension] = useState("");
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(15000);
+  const navigate= useNavigate();
 
   useEffect(() => {
     Promise.all([
@@ -212,7 +214,7 @@ export default function Products() {
             </div>
           ) : products.length > 0 ? (
             products.map((p, index) => (
-              <div key={index} className="col-md-4 col-lg-3 mb-4">
+              <div key={index} className="col-md-4 col-lg-3 mb-4" onClick={() =>{navigate(`/product/${p.slug}`)}}>
                 <ProductCard product={p} />
               </div>
             ))

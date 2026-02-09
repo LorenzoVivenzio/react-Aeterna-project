@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import CardHome from "../components/CardHome";
 import VideoBanner from "../components/VideoBanner";
 import axios from "axios";
-import Chat from "../components/Chat.jsx";
+import Chat from "../components/Chat.jsx"
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function Home() {
   const [featured, setFeatured] = useState([]);
   const [created, setCreated] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -56,7 +60,7 @@ export default function Home() {
           <h1 className="mb-4">I nostri consigliati</h1>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {featured.map((product, index) => (
-              <div key={index} className="col">
+              <div key={index} className="col" onClick={() =>{navigate(`/product/${product.slug}`)}}>
                 <CardHome product={product} />
               </div>
             ))}
@@ -91,7 +95,7 @@ export default function Home() {
           <div className="scroll-wrapper">
             {created.map((product, index) => (
               /* Rimuovi 'col-2' e usa una classe per la card */
-              <div key={index} className="scroll-item">
+              <div key={index} className="scroll-item"onClick={() =>{navigate(`/product/${product.slug}`)}}>
                 <CardHome product={product} />
               </div>
             ))}

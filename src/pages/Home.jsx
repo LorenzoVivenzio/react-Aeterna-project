@@ -80,8 +80,10 @@ export default function Home() {
           </div>
         </section> */}
 
-       
 
+
+
+                           {/* ULTIMI ARRIVI */}
 
         <section
           id="ultimi-arrivi"

@@ -17,7 +17,7 @@ export default function CardHome({ product }) {
       <div className="product-info p-3">
         {" "}
         <h5 className="mt-3 product-name">{product.name}</h5>
-        <p className="pt-1 product-price">€ {product.price}</p>
+        <p className="pt-1 product-price">€ {product.price},00</p>
         <Link to={`/product/${product.slug}`} className="btn-link">
           dettagli
         </Link>

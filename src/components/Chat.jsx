@@ -24,10 +24,12 @@ export default function Chat() {
     setInput("");
     setLoading(true);
     setError(false);
+
     const obj = {
       messageUtente: message,
       history: history,
     };
+
     setHistory((prev) => [
       ...prev,
       { role: "user", parts: [{ text: message }] },
@@ -51,18 +53,43 @@ export default function Chat() {
   return (
     <div className="chat-widget">
       {buttonChat && (
-        <div className="chat-container card shadow-lg">
-          <div className="card-header bg-success text-white d-flex justify-content-between">
-            <small className="fw-bold">AETERNA BOT</small>
+        <div
+          className="chat-container card shadow-lg border-0"
+          style={{ borderRadius: "15px", overflow: "hidden" }}
+        >
+          {/* HEADER: Blu Notte / Ardesia */}
+          <div
+            className="card-header text-white d-flex justify-content-between align-items-center py-3"
+            style={{
+              background: "#0f172a",
+              borderBottom: "1px solid rgba(255,255,255,0.1)",
+            }}
+          >
+            <div className="d-flex align-items-center">
+              <span className="me-2" style={{ color: "#38bdf8" }}>
+                🧬
+              </span>
+              <small
+                className="fw-bold tracking-wider"
+                style={{ letterSpacing: "1px" }}
+              >
+                AETERNA BOT
+              </small>
+            </div>
             <span
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", fontSize: "1.2rem", opacity: "0.7" }}
               onClick={() => setButtonChat(false)}
             >
-              ×
+              &times;
             </span>
           </div>
 
-          <div className="messages card-body bg-light" ref={scrollRef}>
+          {/* MESSAGES BODY */}
+          <div
+            className="messages card-body bg-light"
+            ref={scrollRef}
+            style={{ overflowY: "auto", maxHeight: "400px" }}
+          >
             {welcomeMessage && (
               <div className="d-flex justify-content-start mb-3">
                 <div
@@ -84,6 +111,7 @@ export default function Chat() {
                 </div>
               </div>
             )}
+
             {history.map((h, i) => (
               <div
                 key={i}
@@ -109,7 +137,6 @@ export default function Chat() {
                       Aeterna
                     </div>
                   )}
-
                   <div>{h.parts[0].text}</div>
                 </div>
               </div>
@@ -117,9 +144,11 @@ export default function Chat() {
 
             {loading && (
               <div className="d-flex justify-content-start mb-2">
-                <div className="p-2 bg-white rounded shadow-sm italic-text">
-                  <span className="spinner-grow spinner-grow-sm text-success"></span>{" "}
-                  Sta scrivendo...
+                <div className="p-2 bg-white rounded shadow-sm">
+                  <span className="spinner-grow spinner-grow-sm text-success me-2"></span>
+                  <small className="text-muted italic-text">
+                    Sta scrivendo...
+                  </small>
                 </div>
               </div>
             )}
@@ -134,33 +163,66 @@ export default function Chat() {
             )}
           </div>
 
-          <div className="card-footer p-2 bg-white">
-            <div className="input-group">
+          <div className="card-footer p-3 bg-white border-top-0">
+            <div
+              className="input-group shadow-sm"
+              style={{
+                borderRadius: "25px",
+                overflow: "hidden",
+                border: "1px solid #e2e8f0",
+              }}
+            >
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                className="form-control form-control-sm"
-                placeholder="Chiedi qualcosa..."
+                onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                className="form-control border-0 bg-light"
+                style={{
+                  fontSize: "0.9rem",
+                  paddingLeft: "15px",
+                  boxShadow: "none",
+                }}
+                placeholder="Scrivi ad Aeterna..."
                 disabled={loading}
               />
               <button
-                className="btn btn-success btn-sm"
+                className="btn border-0 px-3"
                 onClick={handleSend}
                 disabled={loading}
+                style={{
+                  backgroundColor: "#0f172a",
+                  color: "#38bdf8",
+                  transition: "all 0.3s ease",
+                  fontWeight: "600",
+                }}
               >
-                {loading ? "..." : "Invia"}
+                {loading ? (
+                  <span className="spinner-border spinner-border-sm"></span>
+                ) : (
+                  "Invia"
+                )}
               </button>
             </div>
           </div>
         </div>
       )}
 
-      <button
-        onClick={() => setButtonChat(!buttonChat)}
-        className={`btn ${buttonChat ? "btn-secondary" : "btn-success"} rounded-pill shadow-lg px-4 mt-2`}
-      >
-        {buttonChat ? "Chiudi Assistente" : "💬 Chiedi ad Aeterna"}
-      </button>
+      {!buttonChat && (
+        <button
+          onClick={() => setButtonChat(true)}
+          className="btn rounded-pill shadow-lg px-4 mt-2 d-flex align-items-center gap-2 border-0"
+          style={{
+            backgroundColor: "#0f172a",
+            color: "#ffffff",
+            height: "50px",
+            transition: "all 0.3s ease",
+            fontWeight: "500",
+          }}
+        >
+          <span style={{ color: "#38bdf8" }}>💬</span>
+          <span>Chiedi ad Aeterna</span>
+        </button>
+      )}
     </div>
   );
 }

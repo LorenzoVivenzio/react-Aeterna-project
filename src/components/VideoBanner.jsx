@@ -29,10 +29,9 @@ export default function VideoBanner() {
             <div className="descrition col-sm-12 col-md-12 col-lg-4 mt-5">
               {" "}
               {/* Corretto typo 'roundend' */}
-              <h4 className="text-center pt-5 pb-2">
-               Aeterna:
+              <h4 className="text-center pt-5 pb-2 anta-head">
+               Bio-ingegneria di lusso e precisione
               </h4>
-              <h6 className="text-center  px-5">Bio-ingegneria di lusso e precisione</h6>
               <p
                 className="text-center my-4 px-3"
               >

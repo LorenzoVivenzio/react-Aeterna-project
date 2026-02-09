@@ -16,6 +16,7 @@ export default function VideoBanner() {
                   playsInline
                   className="video-banner "
                   src="src/public/video/viedo-banner.mp4"
+                  // src="src/public/Pierfilippo_IA.mp4"
                 ></video>
                 <div className="btn-video">
                   <Link to="/products">

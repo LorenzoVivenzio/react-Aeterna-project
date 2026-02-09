@@ -78,7 +78,14 @@ export default function Home() {
           </div>
         </section> */}
 
-        <section id="ultimi-arrivi" className="mt-5">
+
+
+
+                           {/* ULTIMI ARRIVI */}
+
+        <section
+          id="ultimi-arrivi"
+          className="mt-5">
           <h1 className="mb-4">Ultimi arrivi</h1>
           {/* Cambia 'row' con 'scroll-wrapper' */}
           <div className="scroll-wrapper">

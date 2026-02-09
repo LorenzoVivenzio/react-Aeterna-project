@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "../API/axios.jsx";
 import ProductCard from "../components/ProductCard";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../context/CartContext";
 import ShippingBanner from "./ShippingBanner.jsx";
+
 
 
 import "./DetailProduct.css"
@@ -13,19 +14,26 @@ export default function DetailProduct() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
 
   const { addToCart } = useCart();
 
-  useEffect(() => {
-    api.get(`/products/${slug}`).then((res) => {
-      console.log(res)
-
-      const current = res.data.item || res.data;
-      setLoading(false);
-      setProduct(current);
-    });
-  }, [slug]);
+ useEffect(() => {
+    api.get(`/products/${slug}`)
+      .then((res) => {
+        const current = res.data.item || res.data;
+        if (!current) {
+           navigate("/404"); // Se l'API risponde ma l'oggetto è nullo
+        }
+        setProduct(current);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        navigate("/404"); // Se l'API dà errore (es. 404 dal server)
+      });
+  }, [slug, navigate]);
 
   if (loading)
     return (

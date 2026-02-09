@@ -4,6 +4,8 @@ import api from "../API/axios.jsx";
 import ProductCard from "../components/ProductCard";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../context/CartContext";
+import ShippingBanner from "./ShippingBanner.jsx";
+
 
 import "./DetailProduct.css"
 
@@ -34,22 +36,19 @@ export default function DetailProduct() {
 
   return (
     <>
-      <div
-        className="product-detail-page"
-        style={{ paddingTop: "60px" }}>
+      <div className="product-detail-page">
 
         {/* BANNER SCONTO ORDINI */}
-        <div className="banner">
-          Per odini superiori ai €1000, la spedizione è gratuita
-        </div>
+        <ShippingBanner />
 
-        <div className="container">
+
+        <div className="container product-detail">
           {/* SCHEDA PRODOTTO */}
           <div className=" row mb-5 py-5 border-bottom border-secondary">
             <div className="row-cart col-md-6 mb-4">
               <img
                 src={`http://localhost:3001/images/${product.url_image}`}
-                className="img-fluid rounded border border-info shadow-lg"
+                className="img-fluid  img-border shadow-lg"
                 alt={product.name}
               />
             </div>
@@ -57,27 +56,66 @@ export default function DetailProduct() {
 
 
             <div className="col-md-6 px-5">
-              <h3 className="product-name mb-4">
+
+              {/* TITOLO */}
+              <h1 className="anta-font fw-bold mb-1">
                 {product.name}
-              </h3>
+              </h1>
 
-              <h6>Dimensioni prodotto: {product.dimension}</h6>
-              <h5 className=" card-price">
-                € {Number(product.price).toFixed(2)}
-              </h5>
-              <p className="text-free">(Per odini superiori ai €1000, la spedizione è gratuita)</p>
-              <p className="lead">{product.description}</p>
+              {/* PREZZO */}
+              <div className="mb-1">
+                <div className="card-price-big">
+                  € {Number(product.price).toFixed(2)}
+                </div>
+                
+              </div>
 
+              {/* CARATTERISTICHE*/}
+              <div className="mb-4 border-top">
+                <div>
+                  <div className="col-12 py-3">
+                    <strong>Dimensioni: </strong>  
+                      {product.dimension}
 
-              <h5>{product.eras} / {product.diets}</h5>
-              <p className="text-primary">{product.power_sources}</p>
-              <div>
+                  </div>
+                  <div className="row pb-3">
+                    <div className="col-6">
+                      <strong className="anta-font">Era:</strong> <br />
+                      {product.eras}
+                    </div>
+                    <div className="col-6 border-left">
+                      <strong className="anta-font">Dieta:</strong>  <br />
+                      {product.diets}
+                    </div>
+                  </div>
+
+                  <div className="col-12">
+                    <strong className="anta-font">Alimentazione:</strong>  <br />
+                    {product.power_sources}
+                  </div>
+                </div>
+              </div>
+              
+              {/* DESCRIZIONE */}
+              <div className="mb-4 border-top pt-2">
+                <h5 className="mb-1 anta-font">Descrizione:</h5>
+                <p className="lead">
+                  {product.description}
+                </p>
+              </div>
+
+              {/* BOTTONE addToCart */}
+              <div className="d-grid border-top pt-1">
+                <p className="text-muted small mb-2">
+                  Spedizione gratuita sopra i €1000
+                </p>
                 <button
                   onClick={() => addToCart(product)}
                   className="btn-cart2">
-                  AGGIUNGI AL CARRELLO
+                  Aggiungi al carrello
                 </button>
               </div>
+
             </div>
           </div>
 
@@ -90,13 +128,13 @@ export default function DetailProduct() {
           {/* CORRELATI */}
           {product.recommended.length > 0 && (
             <div className="related-section pb-5">
-              <h3 className="mb-5 text-center text-uppercase tracking-widest">
+              <h3 className="mb-5 text-center text-uppercase tracking-widest anta-font">
                 Modelli Correlati per Caratteristiche
               </h3>
               <div className="row">
                 {product.recommended.map((rp, index) => (
                   <div key={index} className="col-md-4">
-                    <p className="text-center text-primary small text-uppercase">
+                    <p className="text-center text-secondary small text-uppercase">
                       {index === 0 && "Stesso Periodo"}
                       {index === 1 && "Stessa Dieta"}
                       {index === 2 && "Stessa Alimentazione"}

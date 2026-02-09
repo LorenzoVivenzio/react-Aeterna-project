@@ -1,3 +1,4 @@
+/* bottoni ------------------------------*/
 .btn-cart2 {
     /* colori */
     color: rgb(107, 107, 107);
@@ -5,8 +6,7 @@
     background: rgb(255, 255, 255);
     border-radius: 10px;
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+   
     padding: 10px 25px;
     transition: all 0.4s ease;
 
@@ -18,21 +18,109 @@
 
 .btn-cart2:hover {
     background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    
-    border: 4px double rgba(69, 194, 216, 0.616);
-    transform: translateY(-2px);
+    border: 3px double rgba(69, 194, 216, 0.616);
     box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-.banner{
-    background-color: rgb(77, 165, 180);
-    color: rgb(255, 255, 255);
-    display: flex;
-    justify-content: center;
-    padding: 5px 0;
+/* detail general -----------------------*/
+.product-detail-page{
+    padding-top: 60px;
+    padding-bottom: 20px;
 }
+.product-detail{
+    padding-top: 20px;
+}
+.img-border{
+    border-radius: 10px;
+    border: 3px  double rgba(69, 194, 216, 0.616);
+}
+/* .img-border:hover{
+    border: 4px  double rgba(69, 194, 216, 0.616)
+} */
+.anta-font{
+    font-family: 'Anta', sans-serif;
+}
+.text-free{
+    color: rgb(129, 127, 127);
+}
+
+.border-left{
+    border-left: 1px solid #dee2e6;
+}
+
+
+/* cards correlati ----------------------*/
+.card-price-big {
+    font-family: anta;
+    font-weight: 100;
+    font-size: 1.2rem;
+    color: #777777;
+    padding-top: 5px;
+    /* O bianco se lo sfondo è scuro */
+}
+
+.card-price {
+    font-family: anta;
+    font-weight: 100;
+    font-size: 1rem;
+    color: #777777;
+    padding-top: 10px;
+    /* O bianco se lo sfondo è scuro */
+}
+
+
+.product-card {
+    background: rgb(255, 255, 255);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(69, 194, 216, 0.616);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(69, 194, 216, 0.616);
+}
+
+.card-image-wrapper {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+     background: #ffffff; /* grigio? */
+
+    /* Sfondo chiaro per far risaltare il robot se l'immagine è trasparente */
+}
+
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Per vedere tutto il robot senza tagli */
+    padding: 18px 5px;
+}
+
+.card-content {
+    padding-top: 5px;
+    padding-bottom: 20px;
+    padding-left: 18px;
+}
+
+.card-category {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #7000ff;
+    letter-spacing: 2px;
+}
+
+.card-title {
+    margin: 10px 0;
+    font-size: 1.4rem;
+}
+
 
 /* 
 .btn-cart2 {

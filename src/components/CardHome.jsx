@@ -1,5 +1,7 @@
 import "./Bestseller.css";
 import { Link } from "react-router-dom";
+import "./CardHome.css";
+
 
 export default function CardHome({ product }) {
   if (!product) return null;
@@ -18,7 +20,7 @@ export default function CardHome({ product }) {
         {" "}
         <h5 className="mt-3 product-name">{product.name}</h5>
         <p className="pt-1 product-price">€ {product.price},00</p>
-        <Link to={`/product/${product.slug}`} className="btn-link">
+        <Link to={`/product/${product.slug}`} className="btn-cart2">
           dettagli
         </Link>
       </div>

@@ -8,6 +8,7 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [buttonChat, setButtonChat] = useState(false);
+  const [welcomeMessage, setWelcomeMessage] = useState(true);
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -23,18 +24,21 @@ export default function Chat() {
     setInput("");
     setLoading(true);
     setError(false);
-
+    setWelcomeMessage(false);
     const obj = {
       messageUtente: message,
       history: history,
     };
+    setHistory((prev) => [
+      ...prev,
+      { role: "user", parts: [{ text: message }] },
+    ]);
 
     axios
       .post("http://localhost:3001/api/chat/", obj)
       .then((res) => {
         setHistory((prev) => [
           ...prev,
-          { role: "user", parts: [{ text: message }] },
           { role: "model", parts: [{ text: res.data.testo_risposta }] },
         ]);
       })
@@ -72,7 +76,27 @@ export default function Chat() {
                 </div>
               </div>
             ))}
-
+            {welcomeMessage && (
+              <div className="d-flex justify-content-start mb-3">
+                <div
+                  className="p-3 bg-white border shadow-sm"
+                  style={{ borderRadius: "15px 15px 15px 0", maxWidth: "85%" }}
+                >
+                  <div className="fw-bold text-primary small mb-1">Aeterna</div>
+                  <div className="text-dark" style={{ fontSize: "0.95rem" }}>
+                    Benvenuto su <strong>Aeterna</strong>. Siamo qui per
+                    riportare la biodiversità nel tuo mondo. Come posso aiutarti
+                    oggi?
+                  </div>
+                  <div
+                    className="mt-2 pt-2 border-top"
+                    style={{ fontSize: "0.75rem", color: "#6c757d" }}
+                  >
+                    🌱 Il 20% del tuo acquisto sostiene le specie a rischio.
+                  </div>
+                </div>
+              </div>
+            )}
             {loading && (
               <div className="d-flex justify-content-start mb-2">
                 <div className="p-2 bg-white rounded shadow-sm italic-text">

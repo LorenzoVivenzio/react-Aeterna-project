@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function Header() {
   const [previw, SetPreview] = useState(false);
   const { cart } = useCart();
-
+  console.log(cart);
   function countProduct() {
     let countQuantity = 0;
     cart.forEach((p) => {
@@ -22,13 +22,11 @@ export default function Header() {
     const timer = setTimeout(() => {
       SetPreview(false);
     }, 2000);
-    return () => clearTimeout(timer);
   }, [cart]);
 
   return (
-    <header className="nav-bar fixed-top header-border-bot bg-white">
+    <header className="nav-bar fixed-top header-border-bot bg-white shadow-sm">
       <div className="container-fluid d-flex align-items-center justify-content-between py-2">
-        {/* MOBILE MENU */}
         <div className="d-md-none">
           <button
             className="btn-custom anta-head"
@@ -68,23 +66,31 @@ export default function Header() {
           </div>
         </div>
 
-        {/* DESKTOP LINKS */}
         <div className="nav d-none d-md-flex">
           <ul className="d-flex list-unstyled m-0 gap-4">
             <li className="anta-head bold">
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/" className="text-decoration-none text-dark">
+                Home
+              </NavLink>
             </li>
             <li className="anta-head bold">
-              <NavLink to="/products">Prodotti</NavLink>
+              <NavLink
+                to="/products"
+                className="text-decoration-none text-dark"
+              >
+                Prodotti
+              </NavLink>
             </li>
             <li className="anta-head bold">
-              <NavLink to="/about">Chi siamo</NavLink>
+              <NavLink to="/about" className="text-decoration-none text-dark">
+                Chi siamo
+              </NavLink>
             </li>
           </ul>
         </div>
 
         <div className="logo2">
-          <p className="main-title m-0">AETERNA</p>
+          <p className="main-title m-0 fw-bold">AETERNA</p>
         </div>
 
         <div className="icons-nav position-relative">
@@ -108,17 +114,14 @@ export default function Header() {
                 />
                 {cart.length > 0 && (
                   <span
-                    className="position-absolute translate-middle badge rounded-pill shadow-sm"
+                    className="position-absolute translate-middle badge rounded-pill"
                     style={{
                       top: "8px",
                       left: "85%",
                       backgroundColor: "#0f172a",
                       color: "#38bdf8",
-                      fontSize: "0.75rem",
-                      fontWeight: "700",
-                      padding: "0.4em 0.6em",
+                      fontSize: "0.7rem",
                       border: "2px solid #ffffff",
-                      minWidth: "1.6rem",
                     }}
                   >
                     {countProduct()}
@@ -126,88 +129,88 @@ export default function Header() {
                 )}
               </NavLink>
 
+              {/* ANTEPRIMA CARRELLO CORRETTA */}
               {previw && cart.length > 0 && (
                 <div
-                  className="position-absolute end-0 mt-2 shadow-lg border rounded-3 bg-white cart-preview-container"
-                  style={{ width: "320px", zIndex: 1050, top: "100%" }}
+                  className="position-absolute end-0 mt-2 shadow-lg border rounded-3 bg-white"
+                  style={{ width: "340px", zIndex: 1050, top: "100%" }}
                 >
-                  <div className="p-2 border-bottom bg-light rounded-top">
-                    <small className="fw-bold text-muted px-2">
-                      RECENTEMENTE AGGIUNTO
+                  <div className="p-3 border-bottom bg-light d-flex justify-content-between align-items-center rounded-top">
+                    <small
+                      className="fw-bold text-muted text-uppercase"
+                      style={{ letterSpacing: "1px" }}
+                    >
+                      Il tuo carrello
                     </small>
+                    <span
+                      className="badge rounded-pill bg-white text-dark border px-2 py-1"
+                      style={{ fontSize: "0.7rem" }}
+                    >
+                      {cart.length} prodotti
+                    </span>
                   </div>
 
                   <ul
-                    className="list-group list-group-flush cart-preview-list"
-                    style={{ maxHeight: "320px", overflowY: "auto" }}
+                    className="list-group list-group-flush"
+                    style={{ maxHeight: "350px", overflowY: "auto" }}
                   >
                     {cart.map((c, index) => {
                       const imageUrl = `http://localhost:3001/images/${c.url_image}`;
                       return (
                         <li
                           key={index}
-                          className="list-group-item cart-item border-bottom py-3 px-3"
+                          className="list-group-item py-3 px-3 border-bottom"
                         >
                           <div className="d-flex align-items-center">
                             <div
-                              className="img-container rounded me-3 shadow-sm"
+                              className="rounded border shadow-sm"
                               style={{
-                                width: "65px",
-                                height: "65px",
+                                width: "70px",
+                                height: "70px",
                                 flexShrink: 0,
                                 backgroundImage: `url(${imageUrl})`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                                 backgroundColor: "#f8fafc",
-                                border: "1px solid #e2e8f0",
                               }}
                             />
 
-                            <div className="flex-grow-1 overflow-hidden">
-                              <div className="d-flex justify-content-between align-items-center mb-1">
+                            <div className="flex-grow-1 ms-3">
+                              <div className="d-flex justify-content-between align-items-start w-100">
                                 <h6
-                                  className="fw-bolder mb-0 text-truncate"
+                                  className="fw-bold text-dark mb-0 text-truncate"
                                   style={{
                                     fontSize: "0.9rem",
-                                    color: "#1e293b",
-                                    letterSpacing: "-0.2px",
-                                    maxWidth: "150px",
+                                    maxWidth: "140px",
                                   }}
-                                  title={c.name}
                                 >
                                   {c.name}
                                 </h6>
                                 <span
-                                  className="fw-bold text-end"
+                                  className="fw-bold text-dark ms-2"
                                   style={{
-                                    fontSize: "0.95rem",
-                                    color: "#0f172a",
-                                    minWidth: "fit-content",
-                                    marginLeft: "10px",
+                                    fontSize: "0.9rem",
+                                    whiteSpace: "nowrap",
                                   }}
                                 >
-                                  €
-                                  {c.price.toLocaleString("it-IT", {
-                                    minimumFractionDigits: 2,
-                                  })}
+                                  €{c.price}
                                 </span>
                               </div>
 
-                              <div className="d-flex justify-content-between align-items-center mt-2">
+                              <div className="mt-2">
                                 <small
-                                  className="text-muted"
-                                  style={{ fontSize: "0.75rem" }}
-                                >
-                                  Quantità: <b>{c.quantity}</b>
-                                </small>
-                                <small
-                                  className="text-uppercase fw-bold"
+                                  className="text-muted d-block"
                                   style={{
-                                    fontSize: "0.6rem",
-                                    color: "#38bdf8",
+                                    fontSize: "0.8rem",
+                                    letterSpacing: "0.3px",
+                                    borderLeft: "2px solid #38bdf8", // Un piccolo tocco di colore laterale
+                                    paddingLeft: "8px",
                                   }}
                                 >
-                                  {c.diets}
+                                  Quantità:{" "}
+                                  <span className="text-dark fw-bold">
+                                    {c.quantity}
+                                  </span>
                                 </small>
                               </div>
                             </div>
@@ -217,13 +220,14 @@ export default function Header() {
                     })}
                   </ul>
 
-                  <div className="p-2 text-center bg-light rounded-bottom">
+                  <div className="p-3 bg-white rounded-bottom">
                     <NavLink
                       to="/cart"
-                      className="btn btn-sm btn-dark w-100 py-2"
+                      className="btn btn-dark w-100 py-2 fw-bold"
+                      style={{ borderRadius: "8px", fontSize: "0.9rem" }}
                       onClick={() => SetPreview(false)}
                     >
-                      Vai al carrello
+                      Visualizza Carrello intero
                     </NavLink>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext"; // 1. Importa l'hook
 
 export default function ProductCard({ product }) {
@@ -8,9 +8,14 @@ export default function ProductCard({ product }) {
   // 2.funzione addToCart
   const { addToCart } = useCart();
 
+  const navigate = useNavigate();
+
+
   return (
     <div className="product-card">
-      <div className="card-image-wrapper">
+      <div 
+      onClick={() =>{navigate(`/product/${product.slug}`)}}
+      className="card-image-wrapper">
         <Link to={`/product/${product.slug}`}>
           <img
             src={imageUrl}

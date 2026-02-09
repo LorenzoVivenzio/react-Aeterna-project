@@ -87,12 +87,30 @@ export default function Chat() {
             {history.map((h, i) => (
               <div
                 key={i}
-                className={`d-flex mb-2 ${h.role === "user" ? "justify-content-end" : "justify-content-start"}`}
+                className={`d-flex mb-3 ${h.role === "user" ? "justify-content-end" : "justify-content-start"}`}
               >
                 <div
-                  className={`p-2 rounded shadow-sm message-bubble ${h.role === "user" ? "bg-primary text-white" : "bg-white text-dark"}`}
+                  className={`p-3 shadow-sm ${
+                    h.role === "user"
+                      ? "bg-primary text-white"
+                      : "bg-white border text-dark"
+                  }`}
+                  style={{
+                    maxWidth: "85%",
+                    fontSize: "0.95rem",
+                    borderRadius:
+                      h.role === "user"
+                        ? "15px 15px 0 15px"
+                        : "15px 15px 15px 0",
+                  }}
                 >
-                  {h.parts[0].text}
+                  {h.role === "model" && (
+                    <div className="fw-bold text-primary small mb-1">
+                      Aeterna
+                    </div>
+                  )}
+
+                  <div>{h.parts[0].text}</div>
                 </div>
               </div>
             ))}

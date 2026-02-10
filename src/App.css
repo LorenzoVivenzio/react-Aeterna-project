@@ -299,6 +299,7 @@ footer li:hover {
     text-transform: uppercase;
 }
 
+
 .btn-link {
     color: initial;
     text-decoration: none;
@@ -475,6 +476,8 @@ footer li:hover {
     border-radius: 25px;
     cursor: pointer;
 }
+
+/* SELECT FORM */
 
 
 

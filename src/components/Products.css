@@ -1,0 +1,205 @@
+/* BASE PAGE */
+.products-page {
+  background: linear-gradient(160deg, #eaf1fb 0%, #ffffff 100%);
+  min-height: 100vh;
+  color: #1d1d1f;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  padding-bottom: 50px;
+}
+
+/* CATALOGO TITLE */
+.catalog-title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #0d6efd;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(13,110,253,0.2);
+}
+
+/* FILTER BOX */
+.filter-box {
+  background: rgba(255,255,255,0.95);
+  padding: 20px 25px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08), 0 5px 10px rgba(0,0,0,0.03);
+  border: 1px solid rgba(200,200,200,0.5);
+  margin-bottom: 25px;
+}
+
+/* LABEL */
+.apple-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6e6e73;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* INPUT */
+.apple-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid #d2d2d7;
+  background: #fafafa;
+  font-size: 15px;
+  color: #1d1d1f;
+  transition: all 0.2s ease;
+}
+
+.apple-input::placeholder {
+  color: #86868b;
+}
+
+.apple-input:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 4px rgba(13,110,253,0.15);
+  background: #ffffff;
+}
+
+/* SELECT */
+.apple-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid #d2d2d7;
+  background: #fafafa;
+  font-size: 15px;
+  color: #1d1d1f;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236e6e73'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+}
+
+.apple-select:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 4px rgba(13,110,253,0.15);
+  background: #ffffff;
+}
+
+/* BUTTON FILTRA */
+.apple-button {
+  background: #0d6efd;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(13,110,253,0.3);
+}
+
+.apple-button:hover {
+  background: #0b5ed7;
+  box-shadow: 0 6px 14px rgba(13,110,253,0.35);
+}
+
+.apple-button:active {
+  transform: scale(0.98);
+}
+
+/* RANGE SLIDER */
+.apple-range {
+  width: 100%;
+  height: 6px;
+  background: #dce4ef;
+  border-radius: 10px;
+  appearance: none;
+  outline: none;
+  margin-top: 5px;
+}
+
+.apple-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #0d6efd;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.apple-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #0d6efd;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid white;
+}
+
+/* FILTERS CONTAINER */
+.filters-container {
+  background: rgba(255,255,255,0.95);
+  padding: 18px 22px;
+  border-radius: 20px;
+  border: 1px solid rgba(200,200,200,0.5);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06), 0 3px 8px rgba(0,0,0,0.03);
+}
+
+/* RESET BUTTON */
+.apple-reset {
+  background: none;
+  border: none;
+  color: #ff3b30;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.apple-reset:hover {
+  text-decoration: underline;
+  color: #ff453a;
+}
+
+/* RESULTS COUNT */
+.results-count {
+  font-size: 0.95rem;
+  color: #6e6e73;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+/* FILTRO RIGA */
+.filter-row form {
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(200,200,200,0.5);
+}
+
+/* FLEX FILTERS */
+.flex-filters > div {
+  min-width: 140px;
+}
+
+/* BUTTON FILTRA */
+.filter-btn {
+  background: #0d6efd;
+  color: white;
+  border-radius: 16px;
+  padding: 12px 20px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(13,110,253,0.3);
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: #0b5ed7;
+  box-shadow: 0 6px 14px rgba(13,110,253,0.35);
+}
+
+.filter-btn:active {
+  transform: scale(0.98);
+}

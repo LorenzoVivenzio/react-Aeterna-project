@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  let location = useLocation();
+
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
@@ -18,6 +20,12 @@ export const CartProvider = ({ children }) => {
       const existingIndex = prevCart.findIndex(
         (item) => item.slug === product.slug,
       );
+      if (location.pathname !== "/cart") {
+        SetPreview(true);
+        setTimeout(() => {
+          SetPreview(false);
+        }, 3000);
+      }
       if (existingIndex !== -1) {
         const newCart = [...prevCart];
 
@@ -34,11 +42,23 @@ export const CartProvider = ({ children }) => {
 
   // Usiamo lo slug per rimuovere
   const removeFromCart = (slug) => {
+    if (location.pathname !== "/cart") {
+      SetPreview(true);
+      setTimeout(() => {
+        SetPreview(false);
+      }, 2000);
+    }
     setCart((prevCart) => prevCart.filter((item) => item.slug !== slug));
   };
 
   // Usiamo lo slug per aggiornare la quantità
   const updateQuantity = (slug, quantity) => {
+    if (location.pathname !== "/cart") {
+      SetPreview(true);
+      setTimeout(() => {
+        SetPreview(false);
+      }, 2000);
+    }
     if (quantity < 1) return;
     setCart((prevCart) =>
       prevCart.map((item) =>

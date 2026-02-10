@@ -110,10 +110,13 @@ export default function Header() {
                     style={{
                       top: "8px",
                       left: "85%",
-                      backgroundColor: "#0f172a",
-                      color: "#38bdf8",
-                      fontSize: "0.7rem",
+                      backgroundColor: "#d4af37",
+                      color: "#000000",
+                      fontSize: "0.75rem",
+                      fontWeight: "800",
+                      padding: "0.4em 0.6em",
                       border: "2px solid #ffffff",
+                      boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
                     }}
                   >
                     {countProduct()}

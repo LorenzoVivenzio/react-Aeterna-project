@@ -1,30 +1,23 @@
-import './App.css'
+import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import DefaultLayout from "./layout/DefaultLayout";
 
-import DefaultLayout from "./layout/DefaultLayout"
+import Home from "./pages/Home";
+import Products from "./pages/Products.jsx";
+import Wishlist from "./pages/Wishlist.jsx";
+import Checkout from "./pages/Checkout.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
-
-
-import Home from "./pages/Home"
-import Products from "./pages/Products.jsx"
-import Wishlist from './pages/Wishlist.jsx';
-import Checkout from './pages/Checkout.jsx';
-import NotFound from './pages/NotFound.jsx';
-
-
-import DetailProduct from './components/DetailProduct.jsx';
-import Cart from './pages/Cart.jsx';
-import About from './pages/About.jsx';
+import DetailProduct from "./components/DetailProduct.jsx";
+import Cart from "./pages/Cart.jsx";
+import About from "./pages/About.jsx";
 import { CartProvider } from "./context/CartContext";
-
-
-
 
 function App() {
   return (
-    <CartProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <CartProvider>
         <Routes>
           <Route element={<DefaultLayout />}>
             <Route path="/" element={<Home />} />
@@ -37,16 +30,9 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
-      </BrowserRouter>
-    </CartProvider>
-  )
+      </CartProvider>
+    </BrowserRouter>
+  );
 }
 
 export default App;
-
-
-
-
-
-
-

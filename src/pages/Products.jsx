@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../API/axios";
 import ProductCard from "../components/ProductCard";
-import Header from "../components/Header";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function Products() {
@@ -29,6 +28,13 @@ export default function Products() {
   const [dimension, setDimension] = useState(searchParams.get("dimension") || "");
 
   const navigate = useNavigate();
+
+  // --- SINCRONIZZAZIONE CON L'URL PER RICERCA GLOBALE ---
+  useEffect(() => {
+    const querySearch = searchParams.get("search") || "";
+    setSearch(querySearch);
+    setSearchTerm(querySearch);
+  }, [searchParams]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -86,20 +92,27 @@ export default function Products() {
     };
     api.get("/products", { params })
       .then((res) => {
-        setProducts(res.data.results || []);
+        const results = res.data.results || [];
+        
+        // Se la ricerca non produce risultati, indirizza alla pagina notfound
+        if (results.length === 0 && search !== "") {
+          navigate("/notfound", { replace: true });
+        }
+
+        setProducts(results);
         setLoading(false);
       })
       .catch((err) => {
         console.error("Errore filtraggio:", err);
         setLoading(false);
       });
-  }, [search, selectedEra, selectedDiet, selectedPower, dimension, minPrice, maxPrice]);
+  }, [search, selectedEra, selectedDiet, selectedPower, dimension, minPrice, maxPrice, navigate]);
 
   return (
     <div className="products-page bg-white text-dark min-vh-100 pb-5">
-      <Header />
+      {/* Header rimosso perché gestito dal DefaultLayout */}
 
-      <div className="container" style={{ paddingTop: "50px" }}>
+      <div className="container" style={{ paddingTop: "100px" }}>
         <h1 className="text-center mb-5 fw-bold text-uppercase tracking-widest text-primary">
           Catalogo Aeterna
         </h1>

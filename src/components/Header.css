@@ -278,3 +278,10 @@
         font-size: 1.2rem;
     }
 }
+
+
+
+header .underline:hover {
+    border-bottom: 2px solid #e1bb70;
+
+}

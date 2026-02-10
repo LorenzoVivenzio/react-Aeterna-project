@@ -91,9 +91,9 @@ export default function Header() {
 
           <div className="nav d-none d-md-flex">
             <ul className="d-flex list-unstyled m-0 gap-4">
-              <li className="anta-head bold"><NavLink to="/" className="text-decoration-none text-dark">Home</NavLink></li>
-              <li className="anta-head bold"><NavLink to="/products" className="text-decoration-none text-dark">Prodotti</NavLink></li>
-              <li className="anta-head bold"><NavLink to="/about" className="text-decoration-none text-dark">Chi siamo</NavLink></li>
+              <li className="anta-head bold"><NavLink to="/" className="text-decoration-none text-dark underline">Home</NavLink></li>
+              <li className="anta-head bold"><NavLink to="/products" className="text-decoration-none text-dark underline">Prodotti</NavLink></li>
+              <li className="anta-head bold"><NavLink to="/about" className="text-decoration-none text-dark underline">Chi siamo</NavLink></li>
             </ul>
           </div>
         </div>
@@ -168,13 +168,13 @@ export default function Header() {
                     style={{
                       width: "150px",
                       fontSize: "0.8rem",
-                      borderColor: "#e2e8f0",
+                      borderColor: "#6a6c70",
                       borderTopLeftRadius: "20px",
                       borderBottomLeftRadius: "20px",
                       borderRight: "none",
                     }}
                   />
-                  <FontAwesomeIcon icon={faMagnifyingGlass} className="position-absolute text-muted" style={{ fontSize: "0.7rem", left: "12px", top: "50%", transform: "translateY(-50%)" }} />
+                  <FontAwesomeIcon icon={faMagnifyingGlass} className="position-absolute text-muted " style={{ fontSize: "0.7rem", left: "8px", top: "50%", transform: "translateY(-50%)" }} />
                 </div>
                 <button
                   onClick={handleSearch}
@@ -194,13 +194,13 @@ export default function Header() {
             </li>
 
             <li>
-              <NavLink to="/wishlist" className="text-dark p-2">
+              <NavLink to="/wishlist" className="text-dark p-2 underline">
                 <FontAwesomeIcon icon={faHeart} />
               </NavLink>
             </li>
 
             <li className="position-relative">
-              <NavLink to="/cart" className="text-dark p-2 d-flex align-items-center" style={{ textDecoration: "none" }}>
+              <NavLink to="/cart" className="text-dark p-2 d-flex align-items-center underline" style={{ textDecoration: "none" }}>
                 <FontAwesomeIcon icon={faCartShopping} size="lg" style={{ color: "#0f172a" }} />
                 {cart.length > 0 && (
                   <span className="position-absolute translate-middle badge rounded-pill" style={{ top: "8px", left: "85%", backgroundColor: "#d4af37", color: "#000000", fontSize: "0.7rem", fontWeight: "800", border: "2px solid #ffffff" }}>

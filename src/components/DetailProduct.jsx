@@ -6,49 +6,58 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../context/CartContext";
 import ShippingBanner from "./ShippingBanner.jsx";
 
-
-
 import "./DetailProduct.css"
 
 export default function DetailProduct() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [fade, setFade] = useState(false); // Stato per l'effetto visivo di caricamento
   const navigate = useNavigate();
-
-
   const { addToCart } = useCart();
 
- useEffect(() => {
+  useEffect(() => {
+    // 1. Reset degli stati quando cambia lo slug
+    setLoading(true);
+    setFade(false); 
+
     api.get(`/products/${slug}`)
       .then((res) => {
         const current = res.data.item || res.data;
         if (!current) {
-           navigate("/404"); // Se l'API risponde ma l'oggetto è nullo
+           navigate("/404");
+           return;
         }
         setProduct(current);
         setLoading(false);
+
+        // 2. GESTIONE CARICAMENTO PAGINA: Torna in cima istantaneamente
+        window.scrollTo(0, 0);
+
+        // 3. Attiva l'animazione di ingresso
+        setTimeout(() => setFade(true), 50);
       })
       .catch((err) => {
         console.error(err);
-        navigate("/404"); // Se l'API dà errore (es. 404 dal server)
+        navigate("/404");
       });
   }, [slug, navigate]);
 
   if (loading)
     return (
-      <div className="pt-5 container">
-        <div className="text-white p-5 text-center">Ricerca in corso...</div>
+      <div className="pt-5 container min-vh-100">
+        <div className="text-white p-5 text-center anta-font">
+            <div className="spinner-border text-primary mb-3"></div>
+            <div>Sincronizzazione dati in corso...</div>
+        </div>
       </div>
     );
 
   return (
     <>
-      <div className="product-detail-page">
-
-        {/* BANNER SCONTO ORDINI */}
+      {/* 4. Applichiamo una classe dinamica per l'effetto fade */}
+      <div className={`product-detail-page ${fade ? "fade-in-active" : "fade-in-init"}`}>
         <ShippingBanner />
-
 
         <div className="container product-detail">
           {/* SCHEDA PRODOTTO */}
@@ -61,30 +70,22 @@ export default function DetailProduct() {
               />
             </div>
 
-
-
             <div className="col-md-6 px-5">
-
-              {/* TITOLO */}
               <h1 className="anta-font fw-bold mb-1">
                 {product.name}
               </h1>
 
-              {/* PREZZO */}
               <div className="mb-1">
                 <div className="card-price-big">
                   € {Number(product.price).toFixed(2)}
                 </div>
-                
               </div>
 
-              {/* CARATTERISTICHE*/}
               <div className="mb-4 border-top">
                 <div>
                   <div className="col-12 py-3">
                     <strong>Dimensioni: </strong>  
                       {product.dimension}
-
                   </div>
                   <div className="row pb-3">
                     <div className="col-6">
@@ -104,7 +105,6 @@ export default function DetailProduct() {
                 </div>
               </div>
               
-              {/* DESCRIZIONE */}
               <div className="mb-4 border-top pt-2">
                 <h5 className="mb-1 anta-font">Descrizione:</h5>
                 <p className="lead">
@@ -112,7 +112,6 @@ export default function DetailProduct() {
                 </p>
               </div>
 
-              {/* BOTTONE addToCart */}
               <div className="d-grid border-top pt-1">
                 <p className="text-muted small mb-2">
                   Spedizione gratuita sopra i €1000
@@ -123,15 +122,8 @@ export default function DetailProduct() {
                   Aggiungi al carrello
                 </button>
               </div>
-
             </div>
           </div>
-
-
-
-
-
-
 
           {/* CORRELATI */}
           {product.recommended.length > 0 && (
@@ -155,9 +147,6 @@ export default function DetailProduct() {
           )}
         </div>
       </div>
-
-
     </>
   );
-
 }

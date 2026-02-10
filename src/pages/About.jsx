@@ -16,10 +16,8 @@ export default function About() {
         }}
       >
         <div className="container">
-          <h1 className="display-2 fw-bold tracking-tight">
-            AETERNA <span className="text-primary">DYNAMICS</span>
-          </h1>
-          <p className="lead fs-4 opacity-75">
+          
+          <p className="lead fs-4 fw-bold opacity-75 my-5 anta-head li-bord-bot py-2">
             Architetti della biosfera. Pionieri del domani.
           </p>
         </div>
@@ -28,15 +26,12 @@ export default function About() {
       <section className="container py-5 mt-lg-5">
         <div className="row justify-content-center text-center">
           <div className="col-lg-8">
-            <h6 className="text-primary fw-bold text-uppercase ls-2 mb-3">
-              Chi Siamo
-            </h6>
             <h2 className="display-5 fw-bold mb-4">
               La Scienza al Servizio della Vita
             </h2>
             <p className="text-muted fs-5 mb-4 leading-relaxed">
               Nata nei laboratori di bio-ingegneria più avanzati,{" "}
-              <strong>Aeterna Dynamics</strong> si pone l'obiettivo di invertire
+              <strong>Aeterna</strong> si pone l'obiettivo di invertire
               la rotta dell'estinzione globale.
             </p>
             <p className="mb-5 fs-5">

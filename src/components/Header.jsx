@@ -1,16 +1,23 @@
 import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import {
   faCartShopping,
   faHeart,
   faMagnifyingGlass,
+  faBars,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./Header.css";
 import { useCart } from "../context/CartContext.jsx";
 
 export default function Header() {
-  const { cart, previw } = useCart();
+  const { cart, previw, SetPreview } = useCart();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
   function countProduct() {
     let countQuantity = 0;
@@ -26,74 +33,65 @@ export default function Header() {
       style={{ zIndex: 2000 }}
     >
       <div className="container-fluid d-flex align-items-center justify-content-between py-2">
-        {/* 1. SEZIONE SINISTRA: MENU (Desktop & Mobile) */}
+        {/* 1. SEZIONE SINISTRA: MENU (Hamburger Mobile & Links Desktop) */}
         <div className="d-flex align-items-center" style={{ flex: 1 }}>
-          {/* MOBILE MENU BUTTON */}
+          {/* Tasto Hamburger Mobile */}
           <div className="d-md-none">
             <button
               className="btn btn-outline-dark border-0 anta-head"
-              type="button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasResponsive"
+              onClick={toggleMenu}
             >
+              <FontAwesomeIcon icon={faBars} className="me-2" />
               Menu
             </button>
-
-            <div
-              className="offcanvas offcanvas-start"
-              tabIndex="-1"
-              id="offcanvasResponsive"
-              aria-labelledby="offcanvasResponsiveLabel"
-            >
-              <div className="offcanvas-header border-bottom">
-                <h5
-                  className="offcanvas-title anta-head"
-                  id="offcanvasResponsiveLabel"
-                >
-                  AETERNA
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="offcanvas"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="offcanvas-body">
-                <ul className="navbar-nav flex-column gap-3 mt-3">
-                  <li className="anta-head fs-5 border-bottom pb-2">
-                    <NavLink
-                      to="/"
-                      className="text-decoration-none text-dark"
-                      data-bs-dismiss="offcanvas"
-                    >
-                      Home
-                    </NavLink>
-                  </li>
-                  <li className="anta-head fs-5 border-bottom pb-2">
-                    <NavLink
-                      to="/products"
-                      className="text-decoration-none text-dark"
-                      data-bs-dismiss="offcanvas"
-                    >
-                      Prodotti
-                    </NavLink>
-                  </li>
-                  <li className="anta-head fs-5 border-bottom pb-2">
-                    <NavLink
-                      to="/about"
-                      className="text-decoration-none text-dark"
-                      data-bs-dismiss="offcanvas"
-                    >
-                      Chi siamo
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
 
-          {/* DESKTOP LINKS */}
+          {/* Menu Offcanvas Manuale (Puro CSS/React) */}
+          <div className={`custom-menu-offcanvas ${isMenuOpen ? "open" : ""}`}>
+            <div className="offcanvas-header-manual border-bottom">
+              <h5 className="anta-head m-0">AETERNA</h5>
+              <button className="btn-close-manual" onClick={closeMenu}>
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+            </div>
+            <div className="offcanvas-body-manual">
+              <ul className="navbar-nav flex-column gap-3 mt-3">
+                <li className="anta-head fs-5 border-bottom pb-2 px-3">
+                  <NavLink
+                    to="/"
+                    className="text-decoration-none text-dark d-block"
+                    onClick={closeMenu}
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li className="anta-head fs-5 border-bottom pb-2 px-3">
+                  <NavLink
+                    to="/products"
+                    className="text-decoration-none text-dark d-block"
+                    onClick={closeMenu}
+                  >
+                    Prodotti
+                  </NavLink>
+                </li>
+                <li className="anta-head fs-5 border-bottom pb-2 px-3">
+                  <NavLink
+                    to="/about"
+                    className="text-decoration-none text-dark d-block"
+                    onClick={closeMenu}
+                  >
+                    Chi siamo
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {/* Overlay per chiudere il menu cliccando fuori */}
+          {isMenuOpen && (
+            <div className="menu-overlay-manual" onClick={closeMenu}></div>
+          )}
+
+          {/* Links Desktop */}
           <div className="nav d-none d-md-flex">
             <ul className="d-flex list-unstyled m-0 gap-4">
               <li className="anta-head bold">
@@ -118,9 +116,8 @@ export default function Header() {
           </div>
         </div>
 
-        {/* 2. SEZIONE CENTRALE: LOGO O SEARCH MOBILE */}
+        {/* 2. SEZIONE CENTRALE: LOGO (Desktop) O SEARCH (Mobile) */}
         <div className="d-flex justify-content-center" style={{ flex: 1 }}>
-          {/* LOGO DESKTOP: Centrato */}
           <div className="logo2 d-none d-md-block">
             <p
               className="main-title m-0 fw-bold"
@@ -130,7 +127,7 @@ export default function Header() {
             </p>
           </div>
 
-          {/* SEARCH BAR MOBILE */}
+          {/* SEARCH BAR MOBILE (Sempre visibile su mobile al centro) */}
           <div
             className="d-block d-md-none w-100"
             style={{ maxWidth: "180px" }}
@@ -161,8 +158,8 @@ export default function Header() {
           style={{ flex: 1 }}
         >
           <ul className="d-flex list-unstyled m-0 align-items-center gap-2 gap-md-3">
-            {/* SEARCH DESKTOP CON TASTO AFFIANCATO */}
-            <li className="d-none d-lg-flex align-items-center">
+            {/* SEARCH DESKTOP: Adesso forzato con display flex */}
+            <li className="d-none d-md-flex align-items-center">
               <div className="d-flex align-items-center">
                 <div className="position-relative">
                   <input
@@ -197,7 +194,7 @@ export default function Header() {
                     borderBottomRightRadius: "20px",
                     paddingRight: "12px",
                     fontWeight: "600",
-                    height: "31px", // Allineato all'input sm
+                    height: "31px",
                   }}
                 >
                   CERCA
@@ -211,7 +208,7 @@ export default function Header() {
               </NavLink>
             </li>
 
-            {/* CARRELLO CON PREVIEW AL PASSAGGIO DEL MOUSE */}
+            {/* CARRELLO CON PREVIEW ORIGINALE */}
             <li
               className="position-relative"
               onMouseEnter={() => SetPreview(true)}
@@ -245,7 +242,7 @@ export default function Header() {
                 )}
               </NavLink>
 
-              {/* ANTEPRIMA CARRELLO */}
+              {/* TUA ANTEPRIMA CARRELLO ORIGINALE */}
               {previw && cart.length > 0 && (
                 <div
                   className="position-absolute end-0 mt-2 shadow-lg border rounded-3 bg-white"

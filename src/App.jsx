@@ -9,15 +9,25 @@ import Wishlist from "./pages/Wishlist.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
-import DetailProduct from "./components/DetailProduct.jsx";
-import Cart from "./pages/Cart.jsx";
-import About from "./pages/About.jsx";
+
+
+import Home from "./pages/Home"
+import Products from "./pages/Products.jsx"
+import Wishlist from './pages/Wishlist.jsx';
+import Checkout from './pages/Checkout.jsx';
+
+
+import DetailProduct from './components/DetailProduct.jsx';
+import Cart from './pages/Cart.jsx';
+import About from './pages/About.jsx';
+import { WishlistProvider } from './context/WishlistContext.jsx';
 import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <CartProvider>
+    <CartProvider>
+      <WishlistProvider>    
+      <BrowserRouter>
         <Routes>
           <Route element={<DefaultLayout />}>
             <Route path="/" element={<Home />} />
@@ -30,9 +40,10 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
-      </CartProvider>
-    </BrowserRouter>
-  );
+      </BrowserRouter>
+       </WishlistProvider>
+    </CartProvider>
+  )
 }
 
 export default App;

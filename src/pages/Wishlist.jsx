@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useWishlist } from "../context/WishlistContext";
 import {useCart}from "../context/CartContext";
+import "./Cart.css"
 
 export default function Wishlist() {
     const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
@@ -9,15 +10,15 @@ export default function Wishlist() {
     return (
         <>
 
-            <div className="cart-page bg-black text-white min-vh-100" style={{ paddingTop: "120px" }}>
+             <div className="cart-page  text-white min-vh-100" style={{ paddingTop: "120px" }}>
                 <div className="container pb-5">
-                    <h1 className="display-5 fw-bold text-uppercase mb-5 text-primary">i tuoi preferiti</h1>
+                  <h1 className="display-5 fw-bold text-uppercase mb-5 cart-title">i tuoi preferiti</h1>
 
 
                     {wishlist.length === 0 ? (
                         <div className="text-center py-5">
-                            <p className="lead opacity-50 mb-4">La tua lista  dei Preferiti è vuota.</p>
-                            <Link to="/products" className="btn btn-primary px-5 py-3 fw-bold">TORNA ALLO SHOP</Link>
+                           <p className="text-gray mb-4">La tua lista  dei Preferiti è vuota.</p>
+                            <Link to="/products" className="btn-gold px-5 py-3 fw-bold">TORNA ALLO SHOP</Link>
                         </div>
                     ) : (
                         <div className="row">

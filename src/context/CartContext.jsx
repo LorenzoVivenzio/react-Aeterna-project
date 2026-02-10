@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-
+import { useLocation } from "react-router-dom";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -19,7 +19,6 @@ export const CartProvider = ({ children }) => {
     }, 2000);
     setCart((prevCart) => {
       if (!product) return prevCart;
-      // Usiamo lo slug come identificatore principale per il frontend
       const existingIndex = prevCart.findIndex(
         (item) => item.slug === product.slug,
       );

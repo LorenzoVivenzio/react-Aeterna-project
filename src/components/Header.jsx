@@ -1,9 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faHeart } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCartShopping,
+  faHeart,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
+
 import "./Header.css";
 import { useCart } from "../context/CartContext.jsx";
-import { useEffect, useState } from "react";
 
 export default function Header() {
   const { cart, previw } = useCart();
@@ -17,83 +21,202 @@ export default function Header() {
   }
 
   return (
-    <header className="nav-bar fixed-top header-border-bot bg-white shadow-sm">
+    <header
+      className="nav-bar fixed-top header-border-bot bg-white shadow-sm"
+      style={{ zIndex: 2000 }}
+    >
       <div className="container-fluid d-flex align-items-center justify-content-between py-2">
-        <div className="d-md-none">
-          <button
-            className="btn-custom anta-head"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasResponsive"
-          >
-            Menu
-          </button>
+        {/* 1. SEZIONE SINISTRA: MENU (Desktop & Mobile) */}
+        <div className="d-flex align-items-center" style={{ flex: 1 }}>
+          {/* MOBILE MENU BUTTON */}
+          <div className="d-md-none">
+            <button
+              className="btn btn-outline-dark border-0 anta-head"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasResponsive"
+            >
+              Menu
+            </button>
 
-          <div
-            className="offcanvas-md offcanvas-start"
-            tabIndex="-1"
-            id="offcanvasResponsive"
-          >
-            <div className="offcanvas-header anta-head">
-              <h5 className="offcanvas-title">Menu</h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="offcanvas"
-              ></button>
+            <div
+              className="offcanvas offcanvas-start"
+              tabIndex="-1"
+              id="offcanvasResponsive"
+              aria-labelledby="offcanvasResponsiveLabel"
+            >
+              <div className="offcanvas-header border-bottom">
+                <h5
+                  className="offcanvas-title anta-head"
+                  id="offcanvasResponsiveLabel"
+                >
+                  AETERNA
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="offcanvas-body">
+                <ul className="navbar-nav flex-column gap-3 mt-3">
+                  <li className="anta-head fs-5 border-bottom pb-2">
+                    <NavLink
+                      to="/"
+                      className="text-decoration-none text-dark"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      Home
+                    </NavLink>
+                  </li>
+                  <li className="anta-head fs-5 border-bottom pb-2">
+                    <NavLink
+                      to="/products"
+                      className="text-decoration-none text-dark"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      Prodotti
+                    </NavLink>
+                  </li>
+                  <li className="anta-head fs-5 border-bottom pb-2">
+                    <NavLink
+                      to="/about"
+                      className="text-decoration-none text-dark"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      Chi siamo
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div className="offcanvas-body">
-              <ul className="list-unstyled">
-                <li className="anta-head li-bord-bot py-2">
-                  <NavLink to="/">Home</NavLink>
-                </li>
-                <li className="anta-head li-bord-bot py-2">
-                  <NavLink to="/products">Prodotti</NavLink>
-                </li>
-                <li className="anta-head li-bord-bot py-2">
-                  <NavLink to="/about">Chi siamo</NavLink>
-                </li>
-              </ul>
+          </div>
+
+          {/* DESKTOP LINKS */}
+          <div className="nav d-none d-md-flex">
+            <ul className="d-flex list-unstyled m-0 gap-4">
+              <li className="anta-head bold">
+                <NavLink to="/" className="text-decoration-none text-dark">
+                  Home
+                </NavLink>
+              </li>
+              <li className="anta-head bold">
+                <NavLink
+                  to="/products"
+                  className="text-decoration-none text-dark"
+                >
+                  Prodotti
+                </NavLink>
+              </li>
+              <li className="anta-head bold">
+                <NavLink to="/about" className="text-decoration-none text-dark">
+                  Chi siamo
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* 2. SEZIONE CENTRALE: LOGO O SEARCH MOBILE */}
+        <div className="d-flex justify-content-center" style={{ flex: 1 }}>
+          {/* LOGO DESKTOP: Centrato */}
+          <div className="logo2 d-none d-md-block">
+            <p
+              className="main-title m-0 fw-bold"
+              style={{ letterSpacing: "2px", whiteSpace: "nowrap" }}
+            >
+              AETERNA
+            </p>
+          </div>
+
+          {/* SEARCH BAR MOBILE */}
+          <div
+            className="d-block d-md-none w-100"
+            style={{ maxWidth: "180px" }}
+          >
+            <div className="position-relative d-flex align-items-center">
+              <input
+                type="text"
+                placeholder="Cerca..."
+                className="form-control form-control-sm ps-4 rounded-pill"
+                style={{
+                  fontSize: "0.8rem",
+                  borderColor: "#e2e8f0",
+                  backgroundColor: "#f8fafc",
+                }}
+              />
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="position-absolute ms-2 text-muted"
+                style={{ fontSize: "0.7rem" }}
+              />
             </div>
           </div>
         </div>
 
-        <div className="nav d-none d-md-flex">
-          <ul className="d-flex list-unstyled m-0 gap-4">
-            <li className="anta-head bold">
-              <NavLink to="/" className="text-decoration-none text-dark">
-                Home
-              </NavLink>
+        {/* 3. SEZIONE DESTRA: ICONS + SEARCH DESKTOP */}
+        <div
+          className="d-flex justify-content-end align-items-center"
+          style={{ flex: 1 }}
+        >
+          <ul className="d-flex list-unstyled m-0 align-items-center gap-2 gap-md-3">
+            {/* SEARCH DESKTOP CON TASTO AFFIANCATO */}
+            <li className="d-none d-lg-flex align-items-center">
+              <div className="d-flex align-items-center">
+                <div className="position-relative">
+                  <input
+                    type="text"
+                    placeholder="Cerca..."
+                    className="form-control form-control-sm ps-4"
+                    style={{
+                      width: "150px",
+                      fontSize: "0.8rem",
+                      borderColor: "#e2e8f0",
+                      borderTopLeftRadius: "20px",
+                      borderBottomLeftRadius: "20px",
+                      borderRight: "none",
+                    }}
+                  />
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="position-absolute text-muted"
+                    style={{
+                      fontSize: "0.7rem",
+                      left: "12px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                    }}
+                  />
+                </div>
+                <button
+                  className="btn btn-dark btn-sm"
+                  style={{
+                    fontSize: "0.7rem",
+                    borderTopRightRadius: "20px",
+                    borderBottomRightRadius: "20px",
+                    paddingRight: "12px",
+                    fontWeight: "600",
+                    height: "31px", // Allineato all'input sm
+                  }}
+                >
+                  CERCA
+                </button>
+              </div>
             </li>
-            <li className="anta-head bold">
-              <NavLink
-                to="/products"
-                className="text-decoration-none text-dark"
-              >
-                Prodotti
-              </NavLink>
-            </li>
-            <li className="anta-head bold">
-              <NavLink to="/about" className="text-decoration-none text-dark">
-                Chi siamo
-              </NavLink>
-            </li>
-          </ul>
-        </div>
 
-        <div className="logo2">
-          <p className="main-title m-0 fw-bold">AETERNA</p>
-        </div>
-
-        <div className="icons-nav position-relative">
-          <ul className="d-flex list-unstyled m-0 align-items-center gap-3">
             <li>
-              <NavLink to="/wishlist" className="text-dark">
+              <NavLink to="/wishlist" className="text-dark p-2">
                 <FontAwesomeIcon icon={faHeart} />
               </NavLink>
             </li>
 
-            <li className="position-relative">
+            {/* CARRELLO CON PREVIEW AL PASSAGGIO DEL MOUSE */}
+            <li
+              className="position-relative"
+              onMouseEnter={() => SetPreview(true)}
+              onMouseLeave={() => SetPreview(false)}
+            >
               <NavLink
                 to="/cart"
                 className="text-dark p-2 d-flex align-items-center"
@@ -112,11 +235,9 @@ export default function Header() {
                       left: "85%",
                       backgroundColor: "#d4af37",
                       color: "#000000",
-                      fontSize: "0.75rem",
+                      fontSize: "0.7rem",
                       fontWeight: "800",
-                      padding: "0.4em 0.6em",
                       border: "2px solid #ffffff",
-                      boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
                     }}
                   >
                     {countProduct()}
@@ -124,11 +245,11 @@ export default function Header() {
                 )}
               </NavLink>
 
-              {/* ANTEPRIMA CARRELLO CORRETTA */}
+              {/* ANTEPRIMA CARRELLO */}
               {previw && cart.length > 0 && (
                 <div
                   className="position-absolute end-0 mt-2 shadow-lg border rounded-3 bg-white"
-                  style={{ width: "340px", zIndex: 1050, top: "100%" }}
+                  style={{ width: "340px", zIndex: 2100, top: "100%" }}
                 >
                   <div className="p-3 border-bottom bg-light d-flex justify-content-between align-items-center rounded-top">
                     <small
@@ -149,70 +270,60 @@ export default function Header() {
                     className="list-group list-group-flush"
                     style={{ maxHeight: "350px", overflowY: "auto" }}
                   >
-                    {cart.map((c, index) => {
-                      const imageUrl = `http://localhost:3001/images/${c.url_image}`;
-                      return (
-                        <li
-                          key={index}
-                          className="list-group-item py-3 px-3 border-bottom"
-                        >
-                          <div className="d-flex align-items-center">
-                            <div
-                              className="rounded border shadow-sm"
-                              style={{
-                                width: "70px",
-                                height: "70px",
-                                flexShrink: 0,
-                                backgroundImage: `url(${imageUrl})`,
-                                backgroundSize: "cover",
-                                backgroundPosition: "center",
-                                backgroundColor: "#f8fafc",
-                              }}
-                            />
-
-                            <div className="flex-grow-1 ms-3">
-                              <div className="d-flex justify-content-between align-items-start w-100">
-                                <h6
-                                  className="fw-bold text-dark mb-0 text-truncate"
-                                  style={{
-                                    fontSize: "0.9rem",
-                                    maxWidth: "140px",
-                                  }}
-                                >
-                                  {c.name}
-                                </h6>
-                                <span
-                                  className="fw-bold text-dark ms-2"
-                                  style={{
-                                    fontSize: "0.9rem",
-                                    whiteSpace: "nowrap",
-                                  }}
-                                >
-                                  €{c.price}
+                    {cart.map((c, index) => (
+                      <li
+                        key={index}
+                        className="list-group-item py-3 px-3 border-bottom"
+                      >
+                        <div className="d-flex align-items-center">
+                          <div
+                            className="rounded border shadow-sm"
+                            style={{
+                              width: "60px",
+                              height: "60px",
+                              flexShrink: 0,
+                              backgroundImage: `url(http://localhost:3001/images/${c.url_image})`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                            }}
+                          />
+                          <div className="flex-grow-1 ms-3">
+                            <div className="d-flex justify-content-between">
+                              <h6
+                                className="fw-bold mb-0 text-truncate"
+                                style={{
+                                  maxWidth: "130px",
+                                  fontSize: "0.9rem",
+                                }}
+                              >
+                                {c.name}
+                              </h6>
+                              <span
+                                className="fw-bold text-dark"
+                                style={{ fontSize: "0.9rem" }}
+                              >
+                                €{c.price}
+                              </span>
+                            </div>
+                            <div className="mt-2">
+                              <small
+                                className="text-muted d-block"
+                                style={{
+                                  fontSize: "0.8rem",
+                                  borderLeft: "2px solid #d4af37",
+                                  paddingLeft: "8px",
+                                }}
+                              >
+                                Quantità:{" "}
+                                <span className="text-dark fw-bold">
+                                  {c.quantity}
                                 </span>
-                              </div>
-
-                              <div className="mt-2">
-                                <small
-                                  className="text-muted d-block"
-                                  style={{
-                                    fontSize: "0.8rem",
-                                    letterSpacing: "0.3px",
-                                    borderLeft: "2px solid #38bdf8", // Un piccolo tocco di colore laterale
-                                    paddingLeft: "8px",
-                                  }}
-                                >
-                                  Quantità:{" "}
-                                  <span className="text-dark fw-bold">
-                                    {c.quantity}
-                                  </span>
-                                </small>
-                              </div>
+                              </small>
                             </div>
                           </div>
-                        </li>
-                      );
-                    })}
+                        </div>
+                      </li>
+                    ))}
                   </ul>
 
                   <div className="p-3 bg-white rounded-bottom">
@@ -222,7 +333,7 @@ export default function Header() {
                       style={{ borderRadius: "8px", fontSize: "0.9rem" }}
                       onClick={() => SetPreview(false)}
                     >
-                      Visualizza Carrello intero
+                      Visualizza Carrello
                     </NavLink>
                   </div>
                 </div>

@@ -36,18 +36,47 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // Usiamo lo slug per rimuovere
-  const removeFromCart = (slug) => {
-    setCart((prevCart) => prevCart.filter((item) => item.slug !== slug));
-  };
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
 
-  // Usiamo lo slug per aggiornare la quantità
-  const updateQuantity = (slug, quantity) => {
-    if (quantity < 1) return;
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.slug === slug ? { ...item, quantity } : item,
-      ),
+const addToCart = (product) => {
+    setCart((prevCart) => {
+        const existingIndex = prevCart.findIndex((item) => item.slug === product.slug);
+        if (existingIndex !== -1) {
+            const newCart = [...prevCart];
+            // Somma la quantità scelta (product.quantity) a quella già presente
+            newCart[existingIndex] = {
+                ...newCart[existingIndex],
+                quantity: newCart[existingIndex].quantity + (product.quantity || 1)
+            };
+            return newCart;
+        } else {
+            return [...prevCart, { ...product, quantity: product.quantity || 1 }];
+        }
+    });
+};
+
+
+    // Usiamo lo slug per rimuovere
+    const removeFromCart = (slug) => {
+        setCart((prevCart) => prevCart.filter((item) => item.slug !== slug));
+    };
+
+    // Usiamo lo slug per aggiornare la quantità
+    const updateQuantity = (slug, quantity) => {
+        if (quantity < 1) return;
+        setCart((prevCart) =>
+            prevCart.map((item) => (item.slug === slug ? { ...item, quantity } : item))
+        );
+    };
+
+    const clearCart = () => setCart([]);
+
+    return (
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}>
+            {children}
+        </CartContext.Provider>
     );
   };
 

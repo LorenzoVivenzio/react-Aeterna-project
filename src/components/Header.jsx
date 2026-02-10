@@ -6,9 +6,8 @@ import { useCart } from "../context/CartContext.jsx";
 import { useEffect, useState } from "react";
 
 export default function Header() {
-  const [previw, SetPreview] = useState(false);
-  const { cart } = useCart();
-  console.log(cart);
+  const { cart, previw } = useCart();
+  console.log(cart, previw);
   function countProduct() {
     let countQuantity = 0;
     cart.forEach((p) => {
@@ -16,13 +15,6 @@ export default function Header() {
     });
     return countQuantity;
   }
-
-  useEffect(() => {
-    SetPreview(true);
-    const timer = setTimeout(() => {
-      SetPreview(false);
-    }, 2000);
-  }, [cart]);
 
   return (
     <header className="nav-bar fixed-top header-border-bot bg-white shadow-sm">

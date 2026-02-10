@@ -13,7 +13,7 @@ import "./Header.css";
 import { useCart } from "../context/CartContext.jsx";
 
 export default function Header() {
-  const { cart, previw, SetPreview } = useCart();
+  const { cart, previw, setPreview } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   // STATO PER LA RICERCA E NAVIGAZIONE
@@ -199,7 +199,7 @@ export default function Header() {
               </NavLink>
             </li>
 
-            <li className="position-relative" onMouseEnter={() => SetPreview(true)} onMouseLeave={() => SetPreview(false)}>
+            <li className="position-relative">
               <NavLink to="/cart" className="text-dark p-2 d-flex align-items-center" style={{ textDecoration: "none" }}>
                 <FontAwesomeIcon icon={faCartShopping} size="lg" style={{ color: "#0f172a" }} />
                 {cart.length > 0 && (
@@ -234,7 +234,7 @@ export default function Header() {
                     ))}
                   </ul>
                   <div className="p-3 bg-white rounded-bottom">
-                    <NavLink to="/cart" className="btn btn-dark w-100 py-2 fw-bold" style={{ borderRadius: "8px", fontSize: "0.9rem" }} onClick={() => SetPreview(false)}> Visualizza Carrello </NavLink>
+                    <NavLink to="/cart" className="btn btn-dark w-100 py-2 fw-bold" style={{ borderRadius: "8px", fontSize: "0.9rem" }} onClick={() => setPreview(false)}> Visualizza Carrello </NavLink>
                   </div>
                 </div>
               )}

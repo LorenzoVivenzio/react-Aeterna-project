@@ -9,7 +9,7 @@ export const CartProvider = ({ children }) => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
-  const [previw, SetPreview] = useState(false);
+  const [previw, setPreview] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -21,9 +21,9 @@ export const CartProvider = ({ children }) => {
         (item) => item.slug === product.slug,
       );
       if (location.pathname !== "/cart") {
-        SetPreview(true);
+        setPreview(true);
         setTimeout(() => {
-          SetPreview(false);
+          setPreview(false);
         }, 3000);
       }
       if (existingIndex !== -1) {
@@ -43,9 +43,9 @@ export const CartProvider = ({ children }) => {
   // Usiamo lo slug per rimuovere
   const removeFromCart = (slug) => {
     if (location.pathname !== "/cart") {
-      SetPreview(true);
+      setPreview(true);
       setTimeout(() => {
-        SetPreview(false);
+        setPreview(false);
       }, 2000);
     }
     setCart((prevCart) => prevCart.filter((item) => item.slug !== slug));
@@ -54,9 +54,9 @@ export const CartProvider = ({ children }) => {
   // Usiamo lo slug per aggiornare la quantità
   const updateQuantity = (slug, quantity) => {
     if (location.pathname !== "/cart") {
-      SetPreview(true);
+      setPreview(true);
       setTimeout(() => {
-        SetPreview(false);
+        setPreview(false);
       }, 2000);
     }
     if (quantity < 1) return;

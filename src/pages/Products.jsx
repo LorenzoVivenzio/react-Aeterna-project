@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../API/axios";
 import ProductCard from "../components/ProductCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import "./Products.css"
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -12,11 +13,9 @@ export default function Products() {
   const [diets, setDiets] = useState([]);
   const [powers, setPowers] = useState([]);
 
-  // Stati per la ricerca testuale
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [searchTerm, setSearchTerm] = useState(search);
 
-  // Stati per il budget
   const [minPrice, setMinPrice] = useState(Number(searchParams.get("minPrice")) || 0);
   const [maxPrice, setMaxPrice] = useState(Number(searchParams.get("maxPrice")) || 15000);
   const [minTerm, setMinTerm] = useState(minPrice);
@@ -29,7 +28,6 @@ export default function Products() {
 
   const navigate = useNavigate();
 
-  // --- SINCRONIZZAZIONE CON L'URL PER RICERCA GLOBALE ---
   useEffect(() => {
     const querySearch = searchParams.get("search") || "";
     setSearch(querySearch);
@@ -93,12 +91,9 @@ export default function Products() {
     api.get("/products", { params })
       .then((res) => {
         const results = res.data.results || [];
-        
-        // Se la ricerca non produce risultati, indirizza alla pagina notfound
         if (results.length === 0 && search !== "") {
           navigate("/notfound", { replace: true });
         }
-
         setProducts(results);
         setLoading(false);
       })
@@ -110,23 +105,21 @@ export default function Products() {
 
   return (
     <div className="products-page bg-white text-dark min-vh-100 pb-5">
-      {/* Header rimosso perché gestito dal DefaultLayout */}
-
-      <div className="container" style={{ paddingTop: "100px" }}>
-        <h1 className="text-center mb-5 fw-bold text-uppercase tracking-widest text-primary">
+      <div className="container" style={{ paddingTop: "120px" }}>
+        <h1 className="text-center mb-5 title-order fw-bold text-uppercase">
           Catalogo Aeterna
         </h1>
 
-        {/* BOX RICERCA E BUDGET */}
+        {/* BOX RICERCA E BUDGET - STILE BORDER-CHECKOUT */}
         <div className="row mb-4">
           <div className="col-12">
-            <div className="p-4 bg-dark rounded-4 border border-secondary shadow-lg">
+            <div className="p-4 border-checkout shadow-sm">
               <form onSubmit={handleSearchSubmit}>
                 <div className="row g-3 align-items-end">
                   <div className="col-md-9">
-                    <label className="small text-info mb-2 text-uppercase fw-bold">Modello Robot</label>
+                    <label className="anta-head small mb-2 text-uppercase fw-bold">Modello Robot</label>
                     <input
-                      className="form-control bg-black text-white border-secondary shadow-none py-2"
+                      className="form-control input-checkout py-2"
                       placeholder="Cerca per nome..."
                       value={searchTerm}
                       onChange={(e) => {
@@ -136,17 +129,17 @@ export default function Products() {
                     />
                   </div>
                   <div className="col-md-3">
-                    <button type="submit" className="btn btn-primary w-100 text-uppercase fw-bold py-2">
+                    <button type="submit" className="btn order-btn w-100 text-uppercase fw-bold py-2">
                       Applica
                     </button>
                   </div>
 
                   {/* RANGE SLIDER */}
-                  <div className="col-12 mt-3">
-                    <div className="p-3 bg-black rounded-3 border border-secondary border-opacity-50">
+                  <div className="col-12 mt-4">
+                    <div className="p-3 riepilogo">
                       <div className="d-flex justify-content-between align-items-center mb-2">
-                        <span className="small text-info text-uppercase fw-bold">Range di Budget</span>
-                        <span className="badge bg-primary px-3 py-2 fw-bold">
+                        <span className="small anta-head text-uppercase fw-bold">Range di Budget</span>
+                        <span className="fw-bold totale">
                           {minTerm} € — {maxTerm} €
                         </span>
                       </div>
@@ -163,10 +156,10 @@ export default function Products() {
                           className="position-absolute top-50 start-0 w-100"
                           style={{ zIndex: "4", appearance: "none", background: "none", pointerEvents: "none", height: "0" }}
                         />
-                        <div className="position-absolute top-50 start-0 w-100 bg-secondary rounded" style={{ height: "6px", transform: "translateY(-50%)", zIndex: "1" }}></div>
+                        <div className="position-absolute top-50 start-0 w-100 rounded" style={{ height: "6px", transform: "translateY(-50%)", zIndex: "1", backgroundColor: "rgba(69, 194, 216, 0.2)" }}></div>
                         <style>{`
-                          input[type=range]::-webkit-slider-thumb { pointer-events: auto; appearance: none; width: 18px; height: 18px; background: #0d6efd; border-radius: 50%; cursor: pointer; border: 2px solid white; }
-                          input[type=range]::-moz-range-thumb { pointer-events: auto; width: 18px; height: 18px; background: #0d6efd; border-radius: 50%; cursor: pointer; border: 2px solid white; }
+                          input[type=range]::-webkit-slider-thumb { pointer-events: auto; appearance: none; width: 20px; height: 20px; background: #e1bb70; border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+                          input[type=range]::-moz-range-thumb { pointer-events: auto; width: 20px; height: 20px; background: #e1bb70; border-radius: 50%; cursor: pointer; border: 2px solid white; }
                         `}</style>
                       </div>
                     </div>
@@ -177,33 +170,33 @@ export default function Products() {
           </div>
         </div>
 
-        {/* FILTRI TECNICI */}
-        <div className="filters-container bg-dark p-4 rounded-4 border border-secondary mb-4 shadow-lg">
+        {/* FILTRI TECNICI - STILE RIEPILOGO */}
+        <div className="p-4 riepilogo mb-4 shadow-sm">
           <div className="row g-4">
             <div className="col-md-3">
-              <label className="small text-info mb-2 text-uppercase fw-bold">Periodo Storico</label>
-              <select className="form-select bg-black text-white border-secondary shadow-none" value={selectedEra} onChange={(e) => setSelectedEra(e.target.value)}>
+              <label className="small anta-head mb-2 text-uppercase fw-bold">Periodo Storico</label>
+              <select className="form-select input-checkout shadow-none" value={selectedEra} onChange={(e) => setSelectedEra(e.target.value)}>
                 <option value="">Tutte le Ere</option>
                 {eras.map((e, index) => <option key={index} value={e.slug}>{e.name}</option>)}
               </select>
             </div>
             <div className="col-md-3">
-              <label className="small text-info mb-2 text-uppercase fw-bold">Dieta Biologica</label>
-              <select className="form-select bg-black text-white border-secondary shadow-none" value={selectedDiet} onChange={(e) => setSelectedDiet(e.target.value)}>
+              <label className="small anta-head mb-2 text-uppercase fw-bold">Dieta Biologica</label>
+              <select className="form-select input-checkout shadow-none" value={selectedDiet} onChange={(e) => setSelectedDiet(e.target.value)}>
                 <option value="">Tutte le Diete</option>
                 {diets.map((d, index) => <option key={index} value={d.slug}>{d.name}</option>)}
               </select>
             </div>
             <div className="col-md-3">
-              <label className="small text-info mb-2 text-uppercase fw-bold">Alimentazione</label>
-              <select className="form-select bg-black text-white border-secondary shadow-none" value={selectedPower} onChange={(e) => setSelectedPower(e.target.value)}>
+              <label className="small anta-head mb-2 text-uppercase fw-bold">Alimentazione</label>
+              <select className="form-select input-checkout shadow-none" value={selectedPower} onChange={(e) => setSelectedPower(e.target.value)}>
                 <option value="">Tutte le Fonti</option>
                 {powers.map((p, index) => <option key={index} value={p.slug}>{p.name}</option>)}
               </select>
             </div>
             <div className="col-md-3">
-              <label className="small text-info mb-2 text-uppercase fw-bold">Taglia</label>
-              <select className="form-select bg-black text-white border-secondary shadow-none" value={dimension} onChange={(e) => setDimension(e.target.value)}>
+              <label className="small anta-head mb-2 text-uppercase fw-bold">Taglia</label>
+              <select className="form-select input-checkout shadow-none" value={dimension} onChange={(e) => setDimension(e.target.value)}>
                 <option value="">Tutte le Taglie</option>
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
@@ -216,15 +209,15 @@ export default function Products() {
 
         {/* AZIONI GLOBALI E CONTEGGIO */}
         <div className="d-flex justify-content-between align-items-center mb-5 px-2">
-          <div className="anta-font text-secondary text-uppercase small tracking-widest">
+          <div className="text-grazie text-uppercase small tracking-widest fw-bold">
             {!loading && (
-              <>Risultati trovati: <span className="text-primary fw-bold">{products.length}</span></>
+              <>Risultati trovati: <span className="text-gold fw-bold">{products.length}</span></>
             )}
           </div>
           <button 
             type="button" 
             onClick={handleReset} 
-            className="btn btn-link text-danger text-decoration-none text-uppercase fw-bold p-0 mb-1"
+            className="btn-svuota"
             style={{ fontSize: '0.75rem', letterSpacing: '1px' }}
           >
             <span className="me-2">✕</span> Azzera tutti i filtri
@@ -234,8 +227,8 @@ export default function Products() {
         {/* GRIGLIA PRODOTTI */}
         <div className="row">
           {loading ? (
-            <div className="text-center p-5 fw-light text-secondary">
-              <div className="spinner-border text-primary mb-3" role="status"></div>
+            <div className="text-center p-5 fw-light text-grazie">
+              <div className="spinner-border text-gold mb-3" role="status"></div>
               <p>Analisi del database in corso...</p>
             </div>
           ) : products.length > 0 ? (

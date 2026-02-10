@@ -1,12 +1,40 @@
 import { createContext, useContext, useState, useEffect } from "react";
-
+import { useLocation } from "react-router-dom";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState(() => {
-        const savedCart = localStorage.getItem("cart");
-        return savedCart ? JSON.parse(savedCart) : [];
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  const [previw, SetPreview] = useState(false);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (product) => {
+    SetPreview(true);
+    const timer = setTimeout(() => {
+      SetPreview(false);
+    }, 2000);
+    setCart((prevCart) => {
+      if (!product) return prevCart;
+      const existingIndex = prevCart.findIndex(
+        (item) => item.slug === product.slug,
+      );
+
+      if (existingIndex !== -1) {
+        const newCart = [...prevCart];
+        newCart[existingIndex] = {
+          ...newCart[existingIndex],
+          quantity: newCart[existingIndex].quantity + 1,
+        };
+        return newCart;
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
     });
+  };
 
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -50,6 +78,24 @@ const addToCart = (product) => {
             {children}
         </CartContext.Provider>
     );
+  };
+
+  const clearCart = () => setCart([]);
+
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        previw,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };
 
 export const useCart = () => useContext(CartContext);

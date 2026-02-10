@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import api from "../API/axios.jsx";
 import { useNavigate } from "react-router-dom";
+import "./Checkout.css"
 
 export default function Checkout() {
     const { cart, clearCart } = useCart();
     const navigate = useNavigate();
-    
+
     // STATI AGGIUNTI
     const [isBillingSameAsShipping, setIsBillingSameAsShipping] = useState(true);
     const [isOrdered, setIsOrdered] = useState(false); // Per mostrare il successo
@@ -102,41 +103,57 @@ export default function Checkout() {
     }
 
     return (
-        <div className="checkout-page bg-black text-white min-vh-100" style={{ paddingTop: "120px" }}>
+        <div className="checkout-page  text-white min-vh-100" style={{ paddingTop: "120px" }}>
             <div className="container pb-5">
                 <form onSubmit={handleSubmit} className="row">
                     <div className="col-lg-8">
                         {/* 1. SPEDIZIONE */}
-                        <div className="bg-dark p-4 rounded-4 border border-secondary mb-4">
-                            <h4 className="text-primary fw-bold mb-4">1. SPEDIZIONE</h4>
+                        <div className="p-4 border-checkout mb-4">
+                            <h4 className="fw-bold mb-4">1. SPEDIZIONE</h4>
                             <div className="row">
                                 <div className="col-12 mb-3">
-                                    <input type="email" name="customer_email" placeholder="Email" required className="form-control bg-black text-white border-secondary" onChange={handleChange} />
+                                    <label htmlFor="customer_email" className="px-2">Email:</label>
+                                    <input type="email" name="customer_email" placeholder="Email" required className="form-control input-checkout" onChange={handleChange} />
+
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <input type="text" name="shipping_name" placeholder="Nome" required className="form-control bg-black text-white border-secondary" onChange={handleChange} />
+                                    <label htmlFor="shipping_name" className="px-2">Nome:</label>
+                                    <input type="text" name="shipping_name" placeholder="Nome" required className="form-control input-checkout" onChange={handleChange} />
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <input type="text" name="shipping_surname" placeholder="Cognome" required className="form-control bg-black text-white border-secondary" onChange={handleChange} />
+                                    <label htmlFor="shipping_surname" className="px-2">Cognome:</label>
+                                    <input type="text" name="shipping_surname" placeholder="Cognome" required className="form-control input-checkout" onChange={handleChange} />
                                 </div>
+
                                 <div className="col-12 mb-3">
-                                    <input type="text" name="shipping_street" placeholder="Indirizzo e Civico" required className="form-control bg-black text-white border-secondary" onChange={handleChange} />
+                                    <label htmlFor="shipping_street" className="px-2">Indirizzo:</label>
+                                    <input type="text" name="shipping_street" placeholder="Indirizzo e Civico" required className="form-control input-checkout" onChange={handleChange} />
+                                </div>
+
+                                <div className="col-md-4 mb-3">
+                                    <label htmlFor="shipping_city" className="px-2">Città:</label>
+                                    <input type="text" name="shipping_city" placeholder="Città" required className="form-control input-checkout" onChange={handleChange} />
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                    <input type="text" name="shipping_city" placeholder="Città" required className="form-control bg-black text-white border-secondary" onChange={handleChange} />
+                                    <label htmlFor="shipping_postcode" className="px-2">CAP:</label>
+                                    <input type="text"
+                                        name="shipping_postcode"
+                                        placeholder="CAP"
+                                        maxLength={5}
+                                        inputMode="numeric"
+                                        required className="form-control input-checkout"
+                                        onChange={handleChange} />
                                 </div>
                                 <div className="col-md-4 mb-3">
-                                    <input type="text" name="shipping_postcode" placeholder="CAP" required className="form-control bg-black text-white border-secondary" onChange={handleChange} />
-                                </div>
-                                <div className="col-md-4 mb-3">
-                                    <input type="text" name="shipping_province_state" placeholder="Provincia" required className="form-control bg-black text-white border-secondary" onChange={handleChange} />
+                                    <label htmlFor="shipping_province_state" className="px-2">Provincia:</label>
+                                    <input type="text" name="shipping_province_state" placeholder="Provincia" required className="form-control input-checkout" onChange={handleChange} />
                                 </div>
                             </div>
                         </div>
 
                         {/* 2. FATTURAZIONE */}
-                        <div className="bg-dark p-4 rounded-4 border border-secondary mb-4">
-                            <h4 className="text-primary fw-bold mb-4">2. FATTURAZIONE</h4>
+                        <div className=" p-4 border-checkout mb-4">
+                            <h4 className="fw-bold mb-4">2. FATTURAZIONE</h4>
                             <div className="form-check form-switch mb-3">
                                 <input className="form-check-input" type="checkbox" checked={isBillingSameAsShipping} onChange={() => setIsBillingSameAsShipping(!isBillingSameAsShipping)} />
                                 <label className="form-check-label">Usa dati spedizione</label>
@@ -144,26 +161,26 @@ export default function Checkout() {
                             {!isBillingSameAsShipping && (
                                 <div className="row border-top border-secondary pt-4 mt-3">
                                     <div className="col-md-6 mb-3">
-                                        <input type="text" name="billing_name" placeholder="Nome Fattura" className="form-control bg-black text-white border-secondary" onChange={handleChange} />
+                                        <input type="text" name="billing_name" placeholder="Nome Fattura" className="form-control input-checkout" onChange={handleChange} />
                                     </div>
                                     <div className="col-md-6 mb-3">
-                                        <input type="text" name="billing_surname" placeholder="Cognome Fattura" className="form-control bg-black text-white border-secondary" onChange={handleChange} />
+                                        <input type="text" name="billing_surname" placeholder="Cognome Fattura" className="form-control input-checkout" onChange={handleChange} />
                                     </div>
                                     <div className="col-12 mb-3">
-                                        <input type="text" name="billing_street" placeholder="Indirizzo Fattura" className="form-control bg-black text-white border-secondary" onChange={handleChange} />
+                                        <input type="text" name="billing_street" placeholder="Indirizzo Fattura" className="form-control input-checkout" onChange={handleChange} />
                                     </div>
                                 </div>
                             )}
                         </div>
 
                         {/* 3. METODO DI PAGAMENTO (INTEGRATO) */}
-                        <div className="bg-dark p-4 rounded-4 border border-secondary mb-4">
-                            <h4 className="text-primary fw-bold mb-4">3. METODO DI PAGAMENTO</h4>
+                        <div className=" p-4 border-checkout mb-4">
+                            <h4 className="fw-bold mb-4">3. METODO DI PAGAMENTO</h4>
                             <div className="row">
                                 <div className="col-12">
-                                    <select 
-                                        name="payment_method" 
-                                        className="form-select bg-black text-white border-secondary py-3" 
+                                    <select
+                                        name="payment_method"
+                                        className="form-select payment_method py-3"
                                         onChange={handleChange}
                                         value={formData.payment_method}
                                     >
@@ -179,14 +196,14 @@ export default function Checkout() {
                     </div>
 
                     <div className="col-lg-4">
-                        <div className="bg-primary bg-opacity-10 p-4 rounded-4 border border-primary sticky-top shadow-lg" style={{ top: "140px" }}>
-                            <h4 className="fw-bold mb-4 text-center text-uppercase">Riepilogo</h4>
-                            <hr/>
-                            <div className="d-flex justify-content-between fs-3 fw-bold text-primary mb-4">
-                                <span>TOTALE</span>
-                                <span>{(subtotal + shippingCost).toFixed(2)}€</span>
+                        <div className=" p-4 riepilogo sticky-top shadow-lg" style={{ top: "140px" }}>
+                            <h4 className="fw-bold mb-4 text-center text-uppercase border-bottom">Riepilogo</h4>
+                            <hr />
+                            <div className="d-flex justify-content-between fs-3  mb-4 ">
+                                <h4 className="totale anta-font">TOTALE:</h4>
+                                <span className="totale fw-bold">{(subtotal + shippingCost).toFixed(2)}€</span>
                             </div>
-                            <button type="submit" className="btn btn-primary w-100 py-3 fw-bold text-uppercase shadow">
+                            <button type="submit" className="order-btn w-100 py-3 fw-bold text-uppercase shadow">
                                 ORDINA ORA
                             </button>
                         </div>

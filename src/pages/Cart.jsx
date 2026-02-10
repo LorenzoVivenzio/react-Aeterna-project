@@ -60,28 +60,28 @@ export default function Cart() {
                                     </button>
                                 </div>
                             ))}
-                            <button onClick={clearCart} className="btn btn-outline-secondary btn-sm mt-3 opacity-75">Svuota carrello</button>
+                            <button onClick={clearCart} className="btn-svuota mt-3 opacity-75">Svuota carrello</button>
                         </div>
 
                         <div className="col-lg-4">
-                            <div className="bg-dark p-4 rounded-4 border border-primary sticky-top shadow-lg" style={{ top: "140px" }}>
+                            <div className="riepilogo text-dark p-4 sticky-top shadow-lg" style={{ top: "140px" }}>
                                 <h4 className="mb-4 text-uppercase fw-bold text-center">Riepilogo</h4>
                                 <div className="d-flex justify-content-between mb-2">
-                                    <span className="opacity-75">Subtotale</span>
+                                    <span className="anta-font">Subtotale</span>
                                     <span>{subtotal.toFixed(2)}€</span>
                                 </div>
                                 <div className="d-flex justify-content-between mb-4">
-                                    <span className="opacity-75">Spedizione</span>
+                                    <span className="anta-font">Spedizione</span>
                                     <span className={shipping === 0 ? "text-success fw-bold" : ""}>
                                         {shipping === 0 ? "GRATIS" : `${shipping.toFixed(2)}€`}
                                     </span>
                                 </div>
                                 <hr className="border-secondary mb-4" />
                                 <div className="d-flex justify-content-between mb-4 fw-bold fs-3">
-                                    <span>TOTALE</span>
-                                    <span className="text-primary">{total.toFixed(2)}€</span>
+                                    <span className="anta-font">TOTALE</span>
+                                    <span className="text-dark">{total.toFixed(2)}€</span>
                                 </div>
-                                <Link to="/checkout" className="btn btn-primary w-100 py-3 fw-bold text-uppercase shadow">
+                                <Link to="/checkout" className="btn-gold-2 w-100 py-3 fw-bold text-uppercase shadow">
                                     Procedi al Checkout
                                 </Link>
                                 <p className="small text-center mt-3 opacity-50">Spedizione gratuita sopra i 1000€</p>

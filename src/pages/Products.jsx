@@ -86,14 +86,21 @@ export default function Products() {
     };
     api.get("/products", { params })
       .then((res) => {
-        setProducts(res.data.results || []);
+        const results = res.data.results || [];
+        
+        // PARAMETRO RICHIESTO: Se la ricerca non produce risultati, indirizza alla pagina notfound
+        if (results.length === 0 && search !== "") {
+          navigate("/notfound", { replace: true });
+        }
+
+        setProducts(results);
         setLoading(false);
       })
       .catch((err) => {
         console.error("Errore filtraggio:", err);
         setLoading(false);
       });
-  }, [search, selectedEra, selectedDiet, selectedPower, dimension, minPrice, maxPrice]);
+  }, [search, selectedEra, selectedDiet, selectedPower, dimension, minPrice, maxPrice, navigate]);
 
   return (
     <div className="products-page bg-white text-dark min-vh-100 pb-5">

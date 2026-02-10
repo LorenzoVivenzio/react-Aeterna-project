@@ -236,3 +236,45 @@
 .main-title {
   font-family: "Anta", sans-serif;
 }
+
+
+/* --- OTTIMIZZAZIONE RESPONSIVE --- */
+
+/* --- OTTIMIZZAZIONE RESPONSIVE --- */
+
+/* Impedisce al tasto CERCA di rimpicciolirsi, sparire o andare a capo */
+.search-btn-fixed, .btn-dark {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
+}
+
+/* Gestione visibilità Logo e layout Tablet */
+@media (max-width: 991px) {
+    .logo2 {
+        display: none !important;
+    }
+    
+    /* Forza le tre sezioni dell'header a dividersi lo spazio equamente */
+    .nav-bar .container-fluid {
+        display: flex !important;
+        justify-content: space-between !important;
+    }
+
+    .nav-bar .container-fluid > div {
+        flex: 1 1 0% !important;
+        min-width: 0; /* Evita bug di overflow su flex children */
+    }
+}
+
+@media (max-width: 576px) {
+    /* Su cellulari molto piccoli riduciamo leggermente il font del tasto per stare in riga */
+    .search-btn-fixed {
+        font-size: 0.6rem !important;
+        padding: 0 6px !important;
+    }
+    
+    .main-title {
+        font-size: 1.2rem;
+    }
+}

@@ -89,14 +89,14 @@ export default function Checkout() {
     if (isOrdered) {
         return (
             <div className="container text-center text-white" style={{ paddingTop: "200px", minHeight: "100vh" }}>
-                <div className="bg-dark p-5 rounded-4 border border-primary shadow-lg d-inline-block">
+                <div className=" p-5 ordine-confermato shadow-lg d-inline-block">
                     <i className="bi bi-check-circle-fill text-primary display-1 mb-4"></i>
-                    <h1 className="fw-bold text-uppercase">Ordine Confermato!</h1>
-                    <p className="lead opacity-75">Grazie per aver scelto la tecnologia Aeterna Dynamics.</p>
+                    <h1 className="fw-bold text-uppercase title-order">Ordine Confermato!</h1>
+                    <p className="lead opacity-75 text-grazie">Grazie per aver scelto la tecnologia Aeterna.</p>
                     <hr className="border-secondary my-4" />
-                    <p className="mb-1">ID Ordine: <span className="text-primary fw-bold">#{orderData?.ordine_id}</span></p>
-                    <p className="mb-4">Fattura: <span className="text-info">{orderData?.fattura}</span></p>
-                    <button onClick={() => navigate("/")} className="btn btn-primary px-5 py-3 fw-bold">TORNA ALLA HOME</button>
+                    <p className="mb-1 text-grazie">ID Ordine: <span className="text-gold fw-bold">#{orderData?.ordine_id}</span></p>
+                    <p className="mb-4 text-grazie">Fattura: <span className="text-gold">{orderData?.fattura}</span></p>
+                    <button onClick={() => navigate("/")} className="order-btn px-5 py-3 fw-bold">TORNA ALLA HOME</button>
                 </div>
             </div>
         );

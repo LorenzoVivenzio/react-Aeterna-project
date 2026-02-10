@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function Header() {
   const { cart, previw } = useCart();
-  console.log(cart, previw);
+
   function countProduct() {
     let countQuantity = 0;
     cart.forEach((p) => {

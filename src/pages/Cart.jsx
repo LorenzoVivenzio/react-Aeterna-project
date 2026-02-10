@@ -33,25 +33,25 @@ export default function Cart() {
                                         <h5 className="mb-0 fw-bold">{item.name}</h5>
                                         <p className="text-info mb-0 fw-semibold">{Number(item.price).toFixed(2)}€</p>
                                     </div>
-                                    
+
                                     {/* CONTROLLI QUANTITÀ: Usiamo item.slug */}
                                     <div className="d-flex align-items-center gap-3 mx-4 bg-black rounded-pill p-1 border border-secondary">
-                                        <button 
-                                            className="btn btn-sm btn-outline-primary rounded-circle border-0" 
+                                        <button
+                                            className="btn btn-sm btn-outline-primary rounded-circle border-0"
                                             onClick={() => updateQuantity(item.slug, item.quantity - 1)}
                                             style={{ width: "32px", height: "32px" }}
                                         > - </button>
                                         <span className="fw-bold px-2" style={{ minWidth: "20px", textAlign: "center" }}>{item.quantity}</span>
-                                        <button 
-                                            className="btn btn-sm btn-outline-primary rounded-circle border-0" 
+                                        <button
+                                            className="btn btn-sm btn-outline-primary rounded-circle border-0"
                                             onClick={() => updateQuantity(item.slug, item.quantity + 1)}
                                             style={{ width: "32px", height: "32px" }}
                                         > + </button>
                                     </div>
 
                                     {/* RIMOZIONE: Usiamo item.slug */}
-                                    <button 
-                                        onClick={() => removeFromCart(item.slug)} 
+                                    <button
+                                        onClick={() => removeFromCart(item.slug)}
                                         className="btn btn-link text-danger p-0 border-0 me-2"
                                         title="Rimuovi prodotto"
                                     >

@@ -15,6 +15,7 @@ import Checkout from './pages/Checkout.jsx';
 import DetailProduct from './components/DetailProduct.jsx';
 import Cart from './pages/Cart.jsx';
 import About from './pages/About.jsx';
+import { WishlistProvider } from './context/WishlistContext.jsx';
 import { CartProvider } from "./context/CartContext";
 
 
@@ -23,6 +24,7 @@ import { CartProvider } from "./context/CartContext";
 function App() {
   return (
     <CartProvider>
+      <WishlistProvider>    
       <BrowserRouter>
         <Routes>
           <Route element={<DefaultLayout />}>
@@ -36,6 +38,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+       </WishlistProvider>
     </CartProvider>
   )
 }

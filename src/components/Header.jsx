@@ -221,9 +221,9 @@ export default function Header() {
                         <div className="d-flex align-items-center">
                           <div className="rounded border shadow-sm" style={{ width: "60px", height: "60px", flexShrink: 0, backgroundImage: `url(http://localhost:3001/images/${c.url_image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
                           <div className="flex-grow-1 ms-3">
-                            <div className="d-flex justify-content-between">
-                              <h6 className="fw-bold mb-0 text-truncate" style={{ maxWidth: "130px", fontSize: "0.9rem" }}> {c.name} </h6>
-                              <span className="fw-bold text-dark" style={{ fontSize: "0.9rem" }}> €{c.price} </span>
+                            <div>
+                              <h6 className="fw-bold mb-0 text-truncate" style={{ maxWidth: "130px", fontSize: "0.95rem" }}> {c.name} </h6>
+                              <span className="fw-bold text-dark" style={{ fontSize: "0.85rem" }}> €{c.price} </span>
                             </div>
                             <div className="mt-2">
                               <small className="text-muted d-block" style={{ fontSize: "0.8rem", borderLeft: "2px solid #d4af37", paddingLeft: "8px" }}> Quantità: <span className="text-dark fw-bold">{c.quantity}</span></small>

@@ -4,6 +4,7 @@ import api from "../API/axios.jsx";
 import ProductCard from "../components/ProductCard";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext"; // Aggiunto import
 import ShippingBanner from "./ShippingBanner.jsx";
 
 import "./DetailProduct.css"
@@ -12,12 +13,12 @@ export default function DetailProduct() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [fade, setFade] = useState(false); // Stato per l'effetto visivo di caricamento
+  const [fade, setFade] = useState(false); 
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist(); // Aggiunto hook
 
   useEffect(() => {
-    // 1. Reset degli stati quando cambia lo slug
     setLoading(true);
     setFade(false); 
 
@@ -30,11 +31,7 @@ export default function DetailProduct() {
         }
         setProduct(current);
         setLoading(false);
-
-        // 2. GESTIONE CARICAMENTO PAGINA: Torna in cima istantaneamente
         window.scrollTo(0, 0);
-
-        // 3. Attiva l'animazione di ingresso
         setTimeout(() => setFade(true), 50);
       })
       .catch((err) => {
@@ -53,14 +50,22 @@ export default function DetailProduct() {
       </div>
     );
 
+  const favorite = isInWishlist(product.slug);
+
+  function handleWishlist() {
+    if (favorite) {
+      removeFromWishlist(product.slug);
+    } else {
+      addToWishlist(product);
+    }
+  }
+
   return (
     <>
-      {/* 4. Applichiamo una classe dinamica per l'effetto fade */}
       <div className={`product-detail-page ${fade ? "fade-in-active" : "fade-in-init"}`}>
         <ShippingBanner />
 
         <div className="container product-detail">
-          {/* SCHEDA PRODOTTO */}
           <div className=" row mb-5 py-5 border-bottom border-secondary">
             <div className="row-cart col-md-6 mb-4">
               <img
@@ -71,8 +76,36 @@ export default function DetailProduct() {
             </div>
 
             <div className="col-md-6 px-5">
-              <h1 className="anta-font fw-bold mb-1">
+              <h1 className="anta-font fw-bold mb-1" style={{ display: 'inline-flex', alignItems: 'center', gap: '15px' }}>
                 {product.name}
+                
+                {/* BOTTONE CUORE ACCANTO AL NOME */}
+                <button 
+                  onClick={handleWishlist}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    outline: 'none',
+                    cursor: 'pointer',
+                    padding: 0,
+                    display: 'flex',
+                    alignItems: 'center'
+                  }}
+                >
+                  <svg 
+                    width="28" 
+                    height="28" 
+                    viewBox="0 0 24 24" 
+                    fill={favorite ? "#e0b969" : "none"} 
+                    stroke={favorite ? "#e0b969" : "#575757"} 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    style={{ transition: 'all 0.3s ease' }}
+                  >
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
               </h1>
 
               <div className="mb-1">
@@ -125,7 +158,6 @@ export default function DetailProduct() {
             </div>
           </div>
 
-          {/* CORRELATI */}
           {product.recommended.length > 0 && (
             <div className="related-section pb-5">
               <h3 className="mb-5 text-center text-uppercase tracking-widest anta-font">

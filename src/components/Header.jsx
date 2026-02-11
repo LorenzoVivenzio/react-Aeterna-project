@@ -12,7 +12,13 @@ import {
 import "./Header.css";
 import { useCart } from "../context/CartContext.jsx";
 
+import {useWishlist} from "../context/WishlistContext.jsx"
+
 export default function Header() {
+
+  const {wishlist} = useWishlist();
+  console.log(wishlist);
+
   const { cart, previw, setPreview } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
@@ -196,6 +202,11 @@ export default function Header() {
             <li>
               <NavLink to="/wishlist" className="text-dark p-2 underline">
                 <FontAwesomeIcon icon={faHeart} />
+                {wishlist.length > 0 && (
+                  <span className="position-absolute translate-middle badge rounded-pill" style={{ top: "8px", left: "85%", backgroundColor: "#d4af37", color: "#000000", fontSize: "0.7rem", fontWeight: "800", border: "2px solid #ffffff" }}>
+                    {wishlist.length}
+                  </span>
+                )}
               </NavLink>
             </li>
 

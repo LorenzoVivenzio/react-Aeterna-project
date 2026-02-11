@@ -25,6 +25,7 @@
 .btn-quantità {
     border: 3px double rgba(224, 184, 105);
     /* border: 3px double rgb(69, 194, 216); */
+    margin-right: 15px;
 }
 
 .btn-regola-quantità {
@@ -96,4 +97,32 @@
 .riepilogo {
     border-radius: 10px;
     border: 5px solid rgba(69, 194, 216, 0.423);
+}
+
+@media (max-width: 768px) {
+
+    .row-card {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .col-sm-card {
+        display: flex;
+        flex-basis: 100%;
+        justify-content: space-between;
+
+    }
+
+    .m-sm-15 {
+        margin-top: 15px;
+    }
+
+    .btn-elimina {
+        border: 3px double rgba(255, 0, 0, 0.516);
+        color: rgb(239, 2, 2);
+        background-color: white;
+        border-radius: 30px;
+        padding: 5px 30px;
+    }
 }

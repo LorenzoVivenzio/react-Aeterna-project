@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../API/axios";
 import ProductCard from "../components/ProductCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import "./Products.css"
+import "./Products.css";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -16,15 +16,25 @@ export default function Products() {
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [searchTerm, setSearchTerm] = useState(search);
 
-  const [minPrice, setMinPrice] = useState(Number(searchParams.get("minPrice")) || 0);
-  const [maxPrice, setMaxPrice] = useState(Number(searchParams.get("maxPrice")) || 15000);
+  const [minPrice, setMinPrice] = useState(
+    Number(searchParams.get("minPrice")) || 0,
+  );
+  const [maxPrice, setMaxPrice] = useState(
+    Number(searchParams.get("maxPrice")) || 15000,
+  );
   const [minTerm, setMinTerm] = useState(minPrice);
   const [maxTerm, setMaxTerm] = useState(maxPrice);
 
   const [selectedEra, setSelectedEra] = useState(searchParams.get("era") || "");
-  const [selectedDiet, setSelectedDiet] = useState(searchParams.get("diet") || "");
-  const [selectedPower, setSelectedPower] = useState(searchParams.get("power_source") || "");
-  const [dimension, setDimension] = useState(searchParams.get("dimension") || "");
+  const [selectedDiet, setSelectedDiet] = useState(
+    searchParams.get("diet") || "",
+  );
+  const [selectedPower, setSelectedPower] = useState(
+    searchParams.get("power_source") || "",
+  );
+  const [dimension, setDimension] = useState(
+    searchParams.get("dimension") || "",
+  );
 
   const navigate = useNavigate();
 
@@ -65,10 +75,22 @@ export default function Products() {
     if (minPrice > 0) newParams.minPrice = minPrice;
     if (maxPrice < 15000) newParams.maxPrice = maxPrice;
     setSearchParams(newParams);
-  }, [search, selectedEra, selectedDiet, selectedPower, dimension, minPrice, maxPrice]);
+  }, [
+    search,
+    selectedEra,
+    selectedDiet,
+    selectedPower,
+    dimension,
+    minPrice,
+    maxPrice,
+  ]);
 
   useEffect(() => {
-    Promise.all([api.get("/eras"), api.get("/diets"), api.get("/power-sources")])
+    Promise.all([
+      api.get("/eras"),
+      api.get("/diets"),
+      api.get("/power-sources"),
+    ])
       .then(([resEras, resDiets, resPowers]) => {
         setEras(resEras.data.results || []);
         setDiets(resDiets.data.results || []);
@@ -88,12 +110,10 @@ export default function Products() {
       minPrice,
       maxPrice,
     };
-    api.get("/products", { params })
+    api
+      .get("/products", { params })
       .then((res) => {
         const results = res.data.results || [];
-        if (results.length === 0 && search !== "") {
-          navigate("/notfound", { replace: true });
-        }
         setProducts(results);
         setLoading(false);
       })
@@ -101,7 +121,16 @@ export default function Products() {
         console.error("Errore filtraggio:", err);
         setLoading(false);
       });
-  }, [search, selectedEra, selectedDiet, selectedPower, dimension, minPrice, maxPrice, navigate]);
+  }, [
+    search,
+    selectedEra,
+    selectedDiet,
+    selectedPower,
+    dimension,
+    minPrice,
+    maxPrice,
+    navigate,
+  ]);
 
   return (
     <div className="products-page bg-white text-dark min-vh-100 pb-5">
@@ -117,7 +146,9 @@ export default function Products() {
               <form onSubmit={handleSearchSubmit}>
                 <div className="row g-3 align-items-end">
                   <div className="col-md-9">
-                    <label className="anta-head small mb-2 text-uppercase fw-bold">Modello Robot</label>
+                    <label className="anta-head small mb-2 text-uppercase fw-bold">
+                      Modello Robot
+                    </label>
                     <input
                       className="form-control input-checkout py-2"
                       placeholder="Cerca per nome..."
@@ -129,7 +160,10 @@ export default function Products() {
                     />
                   </div>
                   <div className="col-md-3">
-                    <button type="submit" className="btn order-btn w-100 text-uppercase fw-bold py-2">
+                    <button
+                      type="submit"
+                      className="btn order-btn w-100 text-uppercase fw-bold py-2"
+                    >
                       Applica
                     </button>
                   </div>
@@ -138,25 +172,66 @@ export default function Products() {
                   <div className="col-12 mt-4">
                     <div className="p-3 riepilogo">
                       <div className="d-flex justify-content-between align-items-center mb-2">
-                        <span className="small anta-head text-uppercase fw-bold">Range di Budget</span>
+                        <span className="small anta-head text-uppercase fw-bold">
+                          Range di Budget
+                        </span>
                         <span className="fw-bold totale">
                           {minTerm} € — {maxTerm} €
                         </span>
                       </div>
-                      <div className="position-relative" style={{ height: "40px" }}>
+                      <div
+                        className="position-relative"
+                        style={{ height: "40px" }}
+                      >
                         <input
-                          type="range" min="0" max="15000" step="100" value={minTerm}
-                          onChange={(e) => setMinTerm(Math.min(Number(e.target.value), maxTerm - 500))}
+                          type="range"
+                          min="0"
+                          max="15000"
+                          step="100"
+                          value={minTerm}
+                          onChange={(e) =>
+                            setMinTerm(
+                              Math.min(Number(e.target.value), maxTerm - 500),
+                            )
+                          }
                           className="position-absolute top-50 start-0 w-100"
-                          style={{ zIndex: minTerm > 7500 ? "5" : "3", appearance: "none", background: "none", pointerEvents: "none", height: "0" }}
+                          style={{
+                            zIndex: minTerm > 7500 ? "5" : "3",
+                            appearance: "none",
+                            background: "none",
+                            pointerEvents: "none",
+                            height: "0",
+                          }}
                         />
                         <input
-                          type="range" min="0" max="15000" step="100" value={maxTerm}
-                          onChange={(e) => setMaxTerm(Math.max(Number(e.target.value), minTerm + 500))}
+                          type="range"
+                          min="0"
+                          max="15000"
+                          step="100"
+                          value={maxTerm}
+                          onChange={(e) =>
+                            setMaxTerm(
+                              Math.max(Number(e.target.value), minTerm + 500),
+                            )
+                          }
                           className="position-absolute top-50 start-0 w-100"
-                          style={{ zIndex: "4", appearance: "none", background: "none", pointerEvents: "none", height: "0" }}
+                          style={{
+                            zIndex: "4",
+                            appearance: "none",
+                            background: "none",
+                            pointerEvents: "none",
+                            height: "0",
+                          }}
                         />
-                        <div className="position-absolute top-50 start-0 w-100 rounded" style={{ height: "6px", transform: "translateY(-50%)", zIndex: "1", backgroundColor: "rgba(69, 194, 216, 0.2)" }}></div>
+                        <div
+                          className="position-absolute top-50 start-0 w-100 rounded"
+                          style={{
+                            height: "6px",
+                            transform: "translateY(-50%)",
+                            zIndex: "1",
+                            backgroundColor: "rgba(69, 194, 216, 0.2)",
+                          }}
+                        ></div>
                         <style>{`
                           input[type=range]::-webkit-slider-thumb { pointer-events: auto; appearance: none; width: 20px; height: 20px; background: #e1bb70; border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
                           input[type=range]::-moz-range-thumb { pointer-events: auto; width: 20px; height: 20px; background: #e1bb70; border-radius: 50%; cursor: pointer; border: 2px solid white; }
@@ -174,29 +249,65 @@ export default function Products() {
         <div className="p-4 riepilogo mb-4 shadow-sm">
           <div className="row g-4">
             <div className="col-md-3">
-              <label className="small anta-head mb-2 text-uppercase fw-bold">Periodo Storico</label>
-              <select className="form-select input-checkout shadow-none" value={selectedEra} onChange={(e) => setSelectedEra(e.target.value)}>
+              <label className="small anta-head mb-2 text-uppercase fw-bold">
+                Periodo Storico
+              </label>
+              <select
+                className="form-select input-checkout shadow-none"
+                value={selectedEra}
+                onChange={(e) => setSelectedEra(e.target.value)}
+              >
                 <option value="">Tutte le Ere</option>
-                {eras.map((e, index) => <option key={index} value={e.slug}>{e.name}</option>)}
+                {eras.map((e, index) => (
+                  <option key={index} value={e.slug}>
+                    {e.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="col-md-3">
-              <label className="small anta-head mb-2 text-uppercase fw-bold">Dieta Biologica</label>
-              <select className="form-select input-checkout shadow-none" value={selectedDiet} onChange={(e) => setSelectedDiet(e.target.value)}>
+              <label className="small anta-head mb-2 text-uppercase fw-bold">
+                Dieta Biologica
+              </label>
+              <select
+                className="form-select input-checkout shadow-none"
+                value={selectedDiet}
+                onChange={(e) => setSelectedDiet(e.target.value)}
+              >
                 <option value="">Tutte le Diete</option>
-                {diets.map((d, index) => <option key={index} value={d.slug}>{d.name}</option>)}
+                {diets.map((d, index) => (
+                  <option key={index} value={d.slug}>
+                    {d.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="col-md-3">
-              <label className="small anta-head mb-2 text-uppercase fw-bold">Alimentazione</label>
-              <select className="form-select input-checkout shadow-none" value={selectedPower} onChange={(e) => setSelectedPower(e.target.value)}>
+              <label className="small anta-head mb-2 text-uppercase fw-bold">
+                Alimentazione
+              </label>
+              <select
+                className="form-select input-checkout shadow-none"
+                value={selectedPower}
+                onChange={(e) => setSelectedPower(e.target.value)}
+              >
                 <option value="">Tutte le Fonti</option>
-                {powers.map((p, index) => <option key={index} value={p.slug}>{p.name}</option>)}
+                {powers.map((p, index) => (
+                  <option key={index} value={p.slug}>
+                    {p.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="col-md-3">
-              <label className="small anta-head mb-2 text-uppercase fw-bold">Taglia</label>
-              <select className="form-select input-checkout shadow-none" value={dimension} onChange={(e) => setDimension(e.target.value)}>
+              <label className="small anta-head mb-2 text-uppercase fw-bold">
+                Taglia
+              </label>
+              <select
+                className="form-select input-checkout shadow-none"
+                value={dimension}
+                onChange={(e) => setDimension(e.target.value)}
+              >
                 <option value="">Tutte le Taglie</option>
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
@@ -211,14 +322,17 @@ export default function Products() {
         <div className="d-flex justify-content-between align-items-center mb-5 px-2">
           <div className="text-grazie text-uppercase small tracking-widest fw-bold">
             {!loading && (
-              <>Risultati trovati: <span className="text-gold fw-bold">{products.length}</span></>
+              <>
+                Risultati trovati:{" "}
+                <span className="text-gold fw-bold">{products.length}</span>
+              </>
             )}
           </div>
-          <button 
-            type="button" 
-            onClick={handleReset} 
+          <button
+            type="button"
+            onClick={handleReset}
             className="btn-svuota"
-            style={{ fontSize: '0.75rem', letterSpacing: '1px' }}
+            style={{ fontSize: "0.75rem", letterSpacing: "1px" }}
           >
             <span className="me-2">✕</span> Azzera tutti i filtri
           </button>
@@ -228,7 +342,10 @@ export default function Products() {
         <div className="row">
           {loading ? (
             <div className="text-center p-5 fw-light text-grazie">
-              <div className="spinner-border text-gold mb-3" role="status"></div>
+              <div
+                className="spinner-border text-gold mb-3"
+                role="status"
+              ></div>
               <p>Analisi del database in corso...</p>
             </div>
           ) : products.length > 0 ? (
@@ -238,7 +355,9 @@ export default function Products() {
               </div>
             ))
           ) : (
-            <div className="text-center p-5 text-muted italic w-100">Nessun robot trovato con questi parametri.</div>
+            <div className="text-center p-5 text-muted italic w-100">
+              Nessun robot trovato con questi parametri.
+            </div>
           )}
         </div>
       </div>

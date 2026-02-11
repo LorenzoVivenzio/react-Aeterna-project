@@ -30,7 +30,7 @@ export default function VideoBanner() {
               {" "}
               {/* Corretto typo 'roundend' */}
               <h4 className="text-center pt-5 pb-2 anta-head">
-               Bio-ingegneria di lusso e precisione
+               BIO-INGEGNERIA DI LUSSO E PRECISIONE
               </h4>
               <p
                 className="text-center my-4 px-3"

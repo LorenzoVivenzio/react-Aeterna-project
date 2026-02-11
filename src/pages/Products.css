@@ -1,0 +1,13 @@
+.btn-svuota {
+    border: 3px double rgba(255, 0, 0, 0.516);
+    color: rgb(239, 2, 2);
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.btn-svuota:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 15px 35px rgba(255, 0, 0, 0.17);
+}

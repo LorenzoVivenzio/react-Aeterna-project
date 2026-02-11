@@ -21,41 +21,49 @@ export default function Wishlist() {
                             <Link to="/products" className="btn-gold px-5 py-3 fw-bold">TORNA ALLO SHOP</Link>
                         </div>
                     ) : (
-                        <div className="row">
+                        <div className="row justify-content-center">
                             <div className="col-lg-8">
+
                                 {wishlist.map((item) => (
 
                                     <>
-                                        <div className="row-car">
-                                            <div key={item.slug} className="row-card d-flex align-items-center p-3 mb-3 shadow cart-border justify-content-between">
-                                                <div className="col-sm-card d-flex align-items-center">
-                                                    <img src={`http://localhost:3001/images/${item.url_image}`}
-                                                        alt={item.name}
-                                                        style={{ width: "90px", height: "90px", objectFit: "cover" }}
-                                                        className="cart-img me-4 "
-                                                    />
-                                                    <div className="flex-grow-1">
-                                                        <h2 className="mb-0 fw-bold">{item.name}</h2>
-                                                        <h3 className="mb-0 fw-bold" style={{ fontSize: "0.8rem" }}>{item.era}</h3>
-                                                        <h3 className="mb-0 fw-bold" style={{ fontSize: "0.8rem" }}>{item.diet}</h3>
+                                        
+                                            <div className="row-car">
+                                               
+                                                <div key={item.slug} className="row-card d-flex align-items-center p-3 mb-3 shadow cart-border justify-content-between">
+                                                    <Link to={`/product/${item.slug}`}>
+                                                    <div className="col-sm-card d-flex align-items-center">
+                                                        <img src={`http://localhost:3001/images/${item.url_image}`}
+                                                            alt={item.name}
+                                                            style={{ width: "90px", height: "90px", objectFit: "cover" }}
+                                                            className="cart-img me-4 "
+                                                        />
+                                                        <div className="flex-grow-1">
+                                                            <h2 className="mb-0 fw-bold">{item.name}</h2>
+                                                            <h3 className="mb-0 fw-bold" style={{ fontSize: "0.8rem" }}>{item.era}</h3>
+                                                            <h3 className="mb-0 fw-bold" style={{ fontSize: "0.8rem" }}>{item.diet}</h3>
 
-                                                        <p className="text-info mb-0 fw-semibold">{Number(item.price).toFixed(2)}€</p>
+                                                            <p className="text-info mb-0 fw-semibold">{Number(item.price).toFixed(2)}€</p>
+                                                        </div>
+                                                    </div>
+
+                                                    </Link>
+                                                    <div className="col-sm-card m-sm-15 d-flex align-items-center">
+                                                        <button onClick={() => addToCart(item)}
+                                                            className="btn-cart3">Aggiungi al carrello</button>
+                                                        <button onClick={() => removeFromWishlist(item.slug)}
+                                                            className="btn-svuota" style={{ padding: "10px", marginBottom: "0px" }}
+                                                            title="Rimuovi prodotto">
+                                                            Elimina
+                                                        </button>
                                                     </div>
                                                 </div>
-                                                <div className="col-sm-card m-sm-15 d-flex align-items-center">
-                                                    <button onClick={() => addToCart(item)}
-                                                        className="btn-cart3">Aggiungi al carrello</button>
-                                                    <button onClick={() => removeFromWishlist(item.slug)}
-                                                        className="btn-svuota" style={{ padding: "10px", marginBottom: "0px" }}
-                                                        title="Rimuovi prodotto">
-                                                        Elimina
-                                                    </button>
-                                                </div>
                                             </div>
-                                        </div>
+                                        
                                     </>
 
                                 ))}
+
                                 <button onClick={clearWishlist}
                                     className="btn btn-outline-secondary btn-sm mt-3 opacity-75">
                                     Svuota Lista Preferiti

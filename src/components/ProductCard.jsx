@@ -25,43 +25,44 @@ export default function ProductCard({ product }) {
     }
 
     return (
-        <div className="product-card" style={{ position: 'relative' }}>
+        <div className="product-card">
             
-            {/* BOTTONE CUORE PIATTO (FLAT) */}
-            <button 
-                onClick={handleWishlist}
-                style={{
-                    position: 'absolute',
-                    top: '12px',
-                    right: '12px',
-                    background: 'none',
-                    border: 'none',
-                    outline: 'none',
-                    cursor: 'pointer',
-                    zIndex: 10,
-                    padding: 0,
-                    fontSize: '22px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    transition: 'color 0.3s ease'
-                }}
-            >
-                {/* Usiamo un SVG per garantire che sia perfettamente piatto e senza ombre su ogni dispositivo */}
-                <svg 
-                    width="24" 
-                    height="24" 
-                    viewBox="0 0 24 24" 
-                    fill={favorite ? "#e0b969" : "none"} // Oro se attivo, vuoto se no
-                    stroke={favorite ? "#e0b969" : "#575757"} // Grigio scuro/Oro per il bordo
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
+            {/* AREA SUPERIORE: SEPARA IL CUORE DALL'IMMAGINE */}
+            <div style={{ 
+                display: 'flex', 
+                justifyContent: 'flex-end', 
+                padding: '10px 12px 5px 0',
+                width: '100%' 
+            }}>
+                <button 
+                    onClick={handleWishlist}
+                    style={{
+                        background: 'none',
+                        border: 'none',
+                        outline: 'none',
+                        cursor: 'pointer',
+                        padding: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
                 >
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-            </button>
+                    <svg 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill={favorite ? "#e0b969" : "none"} 
+                        stroke={favorite ? "#e0b969" : "#575757"} 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                    >
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </button>
+            </div>
 
+            {/* AREA IMMAGINE: ORA È LIBERA DAL CUORE */}
             <div 
                 onClick={() => navigate(`/product/${product.slug}`)} 
                 className="card-image-wrapper"

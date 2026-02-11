@@ -199,11 +199,11 @@ export default function Header() {
               </div>
             </li>
 
-            <li>
+            <li className="position-relative">
               <NavLink to="/wishlist" className="text-dark p-2 underline">
                 <FontAwesomeIcon icon={faHeart} />
                 {wishlist.length > 0 && (
-                  <span className="position-absolute translate-middle badge rounded-pill" style={{ top: "8px", left: "85%", backgroundColor: "#d4af37", color: "#000000", fontSize: "0.7rem", fontWeight: "800", border: "2px solid #ffffff" }}>
+                  <span className="position-absolute translate-middle badge rounded-pill" style={{ top: "2px", left: "85%", backgroundColor: "#d4af37", color: "#000000", fontSize: "0.7rem", fontWeight: "800", border: "2px solid #ffffff" }}>
                     {wishlist.length}
                   </span>
                 )}

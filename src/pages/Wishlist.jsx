@@ -32,7 +32,7 @@ export default function Wishlist() {
                                                     <img src={`http://localhost:3001/images/${item.url_image}`}
                                                         alt={item.name}
                                                         style={{ width: "90px", height: "90px", objectFit: "cover" }}
-                                                        className="rounded-3 border border-primary me-4"
+                                                        className="cart-img me-4 "
                                                     />
                                                     <div className="flex-grow-1">
                                                         <h2 className="mb-0 fw-bold">{item.name}</h2>

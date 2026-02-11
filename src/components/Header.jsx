@@ -12,16 +12,15 @@ import {
 import "./Header.css";
 import { useCart } from "../context/CartContext.jsx";
 
-import {useWishlist} from "../context/WishlistContext.jsx"
+import { useWishlist } from "../context/WishlistContext.jsx";
 
 export default function Header() {
-
-  const {wishlist} = useWishlist();
+  const { wishlist } = useWishlist();
   console.log(wishlist);
 
   const { cart, previw, setPreview } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   // STATO PER LA RICERCA E NAVIGAZIONE
   const [localSearch, setLocalSearch] = useState("");
   const navigate = useNavigate();
@@ -82,38 +81,88 @@ export default function Header() {
             <div className="offcanvas-body-manual">
               <ul className="navbar-nav flex-column gap-3 mt-3">
                 <li className="anta-head fs-5 border-bottom pb-2 px-3">
-                  <NavLink to="/" className="text-decoration-none text-dark d-block" onClick={closeMenu}> Home </NavLink>
+                  <NavLink
+                    to="/"
+                    className="text-decoration-none text-dark d-block"
+                    onClick={closeMenu}
+                  >
+                    {" "}
+                    Home{" "}
+                  </NavLink>
                 </li>
                 <li className="anta-head fs-5 border-bottom pb-2 px-3">
-                  <NavLink to="/products" className="text-decoration-none text-dark d-block" onClick={closeMenu}> Prodotti </NavLink>
+                  <NavLink
+                    to="/products"
+                    className="text-decoration-none text-dark d-block"
+                    onClick={closeMenu}
+                  >
+                    {" "}
+                    Prodotti{" "}
+                  </NavLink>
                 </li>
                 <li className="anta-head fs-5 border-bottom pb-2 px-3">
-                  <NavLink to="/about" className="text-decoration-none text-dark d-block" onClick={closeMenu}> Chi siamo </NavLink>
+                  <NavLink
+                    to="/about"
+                    className="text-decoration-none text-dark d-block"
+                    onClick={closeMenu}
+                  >
+                    {" "}
+                    Chi siamo{" "}
+                  </NavLink>
                 </li>
               </ul>
             </div>
           </div>
-          {isMenuOpen && <div className="menu-overlay-manual" onClick={closeMenu}></div>}
+          {isMenuOpen && (
+            <div className="menu-overlay-manual" onClick={closeMenu}></div>
+          )}
 
           <div className="nav d-none d-md-flex">
             <ul className="d-flex list-unstyled m-0 gap-4">
-              <li className="anta-head bold"><NavLink to="/" className="text-decoration-none text-dark underline">Home</NavLink></li>
-              <li className="anta-head bold"><NavLink to="/products" className="text-decoration-none text-dark underline">Prodotti</NavLink></li>
-              <li className="anta-head bold"><NavLink to="/about" className="text-decoration-none text-dark underline">Chi siamo</NavLink></li>
+              <li className="anta-head bold">
+                <NavLink
+                  to="/"
+                  className="text-decoration-none text-dark underline"
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li className="anta-head bold">
+                <NavLink
+                  to="/products"
+                  className="text-decoration-none text-dark underline"
+                >
+                  Prodotti
+                </NavLink>
+              </li>
+              <li className="anta-head bold">
+                <NavLink
+                  to="/about"
+                  className="text-decoration-none text-dark underline"
+                >
+                  Chi siamo
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
 
-       {/* 2. SEZIONE CENTRALE: LOGO (Desktop) O SEARCH (Mobile/Tablet con tasto) */}
+        {/* 2. SEZIONE CENTRALE: LOGO (Desktop) O SEARCH (Mobile/Tablet con tasto) */}
         <div className="d-flex justify-content-center" style={{ flex: 1 }}>
           <div className="logo2 d-none d-lg-block">
-            <p className="main-title m-0 fw-bold" style={{ letterSpacing: "2px", whiteSpace: "nowrap" }}>
+            <p
+              className="main-title m-0 fw-bold"
+              style={{ letterSpacing: "2px", whiteSpace: "nowrap" }}
+            >
               AETERNA
             </p>
           </div>
 
           {/* SEARCH MOBILE/TABLET */}
-          <div className="d-block d-lg-none w-100" style={{ maxWidth: "220px" }}>
+          <div
+            className="d-block d-lg-none w-100"
+            style={{ maxWidth: "220px" }}
+          >
             <div className="d-flex align-items-center">
               <div className="position-relative flex-grow-1">
                 <input
@@ -130,13 +179,18 @@ export default function Header() {
                     borderTopLeftRadius: "20px",
                     borderBottomLeftRadius: "20px",
                     borderRight: "none",
-                    height: "31px"
+                    height: "31px",
                   }}
                 />
-                <FontAwesomeIcon 
-                  icon={faMagnifyingGlass} 
-                  className="position-absolute text-muted" 
-                  style={{ fontSize: "0.7rem", left: "10px", top: "50%", transform: "translateY(-50%)" }} 
+                <FontAwesomeIcon
+                  icon={faMagnifyingGlass}
+                  className="position-absolute text-muted"
+                  style={{
+                    fontSize: "0.7rem",
+                    left: "10px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                  }}
                 />
               </div>
               <button
@@ -158,7 +212,10 @@ export default function Header() {
         </div>
 
         {/* 3. SEZIONE DESTRA: ICONS + SEARCH DESKTOP */}
-        <div className="d-flex justify-content-end align-items-center" style={{ flex: 1 }}>
+        <div
+          className="d-flex justify-content-end align-items-center"
+          style={{ flex: 1 }}
+        >
           <ul className="d-flex list-unstyled m-0 align-items-center gap-2 gap-md-3">
             {/* SEARCH DESKTOP */}
             <li className="d-none d-lg-flex align-items-center">
@@ -180,7 +237,16 @@ export default function Header() {
                       borderRight: "none",
                     }}
                   />
-                  <FontAwesomeIcon icon={faMagnifyingGlass} className="position-absolute text-muted " style={{ fontSize: "0.7rem", left: "8px", top: "50%", transform: "translateY(-50%)" }} />
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="position-absolute text-muted "
+                    style={{
+                      fontSize: "0.7rem",
+                      left: "8px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                    }}
+                  />
                 </div>
                 <button
                   onClick={handleSearch}
@@ -200,10 +266,24 @@ export default function Header() {
             </li>
 
             <li className="position-relative">
-              <NavLink to="/wishlist" className="text-dark p-2 underline">
+              <NavLink
+                to="/wishlist"
+                className="text-dark p-2 d-flex align-items-center underline"
+              >
                 <FontAwesomeIcon icon={faHeart} />
                 {wishlist.length > 0 && (
-                  <span className="position-absolute translate-middle badge rounded-pill" style={{ top: "2px", left: "85%", backgroundColor: "#d4af37", color: "#000000", fontSize: "0.7rem", fontWeight: "800", border: "2px solid #ffffff" }}>
+                  <span
+                    className="position-absolute translate-middle badge rounded-pill"
+                    style={{
+                      top: "2px",
+                      left: "85%",
+                      backgroundColor: "#d4af37",
+                      color: "#000000",
+                      fontSize: "0.7rem",
+                      fontWeight: "800",
+                      border: "2px solid #ffffff",
+                    }}
+                  >
                     {wishlist.length}
                   </span>
                 )}
@@ -211,33 +291,111 @@ export default function Header() {
             </li>
 
             <li className="position-relative">
-              <NavLink to="/cart" className="text-dark p-2 d-flex align-items-center underline" style={{ textDecoration: "none" }}>
-                <FontAwesomeIcon icon={faCartShopping} size="lg" style={{ color: "#0f172a" }} />
+              <NavLink
+                to="/cart"
+                className="text-dark p-2 d-flex align-items-center underline"
+                style={{ textDecoration: "none" }}
+              >
+                <FontAwesomeIcon
+                  icon={faCartShopping}
+                  size="lg"
+                  style={{ color: "#0f172a" }}
+                />
                 {cart.length > 0 && (
-                  <span className="position-absolute translate-middle badge rounded-pill" style={{ top: "8px", left: "85%", backgroundColor: "#d4af37", color: "#000000", fontSize: "0.7rem", fontWeight: "800", border: "2px solid #ffffff" }}>
+                  <span
+                    className="position-absolute translate-middle badge rounded-pill"
+                    style={{
+                      top: "2px",
+                      left: "85%",
+                      backgroundColor: "#d4af37",
+                      color: "#000000",
+                      fontSize: "0.7rem",
+                      fontWeight: "800",
+                      border: "2px solid #ffffff",
+                    }}
+                  >
                     {countProduct()}
                   </span>
                 )}
               </NavLink>
 
               {previw && cart.length > 0 && (
-                <div className="position-absolute end-0 mt-2 shadow-lg border rounded-3 bg-white" style={{ width: "340px", zIndex: 2100, top: "100%" }}>
+                <div
+                  className="position-absolute end-0 mt-2 shadow-lg border rounded-3 bg-white"
+                  style={{ width: "340px", zIndex: 2100, top: "100%" }}
+                >
                   <div className="p-3 border-bottom bg-light d-flex justify-content-between align-items-center rounded-top">
-                    <small className="fw-bold text-muted text-uppercase" style={{ letterSpacing: "1px" }}> Il tuo carrello </small>
-                    <span className="badge rounded-pill bg-white text-dark border px-2 py-1" style={{ fontSize: "0.7rem" }}> {cart.length} prodotti </span>
+                    <small
+                      className="fw-bold text-muted text-uppercase"
+                      style={{ letterSpacing: "1px" }}
+                    >
+                      {" "}
+                      Il tuo carrello{" "}
+                    </small>
+                    <span
+                      className="badge rounded-pill bg-white text-dark border px-2 py-1"
+                      style={{ fontSize: "0.7rem" }}
+                    >
+                      {" "}
+                      {cart.length} prodotti{" "}
+                    </span>
                   </div>
-                  <ul className="list-group list-group-flush" style={{ maxHeight: "350px", overflowY: "auto" }}>
+                  <ul
+                    className="list-group list-group-flush"
+                    style={{ maxHeight: "350px", overflowY: "auto" }}
+                  >
                     {cart.map((c, index) => (
-                      <li key={index} className="list-group-item py-3 px-3 border-bottom">
+                      <li
+                        key={index}
+                        className="list-group-item py-3 px-3 border-bottom"
+                      >
                         <div className="d-flex align-items-center">
-                          <div className="rounded border shadow-sm" style={{ width: "60px", height: "60px", flexShrink: 0, backgroundImage: `url(http://localhost:3001/images/${c.url_image})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+                          <div
+                            className="rounded border shadow-sm"
+                            style={{
+                              width: "60px",
+                              height: "60px",
+                              flexShrink: 0,
+                              backgroundImage: `url(http://localhost:3001/images/${c.url_image})`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                            }}
+                          />
                           <div className="flex-grow-1 ms-3">
                             <div>
-                              <h6 className="fw-bold mb-0 text-truncate" style={{ maxWidth: "130px", fontSize: "0.95rem" }}> {c.name} </h6>
-                              <span className="fw-bold text-dark" style={{ fontSize: "0.85rem" }}> €{c.price} </span>
+                              <h6
+                                className="fw-bold mb-0 text-truncate"
+                                style={{
+                                  maxWidth: "130px",
+                                  fontSize: "0.95rem",
+                                }}
+                              >
+                                {" "}
+                                {c.name}{" "}
+                              </h6>
+                              <span
+                                className="fw-bold text-dark"
+                                style={{ fontSize: "0.85rem" }}
+                              >
+                                {" "}
+                                €{c.price}{" "}
+                              </span>
                             </div>
                             <div className="mt-2">
-                              <small className="text-muted d-block" style={{ fontSize: "0.8rem", borderLeft: "2px solid #d4af37", paddingLeft: "8px" }}> Quantità: <span className="text-dark fw-bold">{c.quantity}</span></small>
+                              <small
+                                className="text-muted d-block"
+                                style={{
+                                  fontSize: "0.8rem",
+                                  borderLeft: "2px solid #d4af37",
+                                  paddingLeft: "8px",
+                                }}
+                              >
+                                {" "}
+                                Quantità:{" "}
+                                <span className="text-dark fw-bold">
+                                  {c.quantity}
+                                </span>
+                              </small>
                             </div>
                           </div>
                         </div>
@@ -245,7 +403,15 @@ export default function Header() {
                     ))}
                   </ul>
                   <div className="p-3 bg-white rounded-bottom">
-                    <NavLink to="/cart" className="btn btn-dark w-100 py-2 fw-bold" style={{ borderRadius: "8px", fontSize: "0.9rem" }} onClick={() => setPreview(false)}> Visualizza Carrello </NavLink>
+                    <NavLink
+                      to="/cart"
+                      className="btn btn-dark w-100 py-2 fw-bold"
+                      style={{ borderRadius: "8px", fontSize: "0.9rem" }}
+                      onClick={() => setPreview(false)}
+                    >
+                      {" "}
+                      Visualizza Carrello{" "}
+                    </NavLink>
                   </div>
                 </div>
               )}

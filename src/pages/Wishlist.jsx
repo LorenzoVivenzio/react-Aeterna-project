@@ -24,6 +24,12 @@ export default function Wishlist() {
                         <div className="row">
                             <div className="col-lg-8">
                                 {wishlist.map((item) => (
+
+
+
+
+
+
                                     <div key={item.slug} className="d-flex align-items-center bg-dark p-3 rounded-4 mb-3 border border-secondary shadow">
                                         <img src={`http://localhost:3001/images/${item.url_image}`}
                                             alt={item.name}

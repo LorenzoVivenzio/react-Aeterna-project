@@ -23,41 +23,46 @@ export default function Cart() {
                     <div className="row">
                         <div className="col-lg-8">
                             {cart.map((item) => (
-                                <div key={`cart-item-${item.slug}`} className="d-flex align-items-center p-3 mb-3 shadow cart-border">
-                                    <img
-                                        src={`http://localhost:3001/images/${item.url_image}`}
-                                        alt={item.name}
-                                        style={{ width: "90px", height: "90px", objectFit: "cover" }}
-                                        className="cart-img me-4"
-                                    />
-                                    <div className="flex-grow-1">
-                                        <h5 className="mb-0 fw-bold">{item.name}</h5>
-                                        <p className="text-info mb-0 fw-semibold">{Number(item.price).toFixed(2)}€</p>
+                                <div key={`cart-item-${item.slug}`} className="row-card d-flex align-items-center p-3 mb-3 shadow cart-border justify-content-between">
+                                    <div className="col-sm-card d-flex align-items-center">
+                                        <img
+                                            src={`http://localhost:3001/images/${item.url_image}`}
+                                            alt={item.name}
+                                            style={{ width: "90px", height: "90px", objectFit: "cover" }}
+                                            className="cart-img me-4 "
+                                        />
+                                        <div className="flex-grow-1">
+                                            <h5 className="mb-0 fw-bold">{item.name}</h5>
+                                            <p className="text-info mb-0 fw-semibold">{Number(item.price).toFixed(2)}€</p>
+                                        </div>
                                     </div>
 
-                                    {/* CONTROLLI QUANTITÀ: Usiamo item.slug */}
-                                    <div className="d-flex align-items-center gap-3 mx-4 rounded-pill p-1 btn-quantità">
+                                    <div className="col-sm-card m-sm-15 d-flex align-items-center">
+                                        {/* CONTROLLI QUANTITÀ: Usiamo item.slug */}
+                                        <div className="  d-flex align-items-center gap-3  rounded-pill p-1 btn-quantità">
+                                            <button
+                                                className="btn-regola-quantità rounded-circle border-0"
+                                                onClick={() => updateQuantity(item.slug, item.quantity - 1)}
+                                                style={{ width: "32px", height: "32px" }}
+                                            > - </button>
+                                            <span className="fw-bold px-2" style={{ minWidth: "20px", textAlign: "center" }}>{item.quantity}</span>
+                                            <button
+                                                className="btn-regola-quantità rounded-circle border-0"
+                                                onClick={() => updateQuantity(item.slug, item.quantity + 1)}
+                                                style={{ width: "32px", height: "32px" }}
+                                            > + </button>
+                                        </div>
+
+                                        {/* RIMOZIONE: Usiamo item.slug */}
                                         <button
-                                            className="btn-regola-quantità rounded-circle border-0"
-                                            onClick={() => updateQuantity(item.slug, item.quantity - 1)}
-                                            style={{ width: "32px", height: "32px" }}
-                                        > - </button>
-                                        <span className="fw-bold px-2" style={{ minWidth: "20px", textAlign: "center" }}>{item.quantity}</span>
-                                        <button
-                                            className="btn-regola-quantità rounded-circle border-0"
-                                            onClick={() => updateQuantity(item.slug, item.quantity + 1)}
-                                            style={{ width: "32px", height: "32px" }}
-                                        > + </button>
+                                            onClick={() => removeFromCart(item.slug)}
+                                            className="btn-elimina me-2"
+                                            title="Rimuovi prodotto"
+                                        >
+                                            <i className="bi bi-trash3-fill fs-5"></i> Elimina
+                                        </button>
                                     </div>
-                                    
-                                    {/* RIMOZIONE: Usiamo item.slug */}
-                                    <button
-                                        onClick={() => removeFromCart(item.slug)}
-                                        className="btn-elimina me-2"
-                                        title="Rimuovi prodotto"
-                                    >
-                                        <i className="bi bi-trash3-fill fs-5"></i> Elimina
-                                    </button>
+
                                 </div>
                             ))}
                             <button onClick={clearCart} className="btn-svuota mt-3 opacity-75">Svuota carrello</button>

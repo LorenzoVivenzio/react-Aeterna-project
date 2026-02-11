@@ -136,7 +136,7 @@ export default function Products() {
     <div className="products-page bg-white text-dark min-vh-100 pb-5">
       <div className="container" style={{ paddingTop: "120px" }}>
         <h1 className="text-center mb-5 title-order fw-bold text-uppercase">
-          Catalogo Aeterna
+          Catalogo
         </h1>
 
         {/* BOX RICERCA E BUDGET - STILE BORDER-CHECKOUT */}

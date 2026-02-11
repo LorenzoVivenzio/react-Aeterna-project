@@ -16,7 +16,7 @@ import { useWishlist } from "../context/WishlistContext.jsx";
 
 export default function Header() {
   const { wishlist } = useWishlist();
-  console.log(wishlist);
+
 
   const { cart, previw, setPreview } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,55 +55,55 @@ export default function Header() {
 
   return (
     <header
-      className="nav-bar fixed-top header-border-bot bg-white shadow-sm"
+      className="nav-bar fixed-top header-border-bot bg-white shadow-sm "
       style={{ zIndex: 2000 }}
     >
       <div className="container-fluid d-flex align-items-center justify-content-between py-2">
         {/* 1. SEZIONE SINISTRA */}
-        <div className="d-flex align-items-center" style={{ flex: 1 }}>
+        <div className="d-flex align-items-center " style={{ flex: 1 }}>
           <div className="d-md-none">
             <button
-              className="btn btn-outline-dark border-0 anta-head"
+              className="btn btn-outline-dark border-0 anta-font"
               onClick={toggleMenu}
             >
-              <FontAwesomeIcon icon={faBars} className="me-2" />
+              <FontAwesomeIcon icon={faBars} className="me-2 " />
               Menu
             </button>
           </div>
 
           <div className={`custom-menu-offcanvas ${isMenuOpen ? "open" : ""}`}>
             <div className="offcanvas-header-manual border-bottom">
-              <h5 className="anta-head m-0">AETERNA</h5>
+              <h5 className=" m-0 main-title">AETERNA</h5>
               <button className="btn-close-manual" onClick={closeMenu}>
                 <FontAwesomeIcon icon={faXmark} />
               </button>
             </div>
             <div className="offcanvas-body-manual">
               <ul className="navbar-nav flex-column gap-3 mt-3">
-                <li className="anta-head fs-5 border-bottom pb-2 px-3">
+                <li className=" fs-5 border-bottom pb-2 px-3">
                   <NavLink
                     to="/"
-                    className="text-decoration-none text-dark d-block"
+                    className="text-decoration-none text-dark d-block  anta-font"
                     onClick={closeMenu}
                   >
                     {" "}
                     Home{" "}
                   </NavLink>
                 </li>
-                <li className="anta-head fs-5 border-bottom pb-2 px-3">
+                <li className=" fs-5 border-bottom pb-2 px-3">
                   <NavLink
                     to="/products"
-                    className="text-decoration-none text-dark d-block"
+                    className="text-decoration-none text-dark d-block anta-font"
                     onClick={closeMenu}
                   >
                     {" "}
                     Prodotti{" "}
                   </NavLink>
                 </li>
-                <li className="anta-head fs-5 border-bottom pb-2 px-3">
+                <li className=" fs-5 border-bottom pb-2 px-3">
                   <NavLink
                     to="/about"
-                    className="text-decoration-none text-dark d-block"
+                    className="text-decoration-none text-dark d-block anta-font"
                     onClick={closeMenu}
                   >
                     {" "}
@@ -119,26 +119,26 @@ export default function Header() {
 
           <div className="nav d-none d-md-flex">
             <ul className="d-flex list-unstyled m-0 gap-4">
-              <li className="anta-head bold">
+              <li className=" bold">
                 <NavLink
                   to="/"
-                  className="text-decoration-none text-dark underline"
+                  className="text-decoration-none text-dark underline  anta-font"
                 >
                   Home
                 </NavLink>
               </li>
-              <li className="anta-head bold">
+              <li className=" bold">
                 <NavLink
                   to="/products"
-                  className="text-decoration-none text-dark underline"
+                  className="text-decoration-none text-dark underline anta-font"
                 >
                   Prodotti
                 </NavLink>
               </li>
-              <li className="anta-head bold">
+              <li className=" bold">
                 <NavLink
                   to="/about"
-                  className="text-decoration-none text-dark underline"
+                  className="text-decoration-none text-dark underline anta-font"
                 >
                   Chi siamo
                 </NavLink>
@@ -164,7 +164,7 @@ export default function Header() {
             style={{ maxWidth: "220px" }}
           >
             <div className="d-flex align-items-center">
-              <div className="position-relative flex-grow-1">
+              <div className="position-relative flex-grow-1 anta-font">
                 <input
                   type="text"
                   placeholder="Cerca..."
@@ -195,7 +195,7 @@ export default function Header() {
               </div>
               <button
                 onClick={handleSearch}
-                className="btn btn-dark btn-sm search-btn-fixed"
+                className="btn btn-dark btn-sm search-btn-fixed anta-font"
                 style={{
                   fontSize: "0.65rem",
                   borderTopRightRadius: "20px",
@@ -224,7 +224,7 @@ export default function Header() {
                   <input
                     type="text"
                     placeholder="Cerca..."
-                    className="form-control form-control-sm ps-4"
+                    className="form-control form-control-sm ps-4 anta-font"
                     value={localSearch}
                     onChange={(e) => setLocalSearch(e.target.value)}
                     onKeyDown={handleKeyDown}
@@ -250,7 +250,7 @@ export default function Header() {
                 </div>
                 <button
                   onClick={handleSearch}
-                  className="btn btn-dark btn-sm search-btn-fixed"
+                  className="btn btn-dark btn-sm search-btn-fixed anta-font"
                   style={{
                     fontSize: "0.7rem",
                     borderTopRightRadius: "20px",

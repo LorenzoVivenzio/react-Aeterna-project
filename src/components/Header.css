@@ -148,13 +148,16 @@
 
 /* MEDIA QUERIES PER IL MENU MOBILE */
 @media (max-width: 768px) {
+  .anta-font{
+    font-family: anta;
+}
   .nav-menu {
     position: fixed;
     top: 70px;
     left: -100%;
     width: 250px;
     height: 100vh;
-    background: white;
+    background: rgb(255, 255, 255);
     transition: 0.4s;
     border-right: 1px solid #eee;
   }
@@ -201,7 +204,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #50cbd16e;
+  background-color: #ffffff48;
+  
 }
 
 .btn-close-manual {
@@ -223,6 +227,9 @@
 }
 
 @media (min-width: 768px) {
+  .anta-font{
+    font-family: anta;
+}
   .d-md-flex {
     display: flex !important;
   }
@@ -251,6 +258,9 @@
 
 /* Gestione visibilità Logo e layout Tablet */
 @media (max-width: 991px) {
+  .anta-font{
+    font-family: anta;
+}
     .logo2 {
         display: none !important;
     }
@@ -277,6 +287,9 @@
     .main-title {
         font-size: 1.2rem;
     }
+    .anta-font{
+    font-family: anta;
+}
 }
 
 

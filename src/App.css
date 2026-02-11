@@ -323,9 +323,8 @@ footer li:hover {
 
 
 .descrition{
-    overflow-y: scroll;
     height: 300px;
-    scrollbar-width: none
+   
 }
 .btn-cart{
     font-family: Verdana, Geneva, Tahoma, sans-serif;

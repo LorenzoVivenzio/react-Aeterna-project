@@ -16,12 +16,10 @@ export default function VideoBanner() {
                   playsInline
                   className="video-banner "
                   src="src/public/video/viedo-banner.mp4"
-                  // src="src/public/Pierfilippo_IA.mp4"
+                  
                 ></video>
                 <div className="btn-video">
-                  <Link to="/products">
-                    <button className="btn-btn-banner anta-font text-dark">Scopri di più</button>
-                  </Link>
+                 
                 </div>
               </div>
             </div>
@@ -38,7 +36,13 @@ export default function VideoBanner() {
                 "Aeterna non progetta macchine, ma scolpisce il futuro nel titanio: 
                 dove la perfezione meccanica incontra l'immortalità del design."
               </p>
+              <div className="text-center">
+               <Link to="/products">
+                    <button className="btn-btn-banner anta-font text-dark">Scopri di più</button>
+                  </Link>
+                  </div>
             </div>
+            
           </div>
         </div>
       </section>

@@ -37,12 +37,16 @@ export default function Wishlist() {
                                             className="rounded-3 border border-primary me-4"
                                         />
                                         <div className="flex-grow-1">
-                                            <h5 className="mb-0 fw-bold">{item.name}</h5>
+                                            <h2 className="mb-0 fw-bold">{item.name}</h2>
+                                            <h3 className="mb-0 fw-bold" style={{fontSize:"0.8rem"}}>{item.era}</h3>
+                                            <h3 className="mb-0 fw-bold" style={{fontSize:"0.8rem"}}>{item.diet}</h3>
+                                             
                                             <p className="text-info mb-0 fw-semibold">{Number(item.price).toFixed(2)}€</p>
                                         </div>
-                                        <button onClick ={()=>addToCart(item.slug)}></button>
+                                        <button onClick ={()=>addToCart(item.slug)}
+                                        className="btn-cart3">Aggiungi al carrello</button>
                                         <button onClick={()=>removeFromWishlist(item.slug)}
-                                            className="btn btn-link text-danger p-0 border-0 me-2" 
+                                            className="btn-svuota" style={{padding:"10px", marginBottom:"0px"}}
                                              title="Rimuovi prodotto">
                                             Elimina
                                         </button>

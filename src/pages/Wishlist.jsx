@@ -23,11 +23,11 @@ export default function Wishlist() {
                     ) : (
                         <div className="row">
                             <div className="col-lg-8">
-                                {wishlist.map((item) => (
+                                {wishlist.map((item, index) => (
 
-                                    <>
-                                        <div className="row-car">
-                                            <div key={item.slug} className="row-card d-flex align-items-center p-3 mb-3 shadow cart-border justify-content-between">
+                                    <div key={index}>
+                                        <div  className="row-car">
+                                            <div  className="row-card d-flex align-items-center p-3 mb-3 shadow cart-border justify-content-between">
                                                 <div className="col-sm-card d-flex align-items-center">
                                                     <img src={`http://localhost:3001/images/${item.url_image}`}
                                                         alt={item.name}
@@ -53,7 +53,7 @@ export default function Wishlist() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </>
+                                    </div>
 
                                 ))}
                                 <button onClick={clearWishlist}

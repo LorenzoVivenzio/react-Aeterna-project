@@ -162,7 +162,7 @@ export default function Products() {
                   <div className="col-md-3">
                     <button
                       type="submit"
-                      className="btn order-btn w-100 text-uppercase fw-bold py-2"
+                      className="btn applica-btn w-100 text-uppercase fw-bold py-2"
                     >
                       Applica
                     </button>
@@ -253,7 +253,7 @@ export default function Products() {
                 Periodo Storico
               </label>
               <select
-                className="form-select input-checkout shadow-none"
+                className="form-select input-checkout"
                 value={selectedEra}
                 onChange={(e) => setSelectedEra(e.target.value)}
               >
@@ -270,7 +270,7 @@ export default function Products() {
                 Dieta Biologica
               </label>
               <select
-                className="form-select input-checkout shadow-none"
+                className="form-select input-checkout"
                 value={selectedDiet}
                 onChange={(e) => setSelectedDiet(e.target.value)}
               >
@@ -287,7 +287,7 @@ export default function Products() {
                 Alimentazione
               </label>
               <select
-                className="form-select input-checkout shadow-none"
+                className="form-select input-checkout"
                 value={selectedPower}
                 onChange={(e) => setSelectedPower(e.target.value)}
               >
@@ -304,7 +304,7 @@ export default function Products() {
                 Taglia
               </label>
               <select
-                className="form-select input-checkout shadow-none"
+                className="form-select input-checkout"
                 value={dimension}
                 onChange={(e) => setDimension(e.target.value)}
               >

@@ -46,7 +46,7 @@ export default function Home() {
           <div className="btn-slogan">
             <button className="btn-btn-banner">
               <a className="text-white mt-4 anta-font" href="#ultimi-arrivi ">
-                vai alle notività
+                Vai alle notività
               </a>
             </button>
           </div>

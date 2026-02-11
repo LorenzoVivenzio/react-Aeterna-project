@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 
 export default function ProductCard({ product }) {
     const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
+    const {isInWishlist, addToWishlist,removeFromWishlist} =useWishlist();
     const navigate = useNavigate();
 
     const backendUrl = "http://localhost:3001";
@@ -12,8 +14,20 @@ export default function ProductCard({ product }) {
     const cartItem = cart.find(item => item.slug === product.slug);
     const isAdded = !!cartItem;
 
+    function handleWishlist(e){
+        e.stopPropagation();
+        if(isInWishlist(product.slug)===true){
+            removeFromWishlist(product.slug)
+        }
+        else{
+            addToWishlist(product)
+        }
+    }
     return (
         <div className="product-card">
+
+            <button 
+            onClick={handleWishlist}>{isInWishlist(product.slug) ? '❤️' : '🤍'}</button>
             <div 
                 onClick={() => navigate(`/product/${product.slug}`)} 
                 className="card-image-wrapper"

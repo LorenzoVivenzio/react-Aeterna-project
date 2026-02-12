@@ -167,9 +167,9 @@ export default function Products() {
         <div className="row mb-4">
           <div className="col-12">
             <div className="p-4 border-checkout shadow-sm">
-              <form onSubmit={handleSearchSubmit}>
-                <div className="row g-3 align-items-end">
-                  <div className="col-md-9 position-relative">
+              <form onSubmit={handleSearchSubmit} className="">
+                <div className="row g-3 align-items-end ">
+                  <div className="col-md-9 position-relative anta-font">
                     <label className="anta-head small mb-2 text-uppercase fw-bold">
                       Modello Robot
                     </label>
@@ -239,7 +239,7 @@ export default function Products() {
                   <div className="col-12 mt-4">
                     <div className="p-3 riepilogo">
                       <div className="d-flex justify-content-between align-items-center mb-2">
-                        <span className="small anta-head text-uppercase fw-bold">
+                        <span className="small anta-head text-uppercase fw-bold anta-font">
                           Range di Budget
                         </span>
                         <span className="fw-bold totale">
@@ -336,7 +336,7 @@ export default function Products() {
         <div className="p-4 riepilogo mb-4 shadow-sm">
           <div className="row g-4">
             <div className="col-md-3">
-              <label className="small anta-head mb-2 text-uppercase fw-bold">
+              <label className="small anta-head mb-2 text-uppercase fw-bold anta-font">
                 Periodo Storico
               </label>
               <select
@@ -353,7 +353,7 @@ export default function Products() {
               </select>
             </div>
             <div className="col-md-3">
-              <label className="small anta-head mb-2 text-uppercase fw-bold">
+              <label className="small anta-head mb-2 text-uppercase fw-bold anta-font">
                 Dieta Biologica
               </label>
               <select
@@ -370,7 +370,7 @@ export default function Products() {
               </select>
             </div>
             <div className="col-md-3">
-              <label className="small anta-head mb-2 text-uppercase fw-bold">
+              <label className="small anta-head mb-2 text-uppercase fw-bold anta-font">
                 Alimentazione
               </label>
               <select
@@ -387,7 +387,7 @@ export default function Products() {
               </select>
             </div>
             <div className="col-md-3">
-              <label className="small anta-head mb-2 text-uppercase fw-bold">
+              <label className="small anta-head mb-2 text-uppercase fw-bold anta-font">
                 Taglia
               </label>
               <select
@@ -406,7 +406,7 @@ export default function Products() {
         </div>
 
         <div className="d-flex justify-content-between align-items-center mb-5 px-2">
-          <div className="text-grazie text-uppercase small tracking-widest fw-bold">
+          <div className="text-grazie text-uppercase small tracking-widest fw-bold anta-font">
             {!loading && (
               <>
                 Risultati trovati:{" "}
@@ -417,7 +417,7 @@ export default function Products() {
           <button
             type="button"
             onClick={handleReset}
-            className="btn-svuota"
+            className="btn-svuota anta-font"
             style={{ fontSize: "0.75rem", letterSpacing: "1px" }}
           >
             <span className="me-2">✕</span> Azzera tutti i filtri
@@ -437,7 +437,7 @@ export default function Products() {
               </div>
             ))
           ) : (
-            <div className="text-center p-5 text-muted italic w-100">
+            <div className="text-center italic w-100 anta-font no-robot">
               Nessun robot trovato con questi parametri.
             </div>
           )}

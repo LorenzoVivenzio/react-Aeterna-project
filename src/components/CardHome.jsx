@@ -1,15 +1,18 @@
 import "./Bestseller.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./CardHome.css";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext.jsx";
 
 export default function CardHome({ product }) {
+  const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
-  const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   if (!product) return null;
 
+  const cartItem = cart.find((item) => item.slug === product.slug);
+  const isAdded = !!cartItem;
   const favorite = isInWishlist(product.slug);
 
   function handleWishlist(e) {
@@ -22,27 +25,28 @@ export default function CardHome({ product }) {
     }
   }
 
-  function handleAddToCart(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    addToCart(product);
-  }
-
   return (
     <div className="card-container bestseller h-100">
-      <div className="bestseller-img">
+      <div 
+        className="bestseller-img" 
+        onClick={() => navigate(`/product/${product.slug}`)}
+        style={{ cursor: 'pointer' }}
+      >
         <img
           src={`${import.meta.env.VITE_BACKEND_URL}/images/${product.url_image}`}
           alt={product.name}
           className="card-image img-fluid"
+          onError={(e) => {
+            e.target.src = "https://placehold.co/400x400?text=Immagine+non+trovata";
+          }}
         />
       </div>
 
       <div className="product-info p-3">
         <h5 className="mt-3 product-name">{product.name}</h5>
-        <p className="pt-1 product-price">€ {product.price},00</p>
+        <p className="pt-1 product-price">€ {Number(product.price).toFixed(2)}</p>
 
-        {/* CONTENITORE AZIONI (BOTTONE + CUORE) */}
+        {/* CONTENITORE AZIONI IDENTICO A PRODUCTCARD + CUORE */}
         <div
           style={{
             display: "flex",
@@ -51,20 +55,53 @@ export default function CardHome({ product }) {
             marginTop: "10px",
           }}
         >
-          <button
-            onClick={handleAddToCart} // Usiamo la nuova funzione
-            className="btn-cart2"
-            style={{ flex: 1, padding: "8px 12px" }}
-            aria-label={`Aggiungi ${product.name} al carrello`}
-          >
-            Aggiungi
-          </button>
+          {isAdded ? (
+            <div className="status-container" style={{ flex: 1 }}>
+              <span className="status-label">Aggiunto</span>
+              <div className="quantity-controls">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    if (cartItem.quantity > 1) {
+                      updateQuantity(product.slug, cartItem.quantity - 1);
+                    } else {
+                      removeFromCart(product.slug);
+                    }
+                  }}
+                >
+                  -
+                </button>
+                <span className="quantity-value">{cartItem.quantity}</span>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    updateQuantity(product.slug, cartItem.quantity + 1);
+                  }}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              className="btn-cart2"
+              style={{ flex: 1 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                addToCart(product);
+              }}
+            >
+              Aggiungi
+            </button>
+          )}
 
+          {/* PULSANTE CUORE */}
           <button
             onClick={handleWishlist}
-            aria-label={
-              favorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"
-            }
+            aria-label={favorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
             style={{
               background: "none",
               border: "none",
@@ -76,9 +113,7 @@ export default function CardHome({ product }) {
               justifyContent: "center",
               transition: "transform 0.2s ease",
             }}
-            onMouseDown={(e) =>
-              (e.currentTarget.style.transform = "scale(0.9)")
-            }
+            onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.9)")}
             onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
           >
             <svg

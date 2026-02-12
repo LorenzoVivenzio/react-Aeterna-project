@@ -271,39 +271,39 @@ export default function Checkout() {
                 <div className="row border-top border-secondary pt-4 mt-3">
                   <div className="col-md-6 mb-3">
                     <label htmlFor="billing_name" className="px-2">
-                      Nome Fattura:
+                      Nome:
                     </label>
                     <input
                       id="billing_name"
                       type="text"
                       name="billing_name"
-                      placeholder="Nome Fattura"
+                      placeholder="Nome"
                       className="form-control input-checkout"
                       onChange={handleChange}
                     />
                   </div>
                   <div className="col-md-6 mb-3">
                     <label htmlFor="billing_surname" className="px-2">
-                      Cognome Fattura:
+                      Cognome:
                     </label>
                     <input
                       id="billing_surname"
                       type="text"
                       name="billing_surname"
-                      placeholder="Cognome Fattura"
+                      placeholder="Cognome"
                       className="form-control input-checkout"
                       onChange={handleChange}
                     />
                   </div>
                   <div className="col-12 mb-3">
                     <label htmlFor="billing_street" className="px-2">
-                      Indirizzo Fattura:
+                      Indirizzo:
                     </label>
                     <input
                       id="billing_street"
                       type="text"
                       name="billing_street"
-                      placeholder="Indirizzo Fattura"
+                      placeholder="Indirizzo"
                       className="form-control input-checkout"
                       onChange={handleChange}
                     />

@@ -72,7 +72,14 @@ export default function Header() {
 
           <div className={`custom-menu-offcanvas ${isMenuOpen ? "open" : ""}`}>
             <div className="offcanvas-header-manual border-bottom">
-              <h5 className=" m-0 main-title">AETERNA</h5>
+              <Link to="/" className="text-decoration-none">
+                <p
+                  className="main-title m-0 fw-bold"
+                  style={{ letterSpacing: "2px", whiteSpace: "nowrap", cursor: "pointer" }}
+                >
+                  AETERNA
+                </p>
+              </Link>
               <button className="btn-close-manual" onClick={closeMenu}>
                 <FontAwesomeIcon icon={faXmark} />
               </button>
@@ -149,12 +156,14 @@ export default function Header() {
         {/* 2. SEZIONE CENTRALE: LOGO (Desktop) O SEARCH (Mobile/Tablet con tasto) */}
         <div className="d-flex justify-content-center" style={{ flex: 1 }}>
           <div className="logo2 d-none d-lg-block">
-            <p
-              className="main-title m-0 fw-bold"
-              style={{ letterSpacing: "2px", whiteSpace: "nowrap" }}
-            >
-              AETERNA
-            </p>
+            <Link to="/" className="text-decoration-none">
+              <p
+                className="main-title m-0 fw-bold"
+                style={{ letterSpacing: "2px", whiteSpace: "nowrap", cursor: "pointer" }}
+              >
+                AETERNA
+              </p>
+            </Link>
           </div>
 
           {/* SEARCH MOBILE/TABLET */}

@@ -16,6 +16,11 @@ export default function Products() {
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [searchTerm, setSearchTerm] = useState(search);
 
+  // --- STATI PER AUTOCOMPLETE FRONTEND ---
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isTyping, setIsTyping] = useState(false); // Nuovo stato per intercettare l'input manuale
+
   const [minPrice, setMinPrice] = useState(
     Number(searchParams.get("minPrice")) || 0,
   );
@@ -38,17 +43,35 @@ export default function Products() {
 
   const navigate = useNavigate();
 
+  // --- LOGICA AUTOCOMPLETE FRONTEND ---
+  useEffect(() => {
+    // Mostriamo i suggerimenti SOLO SE l'utente sta scrivendo (isTyping === true)
+    if (isTyping && searchTerm.trim().length > 1 && products.length > 0) {
+      const filtered = products.filter((p) =>
+        p.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+      setSuggestions(filtered.slice(0, 5));
+      setShowSuggestions(true);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  }, [searchTerm, products, isTyping]);
+
   useEffect(() => {
     const querySearch = searchParams.get("search") || "";
     setSearch(querySearch);
     setSearchTerm(querySearch);
+    setIsTyping(false); // Quando i parametri cambiano (es. caricamento pagina o indietro), resettiamo isTyping
   }, [searchParams]);
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setSearch(searchTerm);
     setMinPrice(minTerm);
     setMaxPrice(maxTerm);
+    setShowSuggestions(false);
+    setIsTyping(false); // Smette di suggerire dopo l'invio
   };
 
   const handleReset = () => {
@@ -63,6 +86,8 @@ export default function Products() {
     setMinTerm(0);
     setMaxTerm(15000);
     setSearchParams({});
+    setShowSuggestions(false);
+    setIsTyping(false);
   };
 
   useEffect(() => {
@@ -139,13 +164,12 @@ export default function Products() {
           Catalogo
         </h1>
 
-        {/* BOX RICERCA E BUDGET - STILE BORDER-CHECKOUT */}
         <div className="row mb-4">
           <div className="col-12">
             <div className="p-4 border-checkout shadow-sm">
               <form onSubmit={handleSearchSubmit}>
                 <div className="row g-3 align-items-end">
-                  <div className="col-md-9">
+                  <div className="col-md-9 position-relative">
                     <label className="anta-head small mb-2 text-uppercase fw-bold">
                       Modello Robot
                     </label>
@@ -153,11 +177,55 @@ export default function Products() {
                       className="form-control input-checkout py-2"
                       placeholder="Cerca per nome..."
                       value={searchTerm}
+                      autoComplete="off"
                       onChange={(e) => {
+                        setIsTyping(true); // Attiviamo i suggerimenti solo qui
                         setSearchTerm(e.target.value);
                         if (e.target.value === "") setSearch("");
                       }}
+                      onBlur={() =>
+                        setTimeout(() => {
+                          setShowSuggestions(false);
+                          setIsTyping(false);
+                        }, 200)
+                      }
                     />
+
+                    {showSuggestions && suggestions.length > 0 && (
+                      <div className="autocomplete-dropdown shadow-lg border">
+                        {suggestions.map((s, idx) => (
+                          <div
+                            key={idx}
+                            className="suggestion-item d-flex align-items-center p-2"
+                            onClick={() => {
+                              navigate(`/product/${s.slug}`);
+                              setShowSuggestions(false);
+                              setIsTyping(false);
+                            }}
+                          >
+                            <img
+                              src={`http://localhost:3001/images/${s.url_image}`}
+                              alt={s.name}
+                              style={{
+                                width: "40px",
+                                height: "40px",
+                                objectFit: "cover",
+                                marginRight: "10px",
+                                borderRadius: "4px",
+                              }}
+                            />
+                            <div>
+                              <div className="fw-bold small text-dark">
+                                {s.name}
+                              </div>
+                              <div className="text-gold small">
+                                {Number(s.price).toFixed(2)} €
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <div className="col-md-3">
                     <button
@@ -168,7 +236,6 @@ export default function Products() {
                     </button>
                   </div>
 
-                  {/* RANGE SLIDER */}
                   <div className="col-12 mt-4">
                     <div className="p-3 riepilogo">
                       <div className="d-flex justify-content-between align-items-center mb-2">
@@ -235,6 +302,27 @@ export default function Products() {
                         <style>{`
                           input[type=range]::-webkit-slider-thumb { pointer-events: auto; appearance: none; width: 20px; height: 20px; background: #e1bb70; border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
                           input[type=range]::-moz-range-thumb { pointer-events: auto; width: 20px; height: 20px; background: #e1bb70; border-radius: 50%; cursor: pointer; border: 2px solid white; }
+                          
+                          .autocomplete-dropdown {
+                            position: absolute;
+                            top: 100%;
+                            left: 0;
+                            right: 0;
+                            background: white;
+                            z-index: 1000;
+                            border: 1px solid #ddd;
+                            border-top: none;
+                            border-radius: 0 0 8px 8px;
+                            max-height: 250px;
+                            overflow-y: auto;
+                          }
+                          .suggestion-item {
+                            cursor: pointer;
+                            transition: background 0.2s;
+                          }
+                          .suggestion-item:hover {
+                            background: #f1f1f1;
+                          }
                         `}</style>
                       </div>
                     </div>
@@ -245,7 +333,6 @@ export default function Products() {
           </div>
         </div>
 
-        {/* FILTRI TECNICI - STILE RIEPILOGO */}
         <div className="p-4 riepilogo mb-4 shadow-sm">
           <div className="row g-4">
             <div className="col-md-3">
@@ -318,7 +405,6 @@ export default function Products() {
           </div>
         </div>
 
-        {/* AZIONI GLOBALI E CONTEGGIO */}
         <div className="d-flex justify-content-between align-items-center mb-5 px-2">
           <div className="text-grazie text-uppercase small tracking-widest fw-bold">
             {!loading && (
@@ -338,14 +424,10 @@ export default function Products() {
           </button>
         </div>
 
-        {/* GRIGLIA PRODOTTI */}
         <div className="row">
           {loading ? (
             <div className="text-center p-5 fw-light text-grazie">
-              <div
-                className="spinner-border text-gold mb-3"
-                role="status"
-              ></div>
+              <div className="spinner-border text-gold mb-3" role="status"></div>
               <p>Analisi del database in corso...</p>
             </div>
           ) : products.length > 0 ? (

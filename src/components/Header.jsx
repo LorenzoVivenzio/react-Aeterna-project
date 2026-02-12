@@ -17,7 +17,6 @@ import { useWishlist } from "../context/WishlistContext.jsx";
 export default function Header() {
   const { wishlist } = useWishlist();
 
-
   const { cart, previw, setPreview } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -378,7 +377,7 @@ export default function Header() {
                                 style={{ fontSize: "0.85rem" }}
                               >
                                 {" "}
-                                €{c.price}{" "}
+                                € {c.price.toFixed(2).replace(".", ",")}{" "}
                               </span>
                             </div>
                             <div className="mt-2">
